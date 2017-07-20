@@ -6,10 +6,6 @@ Demo app for the telstra messaging API
 npm install
 ```
 ```
-npm run build:prod
-```
-For live reloading
-```
 npm run build
 ```
 In a seperate terminal run  

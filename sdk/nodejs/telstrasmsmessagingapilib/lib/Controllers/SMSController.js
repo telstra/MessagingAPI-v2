@@ -75,6 +75,7 @@ class SMSController {
                     let response = '';
                     // this is a problem
                     if (_context.response.body) {
+                        //response = JSON.parse(_context.response.body);
                         try {
                             response = JSON.parse(_context.response.body);
                         }
@@ -444,6 +445,7 @@ class SMSController {
                 _request(_options, (_error, _response, _context) => {
                     let errorResponse;
                     let response = '';
+
                     if (_context.response.body) {
                         response = JSON.parse(_context.response.body);
                     }
@@ -455,6 +457,7 @@ class SMSController {
                         _reject(errorResponse.error);
                     } else if (_response.statusCode >= 200 && _response.statusCode <= 206) {
                         let parsed = JSON.parse(_response.body);
+                        //parsed = _baseController.getObjectMapper().mapObject(parsed, 'InboundPollResponse');
                         parsed = parsed.map(model =>
                             _baseController.getObjectMapper().mapObject(model, 'InboundPollResponse'));
                         _callback(null, parsed, _context);

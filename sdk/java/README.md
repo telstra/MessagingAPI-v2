@@ -1,3 +1,38 @@
+# Prerequisite
+
+## Provisioning a number
+To get a dedicated number, invoke the provisioning API
+```sh
+#!/bin/bash
+curl -X POST \
+  https://slot2.apipractice.t-dev.telstra.net/v2/messages/provisioning/subscriptions \
+  -H 'authorization: Bearer TOKEN' \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/json' \
+  -d '{
+  "activeDays":30,
+  "notifyURL":"http://example.com/callback"
+}'
+```
+Parameters for the provisioning API are;
+
+| Parameter |Mandatory| Description |
+| --- | --- | --- |
+| `activeDays` | N | The number of days before the number will be released and quarantined. |
+| `notifyURL` | N | A callback URL that will be POSTed to whenever a new message arrives at this destination address. If this is not provided then you can make use the Get Replies API to poll for messages |
+
+### Response
+A typical response will look like;
+```{
+    "destinationAddress": "+61412356789"
+}
+```
+The fields mean;
+
+| Field | Description |
+| --- | --- |
+| `destinationAddress` | The provisioned number assigned to your app. Your customers can send replies to this number. If the `notifyURL` is provided then the replies will be POSTed to it. |
+
 # Getting started
 
 The Telstra SMS Messaging API allows your applications to send and receive SMS text messages from Australia's leading network operator.
@@ -59,7 +94,7 @@ The created Maven project manages its dependencies using its ``` pom.xml ``` fil
 
 ![Adding dependency to the client library - Step 1](https://apidocs.io/illustration/java?step=testProject0&workspaceFolder=Telstra%20SMS%20Messaging%20API-Java&workspaceName=TelstraSMSMessagingAPI&projectName=TelstraSMSMessagingAPILib&rootNamespace=net.telstra.tdev.apipractice.slot2)
 
-Clicking the ``` Add ``` button will open a dialog where you need to specify TelstraSMSMessagingAPI in ``` Group Id ``` and TelstraSMSMessagingAPILib in the ``` Artifact Id ``` fields. Once added click ``` OK ```. Save the ``` pom.xml ``` file.
+Clicking the ``` Add ``` button will open a dialog where you need to specify TelstraSMSMessagingAPI in ``` Group Id ``` and TelstraSMSMessagingAPILib in the ``` Artifact Id ``` fields and remember to change the version to ``` 2.1.0 ```. Once added click ``` OK ```. Save the ``` pom.xml ``` file.
 
 ![Adding dependency to the client library - Step 2](https://apidocs.io/illustration/java?step=testProject1&workspaceFolder=Telstra%20SMS%20Messaging%20API-Java&workspaceName=TelstraSMSMessagingAPI&projectName=TelstraSMSMessagingAPILib&rootNamespace=net.telstra.tdev.apipractice.slot2)
 

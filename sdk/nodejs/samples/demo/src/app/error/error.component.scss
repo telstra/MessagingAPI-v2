@@ -1,0 +1,22 @@
+$icon-size: 15px;
+$error-color: #e11e1e;
+
+.backdrop {
+    background-color: rgba(0,0,0,0.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+}
+h5{
+    color: $error-color;
+}
+.fa-times{
+    cursor: pointer;
+    color: $error-color;
+    font-size: $icon-size;
+}
+.fa-times:active {
+    font-size: $icon-size + 5;
+}

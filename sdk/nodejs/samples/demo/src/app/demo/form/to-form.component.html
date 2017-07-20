@@ -1,0 +1,7 @@
+<form [formGroup]="toForm">
+  <input type="text" class="form-control" style="margin-bottom: 1em" formControlName="number">
+  <div *ngIf="toForm.get('number').hasError('required')
+              && toForm.get('number').touched" class="alert alert-danger" id="form-error">
+    Recipient phone number is required
+  </div>
+</form>

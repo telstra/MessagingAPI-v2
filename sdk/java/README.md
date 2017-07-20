@@ -1,3 +1,38 @@
+# Prerequisite
+
+## Provisioning a number
+To get a dedicated number, invoke the provisioning API
+```sh
+#!/bin/bash
+curl -X POST \
+  https://slot2.apipractice.t-dev.telstra.net/v2/messages/provisioning/subscriptions \
+  -H 'authorization: Bearer TOKEN' \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/json' \
+  -d '{
+  "activeDays":30,
+  "notifyURL":"http://example.com/callback"
+}'
+```
+Parameters for the provisioning API are;
+
+| Parameter |Mandatory| Description |
+| --- | --- | --- |
+| `activeDays` | N | The number of days before the number will be released and quarantined. |
+| `notifyURL` | N | A callback URL that will be POSTed to whenever a new message arrives at this destination address. If this is not provided then you can make use the Get Replies API to poll for messages |
+
+### Response
+A typical response will look like;
+```{
+    "destinationAddress": "+61412356789"
+}
+```
+The fields mean;
+
+| Field | Description |
+| --- | --- |
+| `destinationAddress` | The provisioned number assigned to your app. Your customers can send replies to this number. If the `notifyURL` is provided then the replies will be POSTed to it. |
+
 # Getting started
 
 The Telstra SMS Messaging API allows your applications to send and receive SMS text messages from Australia's leading network operator.

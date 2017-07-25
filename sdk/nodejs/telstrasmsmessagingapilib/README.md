@@ -4,6 +4,12 @@ The Telstra SMS Messaging API allows your applications to send and receive SMS t
 It also allows your application to track the delivery status of both sent and received SMS messages.
 
 ## Initialization
+### Install via NPM
+This SDK is available on npm [here](https://www.npmjs.com/package/telstrasmsmessagingapilib)      
+Add it to your projects  
+```
+npm i telstrasmsmessagingapilib --save 
+```
 
 ### Authentication
 In order to setup authentication in the API client, you need the following information.

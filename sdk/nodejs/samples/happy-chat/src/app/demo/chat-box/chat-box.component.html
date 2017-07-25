@@ -1,0 +1,12 @@
+<div *ngFor="let message of messages; let i = index;">
+  <div class="card card-outline-warning" [@flyIn]>
+    <div class="card-block">
+      <h6 class="card-title">{{ message?.chatter.name }} says...</h6>
+      <p class="card-text">{{ message?.message }}</p>
+      <br>
+      <div class="pull-right text-muted">
+        at {{ message?.sentTimestamp | date: 	'dd/MM/yyyy hh:mm:ss' }}
+      </div>
+    </div>
+  </div>
+</div>

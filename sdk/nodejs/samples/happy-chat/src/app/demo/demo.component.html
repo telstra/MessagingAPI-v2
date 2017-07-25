@@ -1,0 +1,67 @@
+<div class="row">
+  <div class="col-md-8">
+    <div class="card card-outline-primary">
+      <div class="card-block">
+        <h3 class="card-title">Send SMS</h3>
+        <form [formGroup]="smsForm">
+          <div formArrayName="to">
+            <ng-container *ngFor="let number of smsForm.get('to')['controls']; let i = index">
+              <label>Recipient {{ i + 1 }}</label>
+              <div [formGroupName]="i" class="input-group">
+                <input type="text" class="form-control col-md-4" formControlName="number" placeholder="Phone Number">
+                <input type="text" class="form-control col-md-4" formControlName="name" placeholder="Name">
+                <span class="input-group-btn">
+                  <button *ngIf="smsForm.get('to')['controls'].length > 1" 
+                    class="btn btn-danger" (click)="removeTo(i)"><i class="fa fa-times"></i>
+                  </button>
+                </span>
+              </div>
+              <ng-container *ngIf="sentMessages.length > 0">
+                <span [ngSwitch]="getMessageStatus(smsForm.get('to')['controls'][i]['controls']['number'].value)">
+                  <div *ngSwitchCase="'DELIVRD'">
+                    <span class="text-success"><i class="fa fa-check-circle"></i> Sent!</span>
+                  </div>
+                  <div *ngSwitchCase="'DeliveryImpossible'">
+                    <span class="text-danger"><i class="fa fa-times-circle"></i> Failed! Delivery impossible</span>
+                  </div>
+                  <div *ngSwitchCase="'MessageWaiting'">
+                    <span class="text-warning"><i class="fa fa-spinner fa-spin fa-fw"></i> Pending...</span>
+                  </div>
+                </span>
+              </ng-container>
+              <div *ngIf="!smsForm.valid" class="container">
+                <div class="row">
+                  <div *ngIf="smsForm.get('to')['controls'][i].get('number').hasError('required')
+                        && smsForm.get('to')['controls'][i].get('number').touched" class="col-md-3 alert alert-danger form-error" style="margin-right: 1em">
+                        Number required
+                  </div>
+                  <div *ngIf="smsForm.get('to')['controls'][i].get('name').hasError('required')
+                        && smsForm.get('to')['controls'][i].get('name').touched" class="col-md-3 alert alert-danger form-error">
+                        Name required
+                  </div>
+                </div>
+              </div>
+              <br>
+            </ng-container>
+            <button class="btn btn-outline-success btn-sm" style="margin-bottom: 1em" (click)="addTo()">Add Recipient</button>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea rows="5" class="form-control" formControlName="message"></textarea>
+            <div *ngIf="smsForm.get('message').hasError('required')
+                        && smsForm.get('message').touched" class="alert alert-danger form-error">
+              Message required
+            </div>
+          </div>
+          <button class="btn btn-outline-primary col-md-2" [disabled]="!smsForm.valid" (click)="onSend()">
+            <i *ngIf="messageWaiting" class="fa fa-refresh fa-spin fa-fw"></i>
+            {{ messageWaiting ? '' : 'Send' }}
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 chat-container">
+    <app-chat-box [messages]="messages"></app-chat-box>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+$success: #5cb85c;
+$error: 	#d9534f;
+
+.card {
+  height: 65vh;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+.chat-container {
+  height: 65vh;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.navbar {
+  display: flex;
+  flex-direction: column;
+  height: 15vh;
+}
+.navbar > div > p {
+  margin-left: 2em;
+}
+.card-outline-warning>div>h3 {
+  color: #ffbb33;
+  i {
+    cursor: pointer;
+  }
+}
+.fa-check-circle {
+  color: $success;
+}
+.fa-times-circle {
+  color: $error;
+}
+#failed-text {
+  color: $error;
+}
+#sent-text {
+  color: $success;
+}

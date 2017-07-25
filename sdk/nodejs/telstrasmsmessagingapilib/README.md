@@ -6,7 +6,6 @@ It also allows your application to track the delivery status of both sent and re
 ## Initialization
 ### Install via NPM
 This SDK is available on npm [here](https://www.npmjs.com/package/telstrasmsmessagingapilib)      
-Add it to your projects  
 ```
 npm i telstrasmsmessagingapilib --save 
 ```

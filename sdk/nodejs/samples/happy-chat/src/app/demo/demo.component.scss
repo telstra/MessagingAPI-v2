@@ -1,5 +1,6 @@
 $success: #5cb85c;
 $error: 	#d9534f;
+$spin-time: .3s;
 
 .card {
   height: 65vh;
@@ -39,4 +40,87 @@ $error: 	#d9534f;
 }
 #sent-text {
   color: $success;
+}
+.spin-forwards{
+   display: inline-block;
+  -webkit-animation: spin-forwards $spin-time linear;
+  -moz-animation: spin-forwards $spin-time linear;
+  -o-animation: spin-forwards $spin-time linear;
+  animation: spin-forwards $spin-time linear;
+}
+.spin-backwards {
+  display: inline-block;
+  -webkit-animation: spin-backwards $spin-time linear;
+  -moz-animation: spin-backwards $spin-time linear;
+  -o-animation: spin-backwards $spin-time linear;
+  animation: spin-backwards $spin-time linear;
+}
+@-moz-keyframes spin-forwards {
+  0% {
+    -moz-transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin-forwards {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-o-keyframes spin-forwards {
+  0% {
+    -o-transform: rotate(0deg);
+  }
+  100% {
+    -o-transform: rotate(360deg);
+  }
+}
+@keyframes spin-forwards {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@-moz-keyframes spin-backwards {
+  0% {
+    -moz-transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(-360deg);
+  }
+}
+@-webkit-keyframes spin-backwards {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(-360deg);
+  }
+}
+@-o-keyframes spin-backwards {
+  0% {
+    -o-transform: rotate(0deg);
+  }
+  100% {
+    -o-transform: rotate(-360deg);
+  }
+}
+@keyframes spin-backwards {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(-360deg);
+    transform: rotate(-360deg);
+  }
 }

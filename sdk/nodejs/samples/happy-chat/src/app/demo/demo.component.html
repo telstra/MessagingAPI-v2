@@ -8,8 +8,8 @@
             <ng-container *ngFor="let number of smsForm.get('to')['controls']; let i = index">
               <label>Recipient {{ i + 1 }}</label>
               <div [formGroupName]="i" class="input-group">
-                <input type="text" class="form-control col-md-4" formControlName="number" placeholder="Phone Number">
-                <input type="text" class="form-control col-md-4" formControlName="name" placeholder="Name">
+                <input type="text" class="form-control" formControlName="number" placeholder="Phone Number">
+                <input type="text" class="form-control" formControlName="name" placeholder="Name">
                 <span class="input-group-btn">
                   <button *ngIf="smsForm.get('to')['controls'].length > 1" 
                     class="btn btn-danger" (click)="removeTo(i)"><i class="fa fa-times"></i>
@@ -32,11 +32,11 @@
               <div *ngIf="!smsForm.valid" class="container">
                 <div class="row">
                   <div *ngIf="smsForm.get('to')['controls'][i].get('number').hasError('required')
-                        && smsForm.get('to')['controls'][i].get('number').touched" class="col-md-3 alert alert-danger form-error" style="margin-right: 1em">
+                        && smsForm.get('to')['controls'][i].get('number').touched" class="col alert alert-danger form-error" style="margin-right: 1em">
                         Number required
                   </div>
                   <div *ngIf="smsForm.get('to')['controls'][i].get('name').hasError('required')
-                        && smsForm.get('to')['controls'][i].get('name').touched" class="col-md-3 alert alert-danger form-error">
+                        && smsForm.get('to')['controls'][i].get('name').touched" class="col alert alert-danger form-error">
                         Name required
                   </div>
                 </div>
@@ -60,6 +60,9 @@
         </form>
       </div>
     </div>
+    <p><span [ngClass]="{'spin-forwards': userConnected, 'spin-backwards': userDisconnected }">😄</span>
+      &nbsp;{{ connections }} chatter{{ connections > 1 ? 's' : '' }} chatting
+    </p>
   </div>
   <div class="col-md-4 chat-container">
     <app-chat-box [messages]="messages"></app-chat-box>

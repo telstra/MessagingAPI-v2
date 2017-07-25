@@ -20,7 +20,13 @@ And run the express server in a serperate terminal
 ```
 npm start
 ```
-    
+## About Happy Chat
+Happy Chat is a small chat app that will send SMS, tracks its status and be able to display any replies to the screen. It uses websockets and the Tesltra messaging API to do this.   
+
+Phone numbers entered into Happy Chat are not persistently stored anywhere. The app uses the numbers you enter and sends a request to the messaging API to send you a message. All numbers entered are only stored on your client while the app is running.
+
+SMS messages sent to the number that the Happy Chat app uses are free for Australian phone numbers. International numbers will be charged that standard rate based on their service provider.
+
 ## How to use
 Replace the value for CLIENT_ID and CLIENT_SECRET in the /server/api_credentials with your own client_id and client_secret.  
 Also replace the values for myNumber and myNotifyURL inside demo.component.ts with your own provisioned phone number and whatever you URL you want your message status notifications to be sent to respectively.   

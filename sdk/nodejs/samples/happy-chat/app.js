@@ -28,9 +28,6 @@ app.use(function(req, res, next) {
   next();
 });
 
-// set up socket
-app.io = io;
-
 // Set our api routes
 app.use('/api', api);
 
@@ -60,3 +57,13 @@ server.listen(port, () => console.log(`** API running on localhost:${port}`));
 // set up socket 
 var io = require('socket.io')(server);
 app.set('socketio', io);
+// connection and disconnection events. Lets us see the number of collected clients on the front end
+io.on('connection', (socket) => {
+  console.log('user connected', io.engine.clientsCount);
+  io.emit('user_connected', io.engine.clientsCount);
+
+  socket.on('disconnect', function(){
+    console.log('user disconnected', io.engine.clientsCount);
+    io.emit('user_disconnected', io.engine.clientsCount);
+  });
+});

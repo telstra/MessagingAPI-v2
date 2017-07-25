@@ -16,7 +16,7 @@ webpackEmptyContext.id = "../../../../../src async recursive";
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n    <div class=\"col-md-8 offset-md-4\">\r\n        <h1>Happy Chat 😄</h1>\r\n    </div>\r\n    <hr>\r\n    <router-outlet></router-outlet>\r\n</div>\r\n<app-notification></app-notification>\r\n<app-error></app-error>"
+module.exports = "<div class=\"container\">\r\n    <div class=\"col-md-8 offset-md-4\">\r\n        <h1>Happy Chat 😄</h1>\r\n    </div>\r\n    <hr>\r\n    <router-outlet></router-outlet>\r\n</div>\r\n<app-error></app-error>"
 
 /***/ }),
 
@@ -145,7 +145,7 @@ var routing = __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* RouterModule 
 /***/ "../../../../../src/app/demo/chat-box/chat-box.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngFor=\"let message of messages; let i = index;\">\r\n  <div class=\"card card-outline-warning\" [@flyIn]>\r\n    <div class=\"card-block\">\r\n      <h6 class=\"card-title\">{{ message?.chatter.name }} says...</h6>\r\n      <p class=\"card-text\">{{ message?.message }}</p>\r\n      <br>\r\n      <div class=\"pull-right text-muted\">\r\n        at {{ message?.sentTimestamp | date: \t'dd/MM/yyyy hh:mm:ss' }}\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>"
+module.exports = "<ng-container *ngFor=\"let message of messages; let i = index;\">\r\n  <div class=\"card card-outline-warning\" [@flyIn]>\r\n    <div class=\"card-block\">\r\n      <h6 class=\"card-title\">{{ message?.chatter.name }} says...</h6>\r\n      <p class=\"card-text\">{{ message?.message }}</p>\r\n      <br>\r\n      <div class=\"pull-right text-muted\">\r\n        at {{ message?.sentTimestamp | date: \t'dd/MM/yyyy hh:mm:ss' }}\r\n      </div>\r\n    </div>\r\n  </div>\r\n</ng-container>"
 
 /***/ }),
 
@@ -218,7 +218,7 @@ ChatBoxComponent = __decorate([
 /***/ "../../../../../src/app/demo/demo.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"col-md-8\">\n    <div class=\"card card-outline-primary\">\n      <div class=\"card-block\">\n        <h3 class=\"card-title\">Send SMS</h3>\n        <form [formGroup]=\"smsForm\">\n          <div formArrayName=\"to\">\n            <ng-container *ngFor=\"let number of smsForm.get('to')['controls']; let i = index\">\n              <label>Recipient {{ i + 1 }}</label>\n              <div [formGroupName]=\"i\" class=\"input-group\">\n                <input type=\"text\" class=\"form-control col-md-4\" formControlName=\"number\" placeholder=\"Phone Number\">\n                <input type=\"text\" class=\"form-control col-md-4\" formControlName=\"name\" placeholder=\"Name\">\n                <span class=\"input-group-btn\">\n                  <button *ngIf=\"smsForm.get('to')['controls'].length > 1\" \n                    class=\"btn btn-danger\" (click)=\"removeTo(i)\"><i class=\"fa fa-times\"></i>\n                  </button>\n                </span>\n              </div>\n              <ng-container *ngIf=\"sentMessages.length > 0\">\n                <span [ngSwitch]=\"getMessageStatus(smsForm.get('to')['controls'][i]['controls']['number'].value)\">\n                  <div *ngSwitchCase=\"'DELIVRD'\">\n                    <span class=\"text-success\"><i class=\"fa fa-check-circle\"></i> Sent!</span>\n                  </div>\n                  <div *ngSwitchCase=\"'DeliveryImpossible'\">\n                    <span class=\"text-danger\"><i class=\"fa fa-times-circle\"></i> Failed! Delivery impossible</span>\n                  </div>\n                  <div *ngSwitchCase=\"'MessageWaiting'\">\n                    <span class=\"text-warning\"><i class=\"fa fa-spinner fa-spin fa-fw\"></i> Pending...</span>\n                  </div>\n                </span>\n              </ng-container>\n              <div *ngIf=\"!smsForm.valid\" class=\"container\">\n                <div class=\"row\">\n                  <div *ngIf=\"smsForm.get('to')['controls'][i].get('number').hasError('required')\n                        && smsForm.get('to')['controls'][i].get('number').touched\" class=\"col-md-3 alert alert-danger form-error\" style=\"margin-right: 1em\">\n                        Number required\n                  </div>\n                  <div *ngIf=\"smsForm.get('to')['controls'][i].get('name').hasError('required')\n                        && smsForm.get('to')['controls'][i].get('name').touched\" class=\"col-md-3 alert alert-danger form-error\">\n                        Name required\n                  </div>\n                </div>\n              </div>\n              <br>\n            </ng-container>\n            <button class=\"btn btn-outline-success btn-sm\" style=\"margin-bottom: 1em\" (click)=\"addTo()\">Add Recipient</button>\n          </div>\n          <div class=\"form-group\">\n            <label for=\"message\">Message</label>\n            <textarea rows=\"5\" class=\"form-control\" formControlName=\"message\"></textarea>\n            <div *ngIf=\"smsForm.get('message').hasError('required')\n                        && smsForm.get('message').touched\" class=\"alert alert-danger form-error\">\n              Message required\n            </div>\n          </div>\n          <button class=\"btn btn-outline-primary col-md-2\" [disabled]=\"!smsForm.valid\" (click)=\"onSend()\">\n            <i *ngIf=\"messageWaiting\" class=\"fa fa-refresh fa-spin fa-fw\"></i>\n            {{ messageWaiting ? '' : 'Send' }}\n          </button>\n        </form>\n      </div>\n    </div>\n  </div>\n  <div class=\"col-md-4 chat-container\">\n    <app-chat-box [messages]=\"messages\"></app-chat-box>\n  </div>\n</div>"
+module.exports = "<div class=\"row\">\n  <div class=\"col-md-8\">\n    <div class=\"card card-outline-primary\">\n      <div class=\"card-block\">\n        <h3 class=\"card-title\">Send SMS</h3>\n        <form [formGroup]=\"smsForm\">\n          <div formArrayName=\"to\">\n            <ng-container *ngFor=\"let number of smsForm.get('to')['controls']; let i = index\">\n              <label>Recipient {{ i + 1 }}</label>\n              <div [formGroupName]=\"i\" class=\"input-group\">\n                <input type=\"text\" class=\"form-control\" formControlName=\"number\" placeholder=\"Phone Number\">\n                <input type=\"text\" class=\"form-control\" formControlName=\"name\" placeholder=\"Name\">\n                <span class=\"input-group-btn\">\n                  <button *ngIf=\"smsForm.get('to')['controls'].length > 1\" \n                    class=\"btn btn-danger\" (click)=\"removeTo(i)\"><i class=\"fa fa-times\"></i>\n                  </button>\n                </span>\n              </div>\n              <ng-container *ngIf=\"sentMessages.length > 0\">\n                <span [ngSwitch]=\"getMessageStatus(smsForm.get('to')['controls'][i]['controls']['number'].value)\">\n                  <div *ngSwitchCase=\"'DELIVRD'\">\n                    <span class=\"text-success\"><i class=\"fa fa-check-circle\"></i> Sent!</span>\n                  </div>\n                  <div *ngSwitchCase=\"'DeliveryImpossible'\">\n                    <span class=\"text-danger\"><i class=\"fa fa-times-circle\"></i> Failed! Delivery impossible</span>\n                  </div>\n                  <div *ngSwitchCase=\"'MessageWaiting'\">\n                    <span class=\"text-warning\"><i class=\"fa fa-spinner fa-spin fa-fw\"></i> Pending...</span>\n                  </div>\n                </span>\n              </ng-container>\n              <div *ngIf=\"!smsForm.valid\" class=\"container\">\n                <div class=\"row\">\n                  <div *ngIf=\"smsForm.get('to')['controls'][i].get('number').hasError('required')\n                        && smsForm.get('to')['controls'][i].get('number').touched\" class=\"col alert alert-danger form-error\" style=\"margin-right: 1em\">\n                        Number required\n                  </div>\n                  <div *ngIf=\"smsForm.get('to')['controls'][i].get('name').hasError('required')\n                        && smsForm.get('to')['controls'][i].get('name').touched\" class=\"col alert alert-danger form-error\">\n                        Name required\n                  </div>\n                </div>\n              </div>\n              <br>\n            </ng-container>\n            <button class=\"btn btn-outline-success btn-sm\" style=\"margin-bottom: 1em\" (click)=\"addTo()\">Add Recipient</button>\n          </div>\n          <div class=\"form-group\">\n            <label for=\"message\">Message</label>\n            <textarea rows=\"5\" class=\"form-control\" formControlName=\"message\"></textarea>\n            <div *ngIf=\"smsForm.get('message').hasError('required')\n                        && smsForm.get('message').touched\" class=\"alert alert-danger form-error\">\n              Message required\n            </div>\n          </div>\n          <button class=\"btn btn-outline-primary col-md-2\" [disabled]=\"!smsForm.valid\" (click)=\"onSend()\">\n            <i *ngIf=\"messageWaiting\" class=\"fa fa-refresh fa-spin fa-fw\"></i>\n            {{ messageWaiting ? '' : 'Send' }}\n          </button>\n        </form>\n      </div>\n    </div>\n    <p><span [ngClass]=\"{'spin-forwards': userConnected, 'spin-backwards': userDisconnected }\">😄</span>\n      &nbsp;{{ connections }} chatter{{ connections > 1 ? 's' : '' }} chatting\n    </p>\n  </div>\n  <div class=\"col-md-4 chat-container\">\n    <app-chat-box [messages]=\"messages\"></app-chat-box>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -230,7 +230,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".card {\n  height: 65vh;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  overflow: auto; }\n\n.chat-container {\n  height: 65vh;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  overflow-y: auto;\n  overflow-x: hidden; }\n\n.navbar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  height: 15vh; }\n\n.navbar > div > p {\n  margin-left: 2em; }\n\n.card-outline-warning > div > h3 {\n  color: #ffbb33; }\n  .card-outline-warning > div > h3 i {\n    cursor: pointer; }\n\n.fa-check-circle {\n  color: #5cb85c; }\n\n.fa-times-circle {\n  color: #d9534f; }\n\n#failed-text {\n  color: #d9534f; }\n\n#sent-text {\n  color: #5cb85c; }\n", ""]);
+exports.push([module.i, ".card {\n  height: 65vh;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  overflow: auto; }\n\n.chat-container {\n  height: 65vh;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  overflow-y: auto;\n  overflow-x: hidden; }\n\n.navbar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  height: 15vh; }\n\n.navbar > div > p {\n  margin-left: 2em; }\n\n.card-outline-warning > div > h3 {\n  color: #ffbb33; }\n  .card-outline-warning > div > h3 i {\n    cursor: pointer; }\n\n.fa-check-circle {\n  color: #5cb85c; }\n\n.fa-times-circle {\n  color: #d9534f; }\n\n#failed-text {\n  color: #d9534f; }\n\n#sent-text {\n  color: #5cb85c; }\n\n.spin-forwards {\n  display: inline-block;\n  -webkit-animation: spin-forwards 0.3s linear;\n  animation: spin-forwards 0.3s linear; }\n\n.spin-backwards {\n  display: inline-block;\n  -webkit-animation: spin-backwards 0.3s linear;\n  animation: spin-backwards 0.3s linear; }\n\n@-webkit-keyframes spin-forwards {\n  0% {\n    -webkit-transform: rotate(0deg); }\n  100% {\n    -webkit-transform: rotate(360deg); } }\n\n@keyframes spin-forwards {\n  0% {\n    -webkit-transform: rotate(0deg);\n    transform: rotate(0deg); }\n  100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg); } }\n\n@-webkit-keyframes spin-backwards {\n  0% {\n    -webkit-transform: rotate(0deg); }\n  100% {\n    -webkit-transform: rotate(-360deg); } }\n\n@keyframes spin-backwards {\n  0% {\n    -webkit-transform: rotate(0deg);\n    transform: rotate(0deg); }\n  100% {\n    -webkit-transform: rotate(-360deg);\n    transform: rotate(-360deg); } }\n", ""]);
 
 // exports
 
@@ -284,6 +284,9 @@ var DemoComponent = (function () {
         // replace these with your own notifyURL and provisioned phone number
         this.myNotifyURL = "your notify URL here";
         this.myNumber = "your provisioned phone number here";
+        this.connections = 0;
+        this.userConnected = true;
+        this.userDisconnected = false;
         this.messages = [];
         this.sentMessages = [];
         this.chatters = [];
@@ -316,7 +319,7 @@ var DemoComponent = (function () {
             var sms = new __WEBPACK_IMPORTED_MODULE_6__models_sms_model__["a" /* SMS */](numbers_1, this.myNumber, '60', false, this.myNotifyURL, false, this.smsForm.get('message').value);
             // Send the SMS via the demoService. We will get a MessageSentResponse back
             this.messageWaiting = this.demoService.sendSMS(sms).subscribe(function (response) {
-                _this.messageWaiting = null;
+                _this.messageWaiting.unsubscribe();
                 // add all messages from the response to our sentMessages array.
                 response.messages.forEach(function (message) {
                     // here we remove everything after the first hyphen in the messageId. This is because the message status returns this same
@@ -368,6 +371,11 @@ var DemoComponent = (function () {
         var control = this.smsForm.get('to');
         control.removeAt(i);
     };
+    // for the current connected users display.
+    DemoComponent.prototype.setConnected = function (connected, disconnected) {
+        this.userConnected = connected;
+        this.userDisconnected = disconnected;
+    };
     DemoComponent.prototype.ngOnInit = function () {
         var _this = this;
         // subscribe to the getMessageStatus function in the service. This function uses socket.io to listen for message status events
@@ -387,6 +395,22 @@ var DemoComponent = (function () {
                 chatter = new __WEBPACK_IMPORTED_MODULE_7__models_chatter_model__["a" /* Chatter */]('Happy chatter', response.from);
             }
             _this.messages.unshift(new __WEBPACK_IMPORTED_MODULE_9_app_models_message_model__["a" /* Message */](chatter, response.body, response.sentTimestamp, response.messageId));
+        });
+        // get incoming connection messages via socket.io
+        this.demoService.getConnectedUsers().subscribe(function (connections) {
+            if (_this.connections === 0) {
+                _this.connections = connections;
+            }
+            if (connections > _this.connections) {
+                _this.setConnected(true, false);
+            }
+            else if (connections < _this.connections) {
+                _this.setConnected(false, true);
+            }
+            _this.connections = connections;
+            setTimeout(function () {
+                _this.setConnected(false, false);
+            }, 300);
         });
         this.bindForm();
         this.addTo();
@@ -497,6 +521,7 @@ var DemoService = (function () {
         this.router = router;
         this.errorService = errorService;
         this.hostURL = "http://" + document.location.host;
+        this.socket = __WEBPACK_IMPORTED_MODULE_3_socket_io_client__(this.hostURL);
     }
     // error handler
     DemoService.prototype.handleError = function (error) {
@@ -521,7 +546,6 @@ var DemoService = (function () {
     DemoService.prototype.getMessageStatus = function () {
         var _this = this;
         var observable = new __WEBPACK_IMPORTED_MODULE_5_rxjs__["Observable"](function (observer) {
-            _this.socket = __WEBPACK_IMPORTED_MODULE_3_socket_io_client__(_this.hostURL);
             _this.socket.on('message_status', function (data) {
                 observer.next(data);
             });
@@ -536,8 +560,23 @@ var DemoService = (function () {
     DemoService.prototype.getMessages = function () {
         var _this = this;
         var observable = new __WEBPACK_IMPORTED_MODULE_5_rxjs__["Observable"](function (observer) {
-            _this.socket = __WEBPACK_IMPORTED_MODULE_3_socket_io_client__(_this.hostURL);
             _this.socket.on('message_received', function (data) {
+                observer.next(data);
+            });
+            return function () {
+                _this.socket.disconnect();
+            };
+        });
+        return observable;
+    };
+    // this has nothing to do with the messaging API. Uses socket.io to show the number of clients currently connected
+    DemoService.prototype.getConnectedUsers = function () {
+        var _this = this;
+        var observable = new __WEBPACK_IMPORTED_MODULE_5_rxjs__["Observable"](function (observer) {
+            _this.socket.on('user_connected', function (data) {
+                observer.next(data);
+            });
+            _this.socket.on('user_disconnected', function (data) {
                 observer.next(data);
             });
             return function () {

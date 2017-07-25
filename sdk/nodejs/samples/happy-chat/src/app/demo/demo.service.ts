@@ -20,7 +20,9 @@ export class DemoService {
   private socket;
   private hostURL = `http://${document.location.host}`;
 
-  constructor(private http: Http, private router: Router, private errorService: ErrorService) { }
+  constructor(private http: Http, private router: Router, private errorService: ErrorService) {
+    this.socket = io(this.hostURL);
+  }
 
   // error handler
   handleError(error: Response) {
@@ -46,7 +48,6 @@ export class DemoService {
   // how to set this up
   getMessageStatus() {
     let observable = new Observable(observer => {
-      this.socket = io(this.hostURL);
       this.socket.on('message_status', (data: MessageStatus) => {
         observer.next(data);    
       });
@@ -61,7 +62,6 @@ export class DemoService {
   // how to set this up
   getMessages() {
     let observable = new Observable(observer => {
-      this.socket = io(this.hostURL);
       this.socket.on('message_received', (data: Message) => {
         observer.next(data);    
       });
@@ -69,6 +69,22 @@ export class DemoService {
         this.socket.disconnect();
       };  
     })     
+    return observable;
+  }
+
+  // this has nothing to do with the messaging API. Uses socket.io to show the number of clients currently connected
+  getConnectedUsers() {
+    let observable = new Observable(observer => {
+      this.socket.on('user_connected', (data: number) => {
+        observer.next(data);
+      });
+      this.socket.on('user_disconnected', (data: number) => {
+        observer.next(data);
+      });
+      return () => {
+        this.socket.disconnect();
+      };
+    })
     return observable;
   }
 }

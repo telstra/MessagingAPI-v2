@@ -25,11 +25,14 @@ export class DemoComponent implements OnInit {
   private myNotifyURL = `your notify URL here`;
   private myNumber = `your provisioned phone number here`
 
+  connections = 0;
+  userConnected = true;
+  userDisconnected = false;
+
   smsForm: FormGroup;
   messages: Message[] = [];
   sentMessages: MessageStatus[] = [];
 
-  pollWaiting: Subscription;
   messageWaiting: Subscription;
 
   chatters: Chatter[] = [];
@@ -76,7 +79,7 @@ export class DemoComponent implements OnInit {
       );
       // Send the SMS via the demoService. We will get a MessageSentResponse back
       this.messageWaiting = this.demoService.sendSMS(sms).subscribe((response: MessageSentResponse) => {
-        this.messageWaiting = null;
+        this.messageWaiting.unsubscribe();
 
         // add all messages from the response to our sentMessages array.
         response.messages.forEach(message => {
@@ -139,6 +142,12 @@ export class DemoComponent implements OnInit {
     control.removeAt(i);
   }
 
+  // for the current connected users display.
+  setConnected(connected: boolean, disconnected: boolean) {
+    this.userConnected = connected;
+    this.userDisconnected = disconnected;
+  }
+
   ngOnInit() {
     // subscribe to the getMessageStatus function in the service. This function uses socket.io to listen for message status events
     // from the API
@@ -166,6 +175,23 @@ export class DemoComponent implements OnInit {
         response.sentTimestamp,
         response.messageId
       ));
+    });
+
+    // get incoming connection messages via socket.io
+    this.demoService.getConnectedUsers().subscribe((connections: number) => {
+      if(this.connections === 0) { 
+        this.connections = connections; 
+      }
+      if(connections > this.connections) {
+        this.setConnected(true, false);
+      }
+      else if(connections < this.connections) {
+        this.setConnected(false, true);
+      }
+      this.connections = connections;
+      setTimeout(() => {
+        this.setConnected(false, false);
+      }, 300);
     });
 
     this.bindForm();

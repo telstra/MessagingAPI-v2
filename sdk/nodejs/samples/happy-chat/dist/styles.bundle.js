@@ -1,12 +1,5 @@
 webpackJsonp([2],{
 
-/***/ "../../../../../src/assets/fonts/TelstraAkkurat-Light.otf":
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "TelstraAkkurat-Light.e2820cfd71060eab168b.otf";
-
-/***/ }),
-
 /***/ "../../../../../src/styles.scss":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -88,7 +81,7 @@ exports.i(__webpack_require__("../../../../css-loader/index.js?{\"sourceMap\":fa
 exports.i(__webpack_require__("../../../../css-loader/index.js?{\"sourceMap\":false,\"importLoaders\":1}!../../../../postcss-loader/index.js?{\"ident\":\"postcss\"}!../../../../font-awesome/css/font-awesome.css"), "");
 
 // module
-exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\n@font-face {\n  font-family: \"TelstraAkkurat-Light\";\n  src: url(" + __webpack_require__("../../../../../src/assets/fonts/TelstraAkkurat-Light.otf") + "); }\n\nhtml {\n  position: relative;\n  min-height: 100%; }\n\nbody {\n  padding-top: 5rem;\n  height: 100%; }\n\n.btn {\n  cursor: pointer; }\n\nh1 {\n  font-family: TelstraAkkurat-Light;\n  color: #0064D2; }\n\nh3 {\n  color: #0064D2; }\n\ninput.ng-invalid.ng-touched {\n  border: 1px solid red; }\n\ntextarea.ng-invalid.ng-touched {\n  border: 1px solid red; }\n\nselect.ng-invalid.ng-touched {\n  border: 1px solid red; }\n\n.form-error {\n  margin-top: .5em; }\n\n.input-group .form-control {\n  z-index: 0 !important; }\n", ""]);
+exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\nhtml {\n  position: relative;\n  min-height: 100%; }\n\nbody {\n  padding-top: 5rem;\n  height: 100%; }\n\n.btn {\n  cursor: pointer; }\n\nh1 {\n  font-family: \"Helvetica Neue\", \"Arial\";\n  color: #0064D2; }\n\nh3 {\n  color: #0064D2; }\n\ninput.ng-invalid.ng-touched {\n  border: 1px solid red; }\n\ntextarea.ng-invalid.ng-touched {\n  border: 1px solid red; }\n\nselect.ng-invalid.ng-touched {\n  border: 1px solid red; }\n\n.form-error {\n  margin-top: .5em; }\n\n.input-group .form-control {\n  z-index: 0 !important; }\n", ""]);
 
 // exports
 

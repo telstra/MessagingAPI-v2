@@ -1,12 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import "~font-awesome/css/font-awesome.css";
-@font-face {
-  font-family: "TelstraAkkurat-Light";
-  src: url("./assets/fonts/TelstraAkkurat-Light.otf")
-}
 
-$fontFamily: TelstraAkkurat-Light !default;
+$fontFamily: "Helvetica Neue", "Arial" !default;
 $theme: #0064D2 !default;
 
 html {

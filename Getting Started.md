@@ -1,4 +1,3 @@
-![Messaging API Logo](https://dev.telstra.com/sites/default/files/FroBotResize_1.png)
 
 First step is to create an `App`. After you've created and `App`, follow these steps to 
 

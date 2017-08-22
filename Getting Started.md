@@ -5,6 +5,9 @@ First step is to create an `App`. After you've created and `App`, follow these s
 1. Authenticate
 2. Get a provisioned number for Messaging API
 3. Use the Messaging API
+ 
+## Run in Postman
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/a87aa26c31f7a9edc6d5#?env%5BMessaging%20API%20Environments%5D=W3siZW5hYmxlZCI6dHJ1ZSwia2V5IjoiaG9zdCIsInZhbHVlIjoic2xvdDIuYXBpcHJhY3RpY2UudC1kZXYudGVsc3RyYS5uZXQiLCJ0eXBlIjoidGV4dCJ9LHsiZW5hYmxlZCI6dHJ1ZSwia2V5IjoiY2xpZW50X2lkIiwidmFsdWUiOiIiLCJ0eXBlIjoidGV4dCJ9LHsiZW5hYmxlZCI6dHJ1ZSwia2V5IjoiY2xpZW50X3NlY3JldCIsInZhbHVlIjoiIiwidHlwZSI6InRleHQifV0=)
 
 ## Authentication
 To get an OAuth 2.0 Authentication token, pass through your Consumer Key and Consumer Secret that you received when you registered for the Messaging API key. The `grant_type` should be left as `client_credentials` and the `scope` as `NSMS`. The token will expire in one hour. Get your keys by creating an `App`.

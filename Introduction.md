@@ -1,5 +1,4 @@
-# Messaging API
-![Messaging API Logo](https://dev.telstra.com/sites/default/files/FroBotResize_1.png)
+![Messaging API Logo](https://dev.telstra.com/sites/default/files/FroBotResize_1.png =250)
 ## Introduction
 Send out marketing messages to your customers or integrate with One Time Password applications. You can also create a server that triggered by specific SMS messages.
 

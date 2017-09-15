@@ -18,7 +18,7 @@ Messaging API provides these features
 | `Reply Request` | Create a chat session by associating `messageId` and `to` number to track responses received from a mobile number. We will store this association for 8 days |
 | `Character set` | Accetps all Unicode characters as part of of UTF-8 |
 | `Bounce-back response` | See if your SMS hit an unreachable or unallocated number (Australia Only) |
-| `Queuing` | Send SMS as fast as you like. Messaging API will automatically queue and deliver each message at a compliant rate. Beta version limits sending 1 message per second |
+| `Queuing` | Messaging API will automatically queue and deliver each message at a compliant rate. |
 
 ## Getting access to the API
 Follow these steps to get access to the API

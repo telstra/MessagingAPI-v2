@@ -1,38 +1,3 @@
-# Prerequisite
-
-## Provisioning a number
-To get a dedicated number, invoke the provisioning API
-```sh
-#!/bin/bash
-curl -X POST \
-  https://slot2.apipractice.t-dev.telstra.net/v2/messages/provisioning/subscriptions \
-  -H 'authorization: Bearer TOKEN' \
-  -H 'cache-control: no-cache' \
-  -H 'content-type: application/json' \
-  -d '{
-  "activeDays":30,
-  "notifyURL":"http://example.com/callback"
-}'
-```
-Parameters for the provisioning API are;
-
-| Parameter |Mandatory| Description |
-| --- | --- | --- |
-| `activeDays` | N | The number of days before the number will be released and quarantined. |
-| `notifyURL` | N | A callback URL that will be POSTed to whenever a new message arrives at this destination address. If this is not provided then you can make use the Get Replies API to poll for messages |
-
-### Response
-A typical response will look like;
-```{
-    "destinationAddress": "+61412356789"
-}
-```
-The fields mean;
-
-| Field | Description |
-| --- | --- |
-| `destinationAddress` | The provisioned number assigned to your app. Your customers can send replies to this number. If the `notifyURL` is provided then the replies will be POSTed to it. |
-
 # Getting started
 
 The Telstra SMS Messaging API allows your applications to send and receive SMS text messages from Australia's leading network operator.
@@ -48,19 +13,19 @@ you will need internet access for a successful build.
 
 * In order to open the client library in Eclipse click on ``` File -> Import ```.
 
-![Importing SDK into Eclipse - Step 1](https://apidocs.io/illustration/java?step=import0&workspaceFolder=Telstra%20SMS%20Messaging%20API-Java&workspaceName=TelstraSMSMessagingAPI&projectName=TelstraSMSMessagingAPILib&rootNamespace=net.telstra.tdev.apipractice.slot2)
+![Importing SDK into Eclipse - Step 1](https://apidocs.io/illustration/java?step=import0&workspaceFolder=Telstra%20SMS%20Messaging%20API-Java&workspaceName=TelstraSMSMessagingAPI&projectName=TelstraSMSMessagingAPILib&rootNamespace=com.telstra.tapi)
 
 * In the import dialog, select ``` Existing Java Project ``` and click ``` Next ```.
 
-![Importing SDK into Eclipse - Step 2](https://apidocs.io/illustration/java?step=import1&workspaceFolder=Telstra%20SMS%20Messaging%20API-Java&workspaceName=TelstraSMSMessagingAPI&projectName=TelstraSMSMessagingAPILib&rootNamespace=net.telstra.tdev.apipractice.slot2)
+![Importing SDK into Eclipse - Step 2](https://apidocs.io/illustration/java?step=import1&workspaceFolder=Telstra%20SMS%20Messaging%20API-Java&workspaceName=TelstraSMSMessagingAPI&projectName=TelstraSMSMessagingAPILib&rootNamespace=com.telstra.tapi)
 
 * Browse to locate the folder containing the source code. Select the detected location of the project and click ``` Finish ```.
 
-![Importing SDK into Eclipse - Step 3](https://apidocs.io/illustration/java?step=import2&workspaceFolder=Telstra%20SMS%20Messaging%20API-Java&workspaceName=TelstraSMSMessagingAPI&projectName=TelstraSMSMessagingAPILib&rootNamespace=net.telstra.tdev.apipractice.slot2)
+![Importing SDK into Eclipse - Step 3](https://apidocs.io/illustration/java?step=import2&workspaceFolder=Telstra%20SMS%20Messaging%20API-Java&workspaceName=TelstraSMSMessagingAPI&projectName=TelstraSMSMessagingAPILib&rootNamespace=com.telstra.tapi)
 
 * Upon successful import, the project will be automatically built by Eclipse after automatically resolving the dependencies.
 
-![Importing SDK into Eclipse - Step 4](https://apidocs.io/illustration/java?step=import3&workspaceFolder=Telstra%20SMS%20Messaging%20API-Java&workspaceName=TelstraSMSMessagingAPI&projectName=TelstraSMSMessagingAPILib&rootNamespace=net.telstra.tdev.apipractice.slot2)
+![Importing SDK into Eclipse - Step 4](https://apidocs.io/illustration/java?step=import3&workspaceFolder=Telstra%20SMS%20Messaging%20API-Java&workspaceName=TelstraSMSMessagingAPI&projectName=TelstraSMSMessagingAPILib&rootNamespace=com.telstra.tapi)
 
 ## How to Use
 
@@ -70,41 +35,40 @@ The following section explains how to use the TelstraSMSMessagingAPI library in 
 
 For starting a new project, click the menu command ``` File > New > Project ```.
 
-![Add a new project in Eclipse](https://apidocs.io/illustration/java?step=createNewProject0&workspaceFolder=Telstra%20SMS%20Messaging%20API-Java&workspaceName=TelstraSMSMessagingAPI&projectName=TelstraSMSMessagingAPILib&rootNamespace=net.telstra.tdev.apipractice.slot2)
+![Add a new project in Eclipse](https://apidocs.io/illustration/java?step=createNewProject0&workspaceFolder=Telstra%20SMS%20Messaging%20API-Java&workspaceName=TelstraSMSMessagingAPI&projectName=TelstraSMSMessagingAPILib&rootNamespace=com.telstra.tapi)
 
 Next, choose ``` Maven > Maven Project ```and click ``` Next ```.
 
-![Create a new Maven Project - Step 1](https://apidocs.io/illustration/java?step=createNewProject1&workspaceFolder=Telstra%20SMS%20Messaging%20API-Java&workspaceName=TelstraSMSMessagingAPI&projectName=TelstraSMSMessagingAPILib&rootNamespace=net.telstra.tdev.apipractice.slot2)
+![Create a new Maven Project - Step 1](https://apidocs.io/illustration/java?step=createNewProject1&workspaceFolder=Telstra%20SMS%20Messaging%20API-Java&workspaceName=TelstraSMSMessagingAPI&projectName=TelstraSMSMessagingAPILib&rootNamespace=com.telstra.tapi)
 
 Here, make sure to use the current workspace by choosing ``` Use default Workspace location ```, as shown in the picture below and click ``` Next ```.
 
-![Create a new Maven Project - Step 2](https://apidocs.io/illustration/java?step=createNewProject2&workspaceFolder=Telstra%20SMS%20Messaging%20API-Java&workspaceName=TelstraSMSMessagingAPI&projectName=TelstraSMSMessagingAPILib&rootNamespace=net.telstra.tdev.apipractice.slot2)
+![Create a new Maven Project - Step 2](https://apidocs.io/illustration/java?step=createNewProject2&workspaceFolder=Telstra%20SMS%20Messaging%20API-Java&workspaceName=TelstraSMSMessagingAPI&projectName=TelstraSMSMessagingAPILib&rootNamespace=com.telstra.tapi)
 
 Following this, select the *quick start* project type to create a simple project with an existing class and a ``` main ``` method. To do this, choose ``` maven-archetype-quickstart ``` item from the list and click ``` Next ```.
 
-![Create a new Maven Project - Step 3](https://apidocs.io/illustration/java?step=createNewProject3&workspaceFolder=Telstra%20SMS%20Messaging%20API-Java&workspaceName=TelstraSMSMessagingAPI&projectName=TelstraSMSMessagingAPILib&rootNamespace=net.telstra.tdev.apipractice.slot2)
+![Create a new Maven Project - Step 3](https://apidocs.io/illustration/java?step=createNewProject3&workspaceFolder=Telstra%20SMS%20Messaging%20API-Java&workspaceName=TelstraSMSMessagingAPI&projectName=TelstraSMSMessagingAPILib&rootNamespace=com.telstra.tapi)
 
 In the last step, provide a ``` Group Id ``` and ``` Artifact Id ``` as shown in the picture below and click ``` Finish ```.
 
-![Create a new Maven Project - Step 4](https://apidocs.io/illustration/java?step=createNewProject4&workspaceFolder=Telstra%20SMS%20Messaging%20API-Java&workspaceName=TelstraSMSMessagingAPI&projectName=TelstraSMSMessagingAPILib&rootNamespace=net.telstra.tdev.apipractice.slot2)
+![Create a new Maven Project - Step 4](https://apidocs.io/illustration/java?step=createNewProject4&workspaceFolder=Telstra%20SMS%20Messaging%20API-Java&workspaceName=TelstraSMSMessagingAPI&projectName=TelstraSMSMessagingAPILib&rootNamespace=com.telstra.tapi)
 
 ### 2. Add reference of the library project
 
 The created Maven project manages its dependencies using its ``` pom.xml ``` file. In order to add a dependency on the *TelstraSMSMessagingAPILib* client library, double click on the ``` pom.xml ``` file in the ``` Package Explorer ```. Opening the ``` pom.xml ``` file will render a graphical view on the cavas. Here, switch to the ``` Dependencies ``` tab and click the ``` Add ``` button as shown in the picture below.
 
-![Adding dependency to the client library - Step 1](https://apidocs.io/illustration/java?step=testProject0&workspaceFolder=Telstra%20SMS%20Messaging%20API-Java&workspaceName=TelstraSMSMessagingAPI&projectName=TelstraSMSMessagingAPILib&rootNamespace=net.telstra.tdev.apipractice.slot2)
+![Adding dependency to the client library - Step 1](https://apidocs.io/illustration/java?step=testProject0&workspaceFolder=Telstra%20SMS%20Messaging%20API-Java&workspaceName=TelstraSMSMessagingAPI&projectName=TelstraSMSMessagingAPILib&rootNamespace=com.telstra.tapi)
 
-Clicking the ``` Add ``` button will open a dialog where you need to specify TelstraSMSMessagingAPI in ``` Group Id ``` and TelstraSMSMessagingAPILib in the ``` Artifact Id ``` fields and remember to change the version to ``` 2.1.0 ```. Once added click ``` OK ```. Save the ``` pom.xml ``` file.
+Clicking the ``` Add ``` button will open a dialog where you need to specify TelstraSMSMessagingAPI in ``` Group Id ``` and TelstraSMSMessagingAPILib in the ``` Artifact Id ``` fields. Once added click ``` OK ```. Save the ``` pom.xml ``` file.
 
-![Adding dependency to the client library - Step 2](https://apidocs.io/illustration/java?step=testProject1&workspaceFolder=Telstra%20SMS%20Messaging%20API-Java&workspaceName=TelstraSMSMessagingAPI&projectName=TelstraSMSMessagingAPILib&rootNamespace=net.telstra.tdev.apipractice.slot2)
+![Adding dependency to the client library - Step 2](https://apidocs.io/illustration/java?step=testProject1&workspaceFolder=Telstra%20SMS%20Messaging%20API-Java&workspaceName=TelstraSMSMessagingAPI&projectName=TelstraSMSMessagingAPILib&rootNamespace=com.telstra.tapi)
 
-
-### 3. Write sample code 
+### 3. Write sample code
 
 Once the ``` SimpleConsoleApp ``` is created, a file named ``` App.java ``` will be visible in the *Package Explorer* with a ``` main ``` method. This is the entry point for the execution of the created project.
 Here, you can add code to initialize the client library and instantiate a *Controller* class. Sample code to initialize the client library and using controller methods is given in the subsequent sections.
 
-![Adding dependency to the client library - Step 2](https://apidocs.io/illustration/java?step=testProject2&workspaceFolder=Telstra%20SMS%20Messaging%20API-Java&workspaceName=TelstraSMSMessagingAPI&projectName=TelstraSMSMessagingAPILib&rootNamespace=net.telstra.tdev.apipractice.slot2)
+![Adding dependency to the client library - Step 2](https://apidocs.io/illustration/java?step=testProject2&workspaceFolder=Telstra%20SMS%20Messaging%20API-Java&workspaceName=TelstraSMSMessagingAPI&projectName=TelstraSMSMessagingAPILib&rootNamespace=com.telstra.tapi)
 
 ## How to Test
 
@@ -161,11 +125,11 @@ The client can now make authorized endpoint calls.
 
 ### Scopes
 
-Scopes enable your application to only request access to the resources it needs while enabling users to control the amount of access they grant to your application. Available scopes are defined in the `net.telstra.tdev.apipractice.slot2.Models.OAuthScopeEnum` enumeration.
+Scopes enable your application to only request access to the resources it needs while enabling users to control the amount of access they grant to your application. Available scopes are defined in the `com.telstra.tapi.Models.OAuthScopeEnum` enumeration.
 
 | Scope Name | Description |
 | --- | --- |
-| `SMS` |  |
+| `NSMS` |  |
 
 ### Storing an access token for reuse
 
@@ -173,7 +137,7 @@ It is recommended that you store the access token for reuse.
 
 ```java
 // store token
-storeAccessToken(net.telstra.tdev.apipractice.slot2.Configuration.oAuthToken);
+storeAccessToken(com.telstra.tapi.Configuration.oAuthToken);
 ```
 
 ### Creating a client from a stored token
@@ -182,7 +146,7 @@ To authorize a client from a stored access token, just set the access token in `
 
 ```java
 // load token later...
-net.telstra.tdev.apipractice.slot2.Configuration.oAuthToken = loadAccessToken();
+com.telstra.tapi.Configuration.oAuthToken = loadAccessToken();
 
 // Set other configuration, then instantiate client
 client = new TelstraSMSMessagingAPIClient();
@@ -196,7 +160,7 @@ package com.example;
 import java.util.LinkedList;
 import java.util.List;
 
-import net.telstra.tdev.apipractice.slot2.models.OAuthScopeEnum;
+import com.telstra.tapi.models.OAuthScopeEnum;
 
 public class Main {
     public Main() {
@@ -207,7 +171,7 @@ public class Main {
         TelstraSMSMessagingAPIClient client = new TelstraSMSMessagingAPIClient(oAuthClientId, oAuthClientSecret);
 
         List<OAuthScopeEnum> scopes = new LinkedList<OAuthScopeEnum>();
-        scopes.add(OAuthScopeEnum.SMS);
+        scopes.add(OAuthScopeEnum.NSMS);
         
         try {
             // obtain a new access token
@@ -227,22 +191,114 @@ public class Main {
 
 ## <a name="list_of_controllers"></a>List of Controllers
 
-* [SMSController](#sms_controller)
+* [MessagingController](#messaging_controller)
 * [OAuthAuthorizationController](#o_auth_authorization_controller)
 
-## <a name="sms_controller"></a>![Class: ](https://apidocs.io/img/class.png "net.telstra.tdev.apipractice.slot2.controllers.SMSController") SMSController
+## <a name="messaging_controller"></a>![Class: ](https://apidocs.io/img/class.png "com.telstra.tapi.controllers.MessagingController") MessagingController
 
 ### Get singleton instance
 
-The singleton instance of the ``` SMSController ``` class can be accessed from the API Client.
+The singleton instance of the ``` MessagingController ``` class can be accessed from the API Client.
 
 ```java
-SMSController sMS = client.getSMS();
+MessagingController messaging = client.getMessaging();
 ```
 
-### <a name="create_send_message_async"></a>![Method: ](https://apidocs.io/img/method.png "net.telstra.tdev.apipractice.slot2.controllers.SMSController.createSendMessageAsync") createSendMessageAsync
+### <a name="get_message_status_async"></a>![Method: ](https://apidocs.io/img/method.png "com.telstra.tapi.controllers.MessagingController.getMessageStatusAsync") getMessageStatusAsync
 
-> Send an SMS to a Australian or International mobile phone.
+> Get Message Status
+
+
+```java
+void getMessageStatusAsync(
+        final String messageId,
+        final APICallBack<OutboundPollResponse> callBack)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| messageId |  ``` Required ```  | Unique identifier of a message - it is the value returned from a previous POST call to https://api.telstra.com/v2/messages/sms |
+
+
+#### Example Usage
+
+```java
+String messageId = "messageId";
+// Invoking the API call with sample inputs
+messaging.getMessageStatusAsync(messageId, new APICallBack<OutboundPollResponse>() {
+    public void onSuccess(HttpContext context, OutboundPollResponse response) {
+        // TODO success callback handler
+    }
+    public void onFailure(HttpContext context, Throwable error) {
+        // TODO failure callback handler
+    }
+});
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid or missing request parameters |
+| 401 | Invalid or no credentials passed in the request |
+| 403 | Authorization credentials passed and accepted but account does not have permission |
+| 404 | The requested URI does not exist |
+| 405 | The requested resource does not support the supplied verb |
+| 415 | API does not support the requested content type |
+| 422 | The request is formed correctly, but due to some condition the request cannot be processed e.g. email is required and it is not provided in the request |
+| 501 | The HTTP method being used has not yet been implemented for the requested resource |
+| 503 | The service requested is currently unavailable |
+| 0 | An internal error occurred when processing the request |
+
+
+
+### <a name="retrieve_messages_async"></a>![Method: ](https://apidocs.io/img/method.png "com.telstra.tapi.controllers.MessagingController.retrieveMessagesAsync") retrieveMessagesAsync
+
+> Retrieve Messages
+
+
+```java
+void retrieveMessagesAsync(final APICallBack<List<InboundPollResponse>> callBack)
+```
+
+#### Example Usage
+
+```java
+// Invoking the API call with sample inputs
+messaging.retrieveMessagesAsync(new APICallBack<List<InboundPollResponse>>() {
+    public void onSuccess(HttpContext context, List<InboundPollResponse> response) {
+        // TODO success callback handler
+    }
+    public void onFailure(HttpContext context, Throwable error) {
+        // TODO failure callback handler
+    }
+});
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid or missing request parameters |
+| 401 | Invalid or no credentials passed in the request |
+| 403 | Authorization credentials passed and accepted but account does not have permission |
+| 404 | The requested URI does not exist |
+| 405 | The requested resource does not support the supplied verb |
+| 415 | API does not support the requested content type |
+| 422 | The request is formed correctly, but due to some condition the request cannot be processed e.g. email is required and it is not provided in the request |
+| 501 | The HTTP method being used has not yet been implemented for the requested resource |
+| 503 | The service requested is currently unavailable |
+| 0 | An internal error occurred when processing the request |
+
+
+
+### <a name="create_send_message_async"></a>![Method: ](https://apidocs.io/img/method.png "com.telstra.tapi.controllers.MessagingController.createSendMessageAsync") createSendMessageAsync
+
+> Send Message
 
 
 ```java
@@ -265,7 +321,7 @@ The recipient number should be in the format '04xxxxxxxx' where x is a digit |
 try {
     SendSMSRequest payload = new SendSMSRequest();
     // Invoking the API call with sample inputs
-    sMS.createSendMessageAsync(payload, new APICallBack<MessageSentResponse>() {
+    messaging.createSendMessageAsync(payload, new APICallBack<MessageSentResponse>() {
         public void onSuccess(HttpContext context, MessageSentResponse response) {
             // TODO success callback handler
         }
@@ -290,37 +346,37 @@ try {
 | 405 | The requested resource does not support the supplied verb |
 | 415 | API does not support the requested content type |
 | 422 | The request is formed correctly, but due to some condition the request cannot be processed e.g. email is required and it is not provided in the request |
-| 500 | An internal error occurred when processing the request |
 | 501 | The HTTP method being used has not yet been implemented for the requested resource |
 | 503 | The service requested is currently unavailable |
+| 0 | An internal error occurred when processing the request |
 
 
 
-### <a name="get_message_status_async"></a>![Method: ](https://apidocs.io/img/method.png "net.telstra.tdev.apipractice.slot2.controllers.SMSController.getMessageStatusAsync") getMessageStatusAsync
+### <a name="get_mms_status_async"></a>![Method: ](https://apidocs.io/img/method.png "com.telstra.tapi.controllers.MessagingController.getMMSStatusAsync") getMMSStatusAsync
 
-> Retrieve the status of a single outgoing SMS message.
+> Get MMS Status
 
 
 ```java
-void getMessageStatusAsync(
-        final String messageId,
-        final APICallBack<OutboundPollResponse> callBack)
+void getMMSStatusAsync(
+        final String messageid,
+        final APICallBack<String> callBack)
 ```
 
 #### Parameters
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
-| messageId |  ``` Required ```  | Unique identifier of a message - it is the value returned from a previous POST call to https://api.telstra.com/v2/messages/sms |
+| messageid |  ``` Required ```  | Unique identifier of a message - it is the value returned from a previous POST call to https://api.telstra.com/v2/messages/mms |
 
 
 #### Example Usage
 
 ```java
-String messageId = "messageId";
+String messageid = "messageid";
 // Invoking the API call with sample inputs
-sMS.getMessageStatusAsync(messageId, new APICallBack<OutboundPollResponse>() {
-    public void onSuccess(HttpContext context, OutboundPollResponse response) {
+messaging.getMMSStatusAsync(messageid, new APICallBack<String>() {
+    public void onSuccess(HttpContext context, String response) {
         // TODO success callback handler
     }
     public void onFailure(HttpContext context, Throwable error) {
@@ -341,34 +397,48 @@ sMS.getMessageStatusAsync(messageId, new APICallBack<OutboundPollResponse>() {
 | 405 | The requested resource does not support the supplied verb |
 | 415 | API does not support the requested content type |
 | 422 | The request is formed correctly, but due to some condition the request cannot be processed e.g. email is required and it is not provided in the request |
-| 500 | An internal error occurred when processing the request |
 | 501 | The HTTP method being used has not yet been implemented for the requested resource |
 | 503 | The service requested is currently unavailable |
+| 0 | An internal error occurred when processing the request |
 
 
 
-### <a name="retrieve_messages_async"></a>![Method: ](https://apidocs.io/img/method.png "net.telstra.tdev.apipractice.slot2.controllers.SMSController.retrieveMessagesAsync") retrieveMessagesAsync
+### <a name="create_send_mms_async"></a>![Method: ](https://apidocs.io/img/method.png "com.telstra.tapi.controllers.MessagingController.createSendMMSAsync") createSendMMSAsync
 
-> Retrieve the unread incoming SMS messages
+> Send MMS
 
 
 ```java
-void retrieveMessagesAsync(final APICallBack<List<InboundPollResponse>> callBack)
+void createSendMMSAsync(
+        final SendMMSRequest body,
+        final APICallBack<DynamicResponse> callBack)
 ```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| body |  ``` Required ```  | A JSON or XML payload containing the recipient's phone number and MMS message.The recipient number should be in the format '04xxxxxxxx' where x is a digit |
+
 
 #### Example Usage
 
 ```java
-// Invoking the API call with sample inputs
-sMS.retrieveMessagesAsync(new APICallBack<List<InboundPollResponse>>() {
-    public void onSuccess(HttpContext context, List<InboundPollResponse> response) {
-        // TODO success callback handler
-    }
-    public void onFailure(HttpContext context, Throwable error) {
-        // TODO failure callback handler
-    }
-});
-
+try {
+    SendMMSRequest body = new SendMMSRequest();
+    // Invoking the API call with sample inputs
+    messaging.createSendMMSAsync(body, new APICallBack<DynamicResponse>() {
+        public void onSuccess(HttpContext context, DynamicResponse response) {
+            // TODO success callback handler
+        }
+        public void onFailure(HttpContext context, Throwable error) {
+            // TODO failure callback handler
+        }
+    });
+} catch(JsonProcessingException e) {
+    // TODO Auto-generated catch block
+    e.printStackTrace();
+}
 ```
 
 #### Errors
@@ -382,15 +452,15 @@ sMS.retrieveMessagesAsync(new APICallBack<List<InboundPollResponse>>() {
 | 405 | The requested resource does not support the supplied verb |
 | 415 | API does not support the requested content type |
 | 422 | The request is formed correctly, but due to some condition the request cannot be processed e.g. email is required and it is not provided in the request |
-| 500 | An internal error occurred when processing the request |
 | 501 | The HTTP method being used has not yet been implemented for the requested resource |
 | 503 | The service requested is currently unavailable |
+| 0 | An internal error occurred when processing the request |
 
 
 
 [Back to List of Controllers](#list_of_controllers)
 
-## <a name="o_auth_authorization_controller"></a>![Class: ](https://apidocs.io/img/class.png "net.telstra.tdev.apipractice.slot2.controllers.OAuthAuthorizationController") OAuthAuthorizationController
+## <a name="o_auth_authorization_controller"></a>![Class: ](https://apidocs.io/img/class.png "com.telstra.tapi.controllers.OAuthAuthorizationController") OAuthAuthorizationController
 
 ### Get singleton instance
 
@@ -400,7 +470,7 @@ The singleton instance of the ``` OAuthAuthorizationController ``` class can be 
 OAuthAuthorizationController oAuthAuthorization = client.getOAuthAuthorization();
 ```
 
-### <a name="create_request_token_async"></a>![Method: ](https://apidocs.io/img/method.png "net.telstra.tdev.apipractice.slot2.controllers.OAuthAuthorizationController.createRequestTokenAsync") createRequestTokenAsync
+### <a name="create_request_token_async"></a>![Method: ](https://apidocs.io/img/method.png "com.telstra.tapi.controllers.OAuthAuthorizationController.createRequestTokenAsync") createRequestTokenAsync
 
 > *Tags:*  ``` Skips Authentication ``` 
 
@@ -452,7 +522,7 @@ oAuthAuthorization.createRequestTokenAsync(authorization, scope, formParams, new
 
 
 
-### <a name="create_request_token_async"></a>![Method: ](https://apidocs.io/img/method.png "net.telstra.tdev.apipractice.slot2.controllers.OAuthAuthorizationController.createRequestTokenAsync") createRequestTokenAsync
+### <a name="create_request_token_async"></a>![Method: ](https://apidocs.io/img/method.png "com.telstra.tapi.controllers.OAuthAuthorizationController.createRequestTokenAsync") createRequestTokenAsync
 
 > *Tags:*  ``` Skips Authentication ``` 
 

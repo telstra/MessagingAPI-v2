@@ -171,10 +171,8 @@ The fields mean;
 
 ## Delivery Notification
 The API provides several methods for notifying when a message has been delivered to the destination.
-1. When you provision a number there is an opportunity to specify a `notifyURL`, when the message has been delivered the API will make a call to this URL to advise of the message status.
-2. `notifyURL` may be specified per message which will override the API setting for the single message only.
-    1.  If `notifyURL` was provided when you created the 
-3. If you can specify a URL you can always call the `GET /sms` API get the latest replies to the message.
+1. When you provision a number there is an opportunity to specify a `notifyURL`, when the message has been delivered the API will make a call to this URL to advise of the message status. If this is not provided then you can make use the Get Replies API to poll for messages
+2. If you can specify a URL you can always call the `GET /sms` API get the latest replies to the message.
  
 *Please note that the notification URLs and the polling call are exclusive. If a notification URL has been set then the polling call will not provide any useful information.*
 ### Notification URL format

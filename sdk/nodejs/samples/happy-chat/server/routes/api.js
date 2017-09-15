@@ -1,22 +1,45 @@
 const express = require('express');
-var lib = require('telstrasmsmessagingapilib/lib');
+var request = require('request');
+var fs = require('fs');
+var path = require('path');
+var lib = require('telstra-sms-messaging/lib');
 const oAuthManager = lib.OAuthManager;
-var controller = lib.SMSController;
+var controller = lib.MessagingController;
 
 const router = express.Router();
-
 const errorTitle = 'An error occured!';
-const _credentials = require('../api-credentials');
 
-lib.Configuration.oAuthClientId = _credentials.CLIENT_ID;
-lib.Configuration.oAuthClientSecret = _credentials.CLIENT_SECRET;
+// client_id and client_secret as set in the .env file
+lib.Configuration.oAuthClientId = process.env.CLIENT_ID;
+lib.Configuration.oAuthClientSecret = process.env.CLIENT_SECRET;
 
+// token callback
 lib.Configuration.oAuthTokenUpdateCallback = function (token) {
     console.log('new token', token);
 };
 
-// called on every request except for /token. Checks that the token is still valid before continuing with the request
-router.use('/', function (req, res, next) {
+// message status callback route, emits the incomming message back to the client using socket.io
+router.post('/messageStatus', (req, res, next) => {
+    var io = req.app.get('socketio');
+    io.emit('message_status', req.body);
+
+    res.status(200).json({
+        title: 'Status Received'
+    });
+});
+
+// message received callback route, emits the incomming message back to the client using socket.io
+router.post('/receiveMessage', (req, res, next) => {
+    var io = req.app.get('socketio');
+    io.emit('message_received', req.body);
+
+    res.status(200).json({
+        title: 'Message Received'
+    });
+});
+
+// called on every request. Checks that the token is still valid before continuing with the request
+router.use('/', (req, res, next) => {
     if (oAuthManager.isTokenSet()) {
         // token is already stored in the client
         // make API calls as required
@@ -28,7 +51,6 @@ router.use('/', function (req, res, next) {
             // client authorized. API calls can be made
             next();
         }, (exception) => {
-            // error occurred, exception will be of type lib/Exceptions/OAuthProviderException
             return res.status(exception.errorCode).json({
                 title: `${exception.errorCode} - ${errorTitle}`,
                 message: exception.errorMessage
@@ -37,15 +59,16 @@ router.use('/', function (req, res, next) {
     }
 });
 
-router.post('/send', function (req, res, next) {
-    controller.createSendMessage(req.body, function (error, response, context) {
+// send an SMS message
+router.post('/send', (req, res, next) => {
+    controller.createSendMessage(req.body, (error, response, context) => {
         if (error) {
             var errorMessage = '';
-            if(error.errorCode === 401 || error.errorCode === 500) {
+            if (error.errorCode === 401) {
                 // if we get a 401 (invalid credentials) then reset the token
                 lib.Configuration.oAuthToken = {};
-                lib.Configuration.oAuthClientId = _credentials.CLIENT_ID;
-                lib.Configuration.oAuthClientSecret = _credentials.CLIENT_SECRET;
+                lib.Configuration.oAuthClientId = process.env.CLIENT_ID;
+                lib.Configuration.oAuthClientSecret = process.env.CLIENT_SECRET;
 
                 errorMessage = 'Your token may have expired and has now been reset. Please try again';
             }
@@ -63,21 +86,30 @@ router.post('/send', function (req, res, next) {
     });
 });
 
-router.post('/messageStatus', function(req, res, next) {
-    var io = req.app.get('socketio');
-    io.emit('message_status', req.body);  
+// send an MMS message
+router.post('/sendMMS', (req, res, next) => {
+    controller.createSendMMS(req.body, (error, response, context) => {
+        if (error) {
+            var errorMessage = '';
+            if (error.errorCode === 401) {
+                // if we get a 401 (invalid credentials) then reset the token
+                lib.Configuration.oAuthToken = {};
+                lib.Configuration.oAuthClientId = process.env.CLIENT_ID;
+                lib.Configuration.oAuthClientSecret = process.env.CLIENT_SECRET;
 
-    res.status(200).json({
-        title: 'Message Received'
-    });
-});
-
-router.post('/receiveMessage', function(req, res, next) {
-    var io = req.app.get('socketio');
-    io.emit('message_received', req.body);  
-
-    res.status(200).json({
-        title: 'Message Received'
+                errorMessage = 'Your token may have expired and has now been reset. Please try again';
+            }
+            return res.status(error.errorCode).json({
+                title: `${error.errorCode} - ${errorTitle}`,
+                message: `${error.errorMessage}. ${errorMessage}`
+            });
+        }
+        res.status(200).json({
+            title: 'Success',
+            type: 'success',
+            message: 'MMS Sent!',
+            obj: response
+        });
     });
 });
 

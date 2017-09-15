@@ -2,25 +2,24 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { DemoComponent } from './demo.component';
-import { DemoService } from './demo.service';
-import { ChatBoxComponent } from './chat-box/chat-box.component';
+import { LoadingModule } from '../loading/loading.module';
+import { TickModule } from '../tick/tick.module';
+import { ChatBoxModule } from '../chat-box/chat-box.module';
 
 @NgModule({
   declarations: [
-    DemoComponent,
-    ChatBoxComponent
+    DemoComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    FormsModule
-  ],
-  providers: [
-    DemoService
+    FormsModule,
+    LoadingModule,
+    TickModule,
+    ChatBoxModule
   ],
   exports: [
-    DemoComponent,
-    ChatBoxComponent
+    DemoComponent
   ]
 })
 

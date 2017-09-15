@@ -1,4 +1,3 @@
-// represents the message status response returned from the API
 export class MessageStatus {
   receivedTimestamp?: Date;
   sentTimestamp?: Date;

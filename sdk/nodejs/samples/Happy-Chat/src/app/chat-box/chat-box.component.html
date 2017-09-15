@@ -1,0 +1,13 @@
+<ng-container *ngFor="let message of messages; let i = index;">
+  <div class="card mb-3" [ngClass]="replyRequestIds.indexOf(message.messageId) !== -1 ? 'card-purple' : 'card-orange'" [@flyIn]>
+    <div class="card-body">
+      <h5 class="card-title">{{ message.from }} {{ replyRequestIds.indexOf(message.messageId) !== -1 ? 'replies...' : 'says...' }}
+          <i class="fa fa-times fa-spin-hover" style="float: right" (click)="removeMessage(i)"></i>
+      </h5>
+      <p class="card-text">{{ message.body }}</p>
+    </div>
+    <div class="card-footer text-muted text-right">
+      <p>{{ message.sentTimestamp | date: 'dd/MM/yyyy hh:mm:ss' }}</p>
+    </div>
+  </div>
+</ng-container>

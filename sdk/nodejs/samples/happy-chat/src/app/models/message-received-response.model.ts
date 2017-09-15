@@ -1,4 +1,3 @@
-// represents the message received response returned from the API
 export class MessageReceivedResponse {
   to: string;
   from: string;

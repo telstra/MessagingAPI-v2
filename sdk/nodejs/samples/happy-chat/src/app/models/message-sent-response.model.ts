@@ -1,4 +1,3 @@
-// represents the message sent response returned from the API
 export interface MessageSentResponse {
   messages: [
     {

@@ -6,16 +6,35 @@ var debug = require('debug')('node-rest:server');
 var logger = require('morgan');
 const bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
+require('dotenv').config();
+
+const app = express();
+
+/**
+ * Get port from environment and store in Express.
+ */
+var port = process.env.PORT || 8080,
+ip   = process.env.IP || '127.0.0.1';
+
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+const server = http.createServer(app);
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+server.listen(port, () => console.log(`** API running on ${ip}:${port}`));
 
 // Get our API routes
 const api = require('./server/routes/api');
 
-const app = express();
-
 // Parsers for POST data
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }));
 app.use(cookieParser());
 
 // Point static path to dist
@@ -36,28 +55,9 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
-/**
- * Get port from environment and store in Express.
- */
-var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
-    ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
-
-app.set('port', port);
-
-/**
- * Create HTTP server.
- */
-const server = http.createServer(app);
-
-/**
- * Listen on provided port, on all network interfaces.
- */
-server.listen(port, () => console.log(`** API running on localhost:${port}`));
-
 // set up socket 
 var io = require('socket.io')(server);
 app.set('socketio', io);
-// connection and disconnection events. Lets us see the number of collected clients on the front end
 io.on('connection', (socket) => {
   console.log('user connected', io.engine.clientsCount);
   io.emit('user_connected', io.engine.clientsCount);

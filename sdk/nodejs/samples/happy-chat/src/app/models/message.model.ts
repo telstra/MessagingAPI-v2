@@ -1,13 +1,13 @@
-import { Chatter } from './chatter.model';
-
 export class Message {
-  chatter: Chatter;
+  to: string;
+  from: string;
   message: string;
   sentTimestamp: Date;
   messageId: string;
 
-  constructor(chatter: Chatter, message: string, sentTimestamp: Date, messageId: string) {
-    this.chatter = chatter;
+  constructor(to: string, from: string, message: string, sentTimestamp: Date, messageId: string) {
+    this.to = to;
+    this.from = from;
     this.message = message;
     this.sentTimestamp = sentTimestamp;
     this.messageId = messageId;

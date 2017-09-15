@@ -1,4 +1,3 @@
-// represents what the API needs in order to send an SMS. MessageId is added here just for our app
 export class SMS {
     to: string[];
     from: string;
@@ -7,9 +6,9 @@ export class SMS {
     notifyURL: string;
     replyRequest: boolean;
     body: string;
-    messageId?: string;
+    scheduledDelivery?: number;
 
-    constructor(to: string[], from: string, validity: string, priority: boolean, notifyURL: string, replyRequst: boolean, body: string, messageId?: string) {
+    constructor(to: string[], from: string, validity: string, priority: boolean, notifyURL: string, replyRequst: boolean, body: string, scheduledDelivery?: number) {
         this.to = to;
         this.from = from;
         this.validity = validity;
@@ -17,6 +16,6 @@ export class SMS {
         this.notifyURL = notifyURL;
         this.replyRequest = replyRequst;
         this.body = body;
-        this.messageId = messageId;
+        this.scheduledDelivery = scheduledDelivery;
     }
 }

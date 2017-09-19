@@ -13,7 +13,7 @@ Messaging API provides these features
 | `Broadcast Messages` | Invoke a single API to send a message to a list of number provided in `to` |
 | `Delivery Status` | Query the delivery status of your messages |
 | `Callbacks` | Provide a notification URL and Telstra will notify your app when messages status changes |
-| `Alphanumeric Identifier` | Differentiate yourself by providing an alphanumeric string in `from` |
+| `Alphanumeric Identifier` | Differentiate yourself by providing an alphanumeric string in `from`. This feature is only available on paid plans |
 | `Concatenation` | Send messages up to 1900 characters long and Telstra will automaticaly segment and reassemble them |
 | `Reply Request` | Create a chat session by associating `messageId` and `to` number to track responses received from a mobile number. We will store this association for 8 days |
 | `Character set` | Accetps all Unicode characters as part of of UTF-8 |
@@ -23,11 +23,11 @@ Messaging API provides these features
 ## Getting access to the API
 Follow these steps to get access to the API
 
-1. Go to MyApps page and create a new application with `Add New App` button. There is a maximum of 1 free Messaging application per developer. Additional applications can be purchased from dev portal.
+1. Go to MyApps page to find your `Free Trial Messaging API` app and API keys. You can also create a new application with `Add New App` button. There is a maximum of 1000 free messages per developer. Additional messages and features can be purchased from the T.DEV portal
 2. Use the `API Key` to provision a number for your application. A provisioned number is **required** before you can use Messaging API
-3. User `API Key` to get an authentication token and start using the API. Auth tokens needs to be refreshed regularly so keep an eye on `expires`
+3. Use `API Key` to get an authentication token and start using the API. Auth tokens needs to be refreshed regularly so keep an eye on `expires`
 
-Now head over to **Getting Started** to get down to the details. Here are some samples apps and SDKs to get your started.
+Now head over to **Getting Started** to get down to the details. Here are some sample apps and SDKs to get your started.
 Happy Messaging!
 
 ## Sample Apps

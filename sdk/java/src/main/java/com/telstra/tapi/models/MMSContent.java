@@ -11,12 +11,16 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 
 public class MMSContent 
         implements java.io.Serializable {
-    private static final long serialVersionUID = 5090117858606302769L;
+    private static final long serialVersionUID = 5136592586027211997L;
     private String type;
     private String filename;
     private String payload;
     /** GETTER
-     * The following types are supported audio/amr 	audio/aac 	audio/mp3 	audio/mpeg3 	audio/mpeg 	audio/mpg 	audio/wav 	audio/3gpp 	audio/mp4 	image/gif 	image/jpeg 	image/jpg 	image/png 	image/bmp 	video/mpeg4 	video/mp4 	video/mpeg 	video/3gpp 	video/3gp 	video/h263 	text/plain 	text/x-vCard 	text/x-vCalendar
+     * The following types are supported audio/amr 	audio/aac 	audio/mp3
+     * 	audio/mpeg3 	audio/mpeg 	audio/mpg 	audio/wav 	audio/3gpp 	audio/mp4
+     * 	image/gif 	image/jpeg 	image/jpg 	image/png 	image/bmp 	video/mpeg4
+     * 	video/mp4 	video/mpeg 	video/3gpp 	video/3gp 	video/h263 	text/plain
+     * 	text/x-vCard 	text/x-vCalendar
      */
     @JsonGetter("type")
     public String getType ( ) { 
@@ -24,7 +28,11 @@ public class MMSContent
     }
     
     /** SETTER
-     * The following types are supported audio/amr 	audio/aac 	audio/mp3 	audio/mpeg3 	audio/mpeg 	audio/mpg 	audio/wav 	audio/3gpp 	audio/mp4 	image/gif 	image/jpeg 	image/jpg 	image/png 	image/bmp 	video/mpeg4 	video/mp4 	video/mpeg 	video/3gpp 	video/3gp 	video/h263 	text/plain 	text/x-vCard 	text/x-vCalendar
+     * The following types are supported audio/amr 	audio/aac 	audio/mp3
+     * 	audio/mpeg3 	audio/mpeg 	audio/mpg 	audio/wav 	audio/3gpp 	audio/mp4
+     * 	image/gif 	image/jpeg 	image/jpg 	image/png 	image/bmp 	video/mpeg4
+     * 	video/mp4 	video/mpeg 	video/3gpp 	video/3gp 	video/h263 	text/plain
+     * 	text/x-vCard 	text/x-vCalendar
      */
     @JsonSetter("type")
     public void setType (String value) { 
@@ -32,7 +40,8 @@ public class MMSContent
     }
  
     /** GETTER
-     * The file name to be associated with the content. Some devices will display this file name with a placeholder for the content.
+     * The file name to be associated with the content. Some devices
+     * will display this file name with a placeholder for the content.
      */
     @JsonGetter("filename")
     public String getFilename ( ) { 
@@ -40,7 +49,8 @@ public class MMSContent
     }
     
     /** SETTER
-     * The file name to be associated with the content. Some devices will display this file name with a placeholder for the content.
+     * The file name to be associated with the content. Some devices
+     * will display this file name with a placeholder for the content.
      */
     @JsonSetter("filename")
     public void setFilename (String value) { 

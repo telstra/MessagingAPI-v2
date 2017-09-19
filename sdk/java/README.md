@@ -1,6 +1,8 @@
 # Getting started
 
+
 The Telstra SMS Messaging API allows your applications to send and receive SMS text messages from Australia's leading network operator.
+
 It also allows your application to track the delivery status of both sent and received SMS messages.
 
 
@@ -59,7 +61,7 @@ The created Maven project manages its dependencies using its ``` pom.xml ``` fil
 
 ![Adding dependency to the client library - Step 1](https://apidocs.io/illustration/java?step=testProject0&workspaceFolder=Telstra%20SMS%20Messaging%20API-Java&workspaceName=TelstraSMSMessagingAPI&projectName=TelstraSMSMessagingAPILib&rootNamespace=com.telstra.tapi)
 
-Clicking the ``` Add ``` button will open a dialog where you need to specify TelstraSMSMessagingAPI in ``` Group Id ``` and TelstraSMSMessagingAPILib in the ``` Artifact Id ``` fields. Once added click ``` OK ```. Save the ``` pom.xml ``` file.
+Clicking the ``` Add ``` button will open a dialog where you need to specify TelstraSMSMessagingAPI in ``` Group Id ``` and  TelstraSMSMessagingAPILib in the ``` Artifact Id ``` fields. Also make sure that the you enter the TelstraSMSMessagingAPI version (as specified in the pom.xml of TelstraSMSMessagingAPI) in the Version Field. Once added click ``` OK ```. Save the ``` pom.xml ``` file.
 
 ![Adding dependency to the client library - Step 2](https://apidocs.io/illustration/java?step=testProject1&workspaceFolder=Telstra%20SMS%20Messaging%20API-Java&workspaceName=TelstraSMSMessagingAPI&projectName=TelstraSMSMessagingAPILib&rootNamespace=com.telstra.tapi)
 
@@ -129,7 +131,7 @@ Scopes enable your application to only request access to the resources it needs 
 
 | Scope Name | Description |
 | --- | --- |
-| `NSMS` |  |
+| `NSMS` | NSMS |
 
 ### Storing an access token for reuse
 
@@ -204,13 +206,13 @@ The singleton instance of the ``` MessagingController ``` class can be accessed 
 MessagingController messaging = client.getMessaging();
 ```
 
-### <a name="get_message_status_async"></a>![Method: ](https://apidocs.io/img/method.png "com.telstra.tapi.controllers.MessagingController.getMessageStatusAsync") getMessageStatusAsync
+### <a name="get_sms_status_async"></a>![Method: ](https://apidocs.io/img/method.png "com.telstra.tapi.controllers.MessagingController.getSMSStatusAsync") getSMSStatusAsync
 
 > Get Message Status
 
 
 ```java
-void getMessageStatusAsync(
+void getSMSStatusAsync(
         final String messageId,
         final APICallBack<OutboundPollResponse> callBack)
 ```
@@ -219,7 +221,8 @@ void getMessageStatusAsync(
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
-| messageId |  ``` Required ```  | Unique identifier of a message - it is the value returned from a previous POST call to https://api.telstra.com/v2/messages/sms |
+| messageId |  ``` Required ```  | Unique identifier of a message - it is the value returned from
+a previous POST call to https://api.telstra.com/v2/messages/sms |
 
 
 #### Example Usage
@@ -227,7 +230,7 @@ void getMessageStatusAsync(
 ```java
 String messageId = "messageId";
 // Invoking the API call with sample inputs
-messaging.getMessageStatusAsync(messageId, new APICallBack<OutboundPollResponse>() {
+messaging.getSMSStatusAsync(messageId, new APICallBack<OutboundPollResponse>() {
     public void onSuccess(HttpContext context, OutboundPollResponse response) {
         // TODO success callback handler
     }
@@ -244,31 +247,35 @@ messaging.getMessageStatusAsync(messageId, new APICallBack<OutboundPollResponse>
 |------------|-------------------|
 | 400 | Invalid or missing request parameters |
 | 401 | Invalid or no credentials passed in the request |
-| 403 | Authorization credentials passed and accepted but account does not have permission |
+| 403 | Authorization credentials passed and accepted but account does
+not have permission |
 | 404 | The requested URI does not exist |
 | 405 | The requested resource does not support the supplied verb |
 | 415 | API does not support the requested content type |
-| 422 | The request is formed correctly, but due to some condition the request cannot be processed e.g. email is required and it is not provided in the request |
-| 501 | The HTTP method being used has not yet been implemented for the requested resource |
+| 422 | The request is formed correctly, but due to some condition
+the request cannot be processed e.g. email is required and it is not provided
+in the request |
+| 501 | The HTTP method being used has not yet been implemented for
+the requested resource |
 | 503 | The service requested is currently unavailable |
 | 0 | An internal error occurred when processing the request |
 
 
 
-### <a name="retrieve_messages_async"></a>![Method: ](https://apidocs.io/img/method.png "com.telstra.tapi.controllers.MessagingController.retrieveMessagesAsync") retrieveMessagesAsync
+### <a name="retrieve_sms_responses_async"></a>![Method: ](https://apidocs.io/img/method.png "com.telstra.tapi.controllers.MessagingController.retrieveSMSResponsesAsync") retrieveSMSResponsesAsync
 
 > Retrieve Messages
 
 
 ```java
-void retrieveMessagesAsync(final APICallBack<List<InboundPollResponse>> callBack)
+void retrieveSMSResponsesAsync(final APICallBack<List<InboundPollResponse>> callBack)
 ```
 
 #### Example Usage
 
 ```java
 // Invoking the API call with sample inputs
-messaging.retrieveMessagesAsync(new APICallBack<List<InboundPollResponse>>() {
+messaging.retrieveSMSResponsesAsync(new APICallBack<List<InboundPollResponse>>() {
     public void onSuccess(HttpContext context, List<InboundPollResponse> response) {
         // TODO success callback handler
     }
@@ -285,24 +292,28 @@ messaging.retrieveMessagesAsync(new APICallBack<List<InboundPollResponse>>() {
 |------------|-------------------|
 | 400 | Invalid or missing request parameters |
 | 401 | Invalid or no credentials passed in the request |
-| 403 | Authorization credentials passed and accepted but account does not have permission |
+| 403 | Authorization credentials passed and accepted but account does
+not have permission |
 | 404 | The requested URI does not exist |
 | 405 | The requested resource does not support the supplied verb |
 | 415 | API does not support the requested content type |
-| 422 | The request is formed correctly, but due to some condition the request cannot be processed e.g. email is required and it is not provided in the request |
-| 501 | The HTTP method being used has not yet been implemented for the requested resource |
+| 422 | The request is formed correctly, but due to some condition
+the request cannot be processed e.g. email is required and it is not provided
+in the request |
+| 501 | The HTTP method being used has not yet been implemented for
+the requested resource |
 | 503 | The service requested is currently unavailable |
 | 0 | An internal error occurred when processing the request |
 
 
 
-### <a name="create_send_message_async"></a>![Method: ](https://apidocs.io/img/method.png "com.telstra.tapi.controllers.MessagingController.createSendMessageAsync") createSendMessageAsync
+### <a name="create_send_sms_async"></a>![Method: ](https://apidocs.io/img/method.png "com.telstra.tapi.controllers.MessagingController.createSendSMSAsync") createSendSMSAsync
 
 > Send Message
 
 
 ```java
-void createSendMessageAsync(
+void createSendSMSAsync(
         final SendSMSRequest payload,
         final APICallBack<MessageSentResponse> callBack)
 ```
@@ -312,6 +323,7 @@ void createSendMessageAsync(
 | Parameter | Tags | Description |
 |-----------|------|-------------|
 | payload |  ``` Required ```  | A JSON or XML payload containing the recipient's phone number and text message.
+
 The recipient number should be in the format '04xxxxxxxx' where x is a digit |
 
 
@@ -321,7 +333,7 @@ The recipient number should be in the format '04xxxxxxxx' where x is a digit |
 try {
     SendSMSRequest payload = new SendSMSRequest();
     // Invoking the API call with sample inputs
-    messaging.createSendMessageAsync(payload, new APICallBack<MessageSentResponse>() {
+    messaging.createSendSMSAsync(payload, new APICallBack<MessageSentResponse>() {
         public void onSuccess(HttpContext context, MessageSentResponse response) {
             // TODO success callback handler
         }
@@ -341,12 +353,16 @@ try {
 |------------|-------------------|
 | 400 | Invalid or missing request parameters |
 | 401 | Invalid or no credentials passed in the request |
-| 403 | Authorization credentials passed and accepted but account does not have permission |
+| 403 | Authorization credentials passed and accepted but account does
+not have permission |
 | 404 | The requested URI does not exist |
 | 405 | The requested resource does not support the supplied verb |
 | 415 | API does not support the requested content type |
-| 422 | The request is formed correctly, but due to some condition the request cannot be processed e.g. email is required and it is not provided in the request |
-| 501 | The HTTP method being used has not yet been implemented for the requested resource |
+| 422 | The request is formed correctly, but due to some condition
+the request cannot be processed e.g. email is required and it is not provided
+in the request |
+| 501 | The HTTP method being used has not yet been implemented for
+the requested resource |
 | 503 | The service requested is currently unavailable |
 | 0 | An internal error occurred when processing the request |
 
@@ -367,7 +383,8 @@ void getMMSStatusAsync(
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
-| messageid |  ``` Required ```  | Unique identifier of a message - it is the value returned from a previous POST call to https://api.telstra.com/v2/messages/mms |
+| messageid |  ``` Required ```  | Unique identifier of a message - it is the value returned from
+a previous POST call to https://api.telstra.com/v2/messages/mms |
 
 
 #### Example Usage
@@ -392,12 +409,16 @@ messaging.getMMSStatusAsync(messageid, new APICallBack<String>() {
 |------------|-------------------|
 | 400 | Invalid or missing request parameters |
 | 401 | Invalid or no credentials passed in the request |
-| 403 | Authorization credentials passed and accepted but account does not have permission |
+| 403 | Authorization credentials passed and accepted but account does
+not have permission |
 | 404 | The requested URI does not exist |
 | 405 | The requested resource does not support the supplied verb |
 | 415 | API does not support the requested content type |
-| 422 | The request is formed correctly, but due to some condition the request cannot be processed e.g. email is required and it is not provided in the request |
-| 501 | The HTTP method being used has not yet been implemented for the requested resource |
+| 422 | The request is formed correctly, but due to some condition
+the request cannot be processed e.g. email is required and it is not provided
+in the request |
+| 501 | The HTTP method being used has not yet been implemented for
+the requested resource |
 | 503 | The service requested is currently unavailable |
 | 0 | An internal error occurred when processing the request |
 
@@ -418,7 +439,9 @@ void createSendMMSAsync(
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
-| body |  ``` Required ```  | A JSON or XML payload containing the recipient's phone number and MMS message.The recipient number should be in the format '04xxxxxxxx' where x is a digit |
+| body |  ``` Required ```  | A JSON or XML payload containing the recipient's phone number
+and MMS message.The recipient number should be in the format '04xxxxxxxx'
+where x is a digit |
 
 
 #### Example Usage
@@ -447,12 +470,16 @@ try {
 |------------|-------------------|
 | 400 | Invalid or missing request parameters |
 | 401 | Invalid or no credentials passed in the request |
-| 403 | Authorization credentials passed and accepted but account does not have permission |
+| 403 | Authorization credentials passed and accepted but account does
+not have permission |
 | 404 | The requested URI does not exist |
 | 405 | The requested resource does not support the supplied verb |
 | 415 | API does not support the requested content type |
-| 422 | The request is formed correctly, but due to some condition the request cannot be processed e.g. email is required and it is not provided in the request |
-| 501 | The HTTP method being used has not yet been implemented for the requested resource |
+| 422 | The request is formed correctly, but due to some condition
+the request cannot be processed e.g. email is required and it is not provided
+in the request |
+| 501 | The HTTP method being used has not yet been implemented for
+the requested resource |
 | 503 | The service requested is currently unavailable |
 | 0 | An internal error occurred when processing the request |
 

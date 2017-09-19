@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 
 public class InboundPollResponse 
         implements java.io.Serializable {
-    private static final long serialVersionUID = 4728321076669880980L;
+    private static final long serialVersionUID = 5389078289099635456L;
     private String to;
     private String from;
     private String body;
@@ -19,7 +19,8 @@ public class InboundPollResponse
     private Integer moreMessages;
     private String messageId;
     /** GETTER
-     * The phone number (recipient) that the message was sent to(in E.164 format).
+     * The phone number (recipient) that the message was sent to(in
+     * E.164 format).
      */
     @JsonGetter("to")
     public String getTo ( ) { 
@@ -27,7 +28,8 @@ public class InboundPollResponse
     }
     
     /** SETTER
-     * The phone number (recipient) that the message was sent to(in E.164 format).
+     * The phone number (recipient) that the message was sent to(in
+     * E.164 format).
      */
     @JsonSetter("to")
     public void setTo (String value) { 
@@ -35,7 +37,8 @@ public class InboundPollResponse
     }
  
     /** GETTER
-     * The phone number (sender) that the message was sent from (in E.164 format).
+     * The phone number (sender) that the message was sent from (in
+     * E.164 format).
      */
     @JsonGetter("from")
     public String getFrom ( ) { 
@@ -43,7 +46,8 @@ public class InboundPollResponse
     }
     
     /** SETTER
-     * The phone number (sender) that the message was sent from (in E.164 format).
+     * The phone number (sender) that the message was sent from (in
+     * E.164 format).
      */
     @JsonSetter("from")
     public void setFrom (String value) { 
@@ -83,7 +87,9 @@ public class InboundPollResponse
     }
  
     /** GETTER
-     * Indicates if there are more messages that can be polled from the server. 0=No more messages available. Anything else indicates there are more messages on the server.
+     * Indicates if there are more messages that can be polled from
+     * the server. 0=No more messages available. Anything else indicates there
+     * are more messages on the server.
      */
     @JsonGetter("moreMessages")
     public Integer getMoreMessages ( ) { 
@@ -91,7 +97,9 @@ public class InboundPollResponse
     }
     
     /** SETTER
-     * Indicates if there are more messages that can be polled from the server. 0=No more messages available. Anything else indicates there are more messages on the server.
+     * Indicates if there are more messages that can be polled from
+     * the server. 0=No more messages available. Anything else indicates there
+     * are more messages on the server.
      */
     @JsonSetter("moreMessages")
     public void setMoreMessages (Integer value) { 
@@ -99,7 +107,8 @@ public class InboundPollResponse
     }
  
     /** GETTER
-     * Optional message ID of the SMS you sent. Use this ID to view the message status or get responses.
+     * Optional message ID of the SMS you sent. Use this ID to view
+     * the message status or get responses.
      */
     @JsonGetter("messageId")
     public String getMessageId ( ) { 
@@ -107,7 +116,8 @@ public class InboundPollResponse
     }
     
     /** SETTER
-     * Optional message ID of the SMS you sent. Use this ID to view the message status or get responses.
+     * Optional message ID of the SMS you sent. Use this ID to view
+     * the message status or get responses.
      */
     @JsonSetter("messageId")
     public void setMessageId (String value) { 

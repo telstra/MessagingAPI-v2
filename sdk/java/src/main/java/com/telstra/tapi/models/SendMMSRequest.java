@@ -11,14 +11,17 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 
 public class SendMMSRequest 
         implements java.io.Serializable {
-    private static final long serialVersionUID = 5631183116903116347L;
+    private static final long serialVersionUID = 5540698322169811011L;
     private String from;
     private String to;
     private String subject;
     private boolean replyRequest;
     private List<MMSContent> mMSContent;
     /** GETTER
-     * This will be the source address that will be displayed on the receiving device. If it is not present then it will default to the MSISDN assigned to the app. If replyRequest is set to true, then this field will be ignored.
+     * This will be the source address that will be displayed on the
+     * receiving device. If it is not present then it will default to the MSISDN
+     * assigned to the app. If replyRequest is set to true, then this field will
+     * be ignored.
      */
     @JsonGetter("from")
     public String getFrom ( ) { 
@@ -26,7 +29,10 @@ public class SendMMSRequest
     }
     
     /** SETTER
-     * This will be the source address that will be displayed on the receiving device. If it is not present then it will default to the MSISDN assigned to the app. If replyRequest is set to true, then this field will be ignored.
+     * This will be the source address that will be displayed on the
+     * receiving device. If it is not present then it will default to the MSISDN
+     * assigned to the app. If replyRequest is set to true, then this field will
+     * be ignored.
      */
     @JsonSetter("from")
     public void setFrom (String value) { 
@@ -66,7 +72,8 @@ public class SendMMSRequest
     }
  
     /** GETTER
-     * If set to true, the reply message functionality will be implemented and the to address will be ignored if present.
+     * If set to true, the reply message functionality will be implemented
+     * and the to address will be ignored if present.
      */
     @JsonGetter("replyRequest")
     public boolean getReplyRequest ( ) { 
@@ -74,7 +81,8 @@ public class SendMMSRequest
     }
     
     /** SETTER
-     * If set to true, the reply message functionality will be implemented and the to address will be ignored if present.
+     * If set to true, the reply message functionality will be implemented
+     * and the to address will be ignored if present.
      */
     @JsonSetter("replyRequest")
     public void setReplyRequest (boolean value) { 
@@ -82,7 +90,9 @@ public class SendMMSRequest
     }
  
     /** GETTER
-     * An Array of content that will be sent in an MMS message. If this array is present it will cause the “body” element to be ignored, and the message will be sent as an MMS.
+     * An Array of content that will be sent in an MMS message. If this
+     * array is present it will cause the “body” element to be ignored, and the
+     * message will be sent as an MMS.
      */
     @JsonGetter("MMSContent")
     public List<MMSContent> getMMSContent ( ) { 
@@ -90,7 +100,9 @@ public class SendMMSRequest
     }
     
     /** SETTER
-     * An Array of content that will be sent in an MMS message. If this array is present it will cause the “body” element to be ignored, and the message will be sent as an MMS.
+     * An Array of content that will be sent in an MMS message. If this
+     * array is present it will cause the “body” element to be ignored, and the
+     * message will be sent as an MMS.
      */
     @JsonSetter("MMSContent")
     public void setMMSContent (List<MMSContent> value) { 

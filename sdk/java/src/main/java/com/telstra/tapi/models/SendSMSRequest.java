@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 
 public class SendSMSRequest 
         implements java.io.Serializable {
-    private static final long serialVersionUID = 4897690538583247516L;
+    private static final long serialVersionUID = 4710175095382957673L;
     private String to;
     private String body;
     private String from;
@@ -20,7 +20,8 @@ public class SendSMSRequest
     private String notifyURL;
     private Boolean replyRequest;
     /** GETTER
-     * Phone number (in E.164 format) to send the SMS to. This number can be in international format if preceeded by a ‘+’, or in national format.
+     * Phone number (in E.164 format) to send the SMS to. This number
+     * can be in international format if preceeded by a ‘+’, or in national format.
      */
     @JsonGetter("to")
     public String getTo ( ) { 
@@ -28,7 +29,8 @@ public class SendSMSRequest
     }
     
     /** SETTER
-     * Phone number (in E.164 format) to send the SMS to. This number can be in international format if preceeded by a ‘+’, or in national format.
+     * Phone number (in E.164 format) to send the SMS to. This number
+     * can be in international format if preceeded by a ‘+’, or in national format.
      */
     @JsonSetter("to")
     public void setTo (String value) { 
@@ -36,7 +38,8 @@ public class SendSMSRequest
     }
  
     /** GETTER
-     * The text body of the message. Messages longer than 160 characters will be counted as multiple messages.
+     * The text body of the message. Messages longer than 160 characters
+     * will be counted as multiple messages.
      */
     @JsonGetter("body")
     public String getBody ( ) { 
@@ -44,7 +47,8 @@ public class SendSMSRequest
     }
     
     /** SETTER
-     * The text body of the message. Messages longer than 160 characters will be counted as multiple messages.
+     * The text body of the message. Messages longer than 160 characters
+     * will be counted as multiple messages.
      */
     @JsonSetter("body")
     public void setBody (String value) { 
@@ -52,7 +56,9 @@ public class SendSMSRequest
     }
  
     /** GETTER
-     * Phone number (in E.164 format) the SMS was sent from. If not present, the serverice will use the mobile number associated with the application, or it be an Alphanumeric address of up to 11 characters.
+     * Phone number (in E.164 format) the SMS was sent from. If not
+     * present, the serverice will use the mobile number associated with the application,
+     * or it be an Alphanumeric address of up to 11 characters.
      */
     @JsonGetter("from")
     public String getFrom ( ) { 
@@ -60,7 +66,9 @@ public class SendSMSRequest
     }
     
     /** SETTER
-     * Phone number (in E.164 format) the SMS was sent from. If not present, the serverice will use the mobile number associated with the application, or it be an Alphanumeric address of up to 11 characters.
+     * Phone number (in E.164 format) the SMS was sent from. If not
+     * present, the serverice will use the mobile number associated with the application,
+     * or it be an Alphanumeric address of up to 11 characters.
      */
     @JsonSetter("from")
     public void setFrom (String value) { 
@@ -68,7 +76,8 @@ public class SendSMSRequest
     }
  
     /** GETTER
-     * How long the platform should attempt to deliver the message for. This period is specified in minutes from the message
+     * How long the platform should attempt to deliver the message for.
+     * This period is specified in minutes from the message
      */
     @JsonGetter("validity")
     public Integer getValidity ( ) { 
@@ -76,7 +85,8 @@ public class SendSMSRequest
     }
     
     /** SETTER
-     * How long the platform should attempt to deliver the message for. This period is specified in minutes from the message
+     * How long the platform should attempt to deliver the message for.
+     * This period is specified in minutes from the message
      */
     @JsonSetter("validity")
     public void setValidity (Integer value) { 
@@ -84,7 +94,8 @@ public class SendSMSRequest
     }
  
     /** GETTER
-     * How long the platform should wait before attempting to send the message - specified in minutes.
+     * How long the platform should wait before attempting to send the
+     * message - specified in minutes.
      */
     @JsonGetter("scheduledDelivery")
     public Integer getScheduledDelivery ( ) { 
@@ -92,7 +103,8 @@ public class SendSMSRequest
     }
     
     /** SETTER
-     * How long the platform should wait before attempting to send the message - specified in minutes.
+     * How long the platform should wait before attempting to send the
+     * message - specified in minutes.
      */
     @JsonSetter("scheduledDelivery")
     public void setScheduledDelivery (Integer value) { 
@@ -100,7 +112,8 @@ public class SendSMSRequest
     }
  
     /** GETTER
-     * Contains a URL that will be called once your message has been processed. The status may be delivered, expired, deleted, etc.
+     * Contains a URL that will be called once your message has been
+     * processed. The status may be delivered, expired, deleted, etc.
      */
     @JsonGetter("notifyURL")
     public String getNotifyURL ( ) { 
@@ -108,7 +121,8 @@ public class SendSMSRequest
     }
     
     /** SETTER
-     * Contains a URL that will be called once your message has been processed. The status may be delivered, expired, deleted, etc.
+     * Contains a URL that will be called once your message has been
+     * processed. The status may be delivered, expired, deleted, etc.
      */
     @JsonSetter("notifyURL")
     public void setNotifyURL (String value) { 
@@ -116,7 +130,9 @@ public class SendSMSRequest
     }
  
     /** GETTER
-     * If set to true, the reply message functionality will be implemented and the to address will be ignored if present. If false or not present, then normal message handling is implemented.
+     * If set to true, the reply message functionality will be implemented
+     * and the to address will be ignored if present. If false or not present,
+     * then normal message handling is implemented.
      */
     @JsonGetter("replyRequest")
     public Boolean getReplyRequest ( ) { 
@@ -124,7 +140,9 @@ public class SendSMSRequest
     }
     
     /** SETTER
-     * If set to true, the reply message functionality will be implemented and the to address will be ignored if present. If false or not present, then normal message handling is implemented.
+     * If set to true, the reply message functionality will be implemented
+     * and the to address will be ignored if present. If false or not present,
+     * then normal message handling is implemented.
      */
     @JsonSetter("replyRequest")
     public void setReplyRequest (Boolean value) { 

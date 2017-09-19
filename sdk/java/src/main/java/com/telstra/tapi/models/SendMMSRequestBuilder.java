@@ -19,7 +19,10 @@ public class SendMMSRequestBuilder {
     }
 
     /**
-     * This will be the source address that will be displayed on the receiving device. If it is not present then it will default to the MSISDN assigned to the app. If replyRequest is set to true, then this field will be ignored.
+     * This will be the source address that will be displayed on the
+     * receiving device. If it is not present then it will default to the MSISDN
+     * assigned to the app. If replyRequest is set to true, then this field will
+     * be ignored.
      */
     public SendMMSRequestBuilder from(String from) {
         sendMMSRequest.setFrom(from);
@@ -43,7 +46,8 @@ public class SendMMSRequestBuilder {
     }
 
     /**
-     * If set to true, the reply message functionality will be implemented and the to address will be ignored if present.
+     * If set to true, the reply message functionality will be implemented
+     * and the to address will be ignored if present.
      */
     public SendMMSRequestBuilder replyRequest(boolean replyRequest) {
         sendMMSRequest.setReplyRequest(replyRequest);
@@ -51,7 +55,9 @@ public class SendMMSRequestBuilder {
     }
 
     /**
-     * An Array of content that will be sent in an MMS message. If this array is present it will cause the “body” element to be ignored, and the message will be sent as an MMS.
+     * An Array of content that will be sent in an MMS message. If this
+     * array is present it will cause the “body” element to be ignored, and the
+     * message will be sent as an MMS.
      */
     public SendMMSRequestBuilder mMSContent(List<MMSContent> mMSContent) {
         sendMMSRequest.setMMSContent(mMSContent);

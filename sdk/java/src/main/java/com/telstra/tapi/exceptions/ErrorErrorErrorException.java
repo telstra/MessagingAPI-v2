@@ -10,10 +10,10 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.telstra.tapi.http.client.HttpContext;
 
-public class ErrorErrorException 
+public class ErrorErrorErrorException 
         extends APIException
         implements java.io.Serializable {
-    private static final long serialVersionUID = 5098257998516091405L;
+    private static final long serialVersionUID = 5641047676277123320L;
     private Integer status;
     private String message;
     /** GETTER
@@ -53,7 +53,7 @@ public class ErrorErrorException
      * @param   reason  The reason for throwing exception
      * @param   context The http context of the API exception
      */
-    public ErrorErrorException(String reason, HttpContext context) {
+    public ErrorErrorErrorException(String reason, HttpContext context) {
         super(reason, context);
     }
 }

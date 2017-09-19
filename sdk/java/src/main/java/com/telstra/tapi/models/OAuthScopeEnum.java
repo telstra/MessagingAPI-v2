@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.TreeMap;
 
 public enum OAuthScopeEnum {
-    NSMS; //TODO: Write general description for this element
+    NSMS; //NSMS
 
     private static TreeMap<String, OAuthScopeEnum> valueMap = new TreeMap<String, OAuthScopeEnum>();
     private String value;

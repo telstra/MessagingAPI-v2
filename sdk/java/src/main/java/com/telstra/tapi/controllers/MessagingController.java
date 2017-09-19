@@ -45,11 +45,11 @@ public class MessagingController extends BaseController {
      * @param    messageId    Required parameter: Unique identifier of a message - it is the value returned from a previous POST call to https://api.telstra.com/v2/messages/sms
      * @return    Returns the OutboundPollResponse response from the API call 
      */
-    public OutboundPollResponse getMessageStatus(
+    public OutboundPollResponse getSMSStatus(
                 final String messageId
     ) throws Throwable {
         APICallBackCatcher<OutboundPollResponse> callback = new APICallBackCatcher<OutboundPollResponse>();
-        getMessageStatusAsync(messageId, callback);
+        getSMSStatusAsync(messageId, callback);
         if(!callback.isSuccess())
             throw callback.getError();
         return callback.getResult();
@@ -60,7 +60,7 @@ public class MessagingController extends BaseController {
      * @param    messageId    Required parameter: Unique identifier of a message - it is the value returned from a previous POST call to https://api.telstra.com/v2/messages/sms
      * @return    Returns the void response from the API call 
      */
-    public void getMessageStatusAsync(
+    public void getSMSStatusAsync(
                 final String messageId,
                 final APICallBack<OutboundPollResponse> callBack
     ) {
@@ -73,7 +73,7 @@ public class MessagingController extends BaseController {
 
         //process template parameters
         APIHelper.appendUrlWithTemplateParameters(_queryBuilder, new HashMap<String, Object>() {
-            private static final long serialVersionUID = 5711946271583668153L;
+            private static final long serialVersionUID = 4870130418780927065L;
             {
                     put( "messageId", messageId );
             }});
@@ -82,7 +82,7 @@ public class MessagingController extends BaseController {
 
         //load all headers for the outgoing API request
         Map<String, String> _headers = new HashMap<String, String>() {
-            private static final long serialVersionUID = 5713387613973848382L;
+            private static final long serialVersionUID = 4721791120699447246L;
             {
                     put( "user-agent", "APIMATIC 2.0" );
                     put( "accept", "application/json" );
@@ -116,34 +116,34 @@ public class MessagingController extends BaseController {
                             //Error handling using HTTP status codes
                             int _responseCode = _response.getStatusCode();
                             if (_responseCode == 400)
-                                throw new ErrorErrorException("Invalid or missing request parameters", _context);
+                                throw new ErrorErrorErrorException("Invalid or missing request parameters", _context);
 
                             if (_responseCode == 401)
-                                throw new ErrorErrorException("Invalid or no credentials passed in the request", _context);
+                                throw new ErrorErrorErrorException("Invalid or no credentials passed in the request", _context);
 
                             if (_responseCode == 403)
-                                throw new ErrorErrorException("Authorization credentials passed and accepted but account does not have permission", _context);
+                                throw new ErrorErrorErrorException("Authorization credentials passed and accepted but account does not have permission", _context);
 
                             if (_responseCode == 404)
-                                throw new ErrorErrorException("The requested URI does not exist", _context);
+                                throw new ErrorErrorErrorException("The requested URI does not exist", _context);
 
                             if (_responseCode == 405)
-                                throw new ErrorErrorException("The requested resource does not support the supplied verb", _context);
+                                throw new ErrorErrorErrorException("The requested resource does not support the supplied verb", _context);
 
                             if (_responseCode == 415)
-                                throw new ErrorErrorException("API does not support the requested content type", _context);
+                                throw new ErrorErrorErrorException("API does not support the requested content type", _context);
 
                             if (_responseCode == 422)
-                                throw new ErrorErrorException("The request is formed correctly, but due to some condition the request cannot be processed e.g. email is required and it is not provided in the request", _context);
+                                throw new ErrorErrorErrorException("The request is formed correctly, but due to some condition the request cannot be processed e.g. email is required and it is not provided in the request", _context);
 
                             if (_responseCode == 501)
-                                throw new ErrorErrorException("The HTTP method being used has not yet been implemented for the requested resource", _context);
+                                throw new ErrorErrorErrorException("The HTTP method being used has not yet been implemented for the requested resource", _context);
 
                             if (_responseCode == 503)
-                                throw new ErrorErrorException("The service requested is currently unavailable", _context);
+                                throw new ErrorErrorErrorException("The service requested is currently unavailable", _context);
 
                             if ((_responseCode < 200) || (_responseCode > 208))
-                                throw new ErrorErrorException("An internal error occurred when processing the request", _context);
+                                throw new ErrorErrorErrorException("An internal error occurred when processing the request", _context);
 
                             //handle errors defined at the API level
                             validateResponse(_response, _context);
@@ -188,10 +188,10 @@ public class MessagingController extends BaseController {
      * Retrieve Messages
      * @return    Returns the List<InboundPollResponse> response from the API call 
      */
-    public List<InboundPollResponse> retrieveMessages(
+    public List<InboundPollResponse> retrieveSMSResponses(
     ) throws Throwable {
         APICallBackCatcher<List<InboundPollResponse>> callback = new APICallBackCatcher<List<InboundPollResponse>>();
-        retrieveMessagesAsync(callback);
+        retrieveSMSResponsesAsync(callback);
         if(!callback.isSuccess())
             throw callback.getError();
         return callback.getResult();
@@ -201,7 +201,7 @@ public class MessagingController extends BaseController {
      * Retrieve Messages
      * @return    Returns the void response from the API call 
      */
-    public void retrieveMessagesAsync(
+    public void retrieveSMSResponsesAsync(
                 final APICallBack<List<InboundPollResponse>> callBack
     ) {
         //the base uri for api requests
@@ -215,7 +215,7 @@ public class MessagingController extends BaseController {
 
         //load all headers for the outgoing API request
         Map<String, String> _headers = new HashMap<String, String>() {
-            private static final long serialVersionUID = 5708222005077957683L;
+            private static final long serialVersionUID = 5302116637038357477L;
             {
                     put( "user-agent", "APIMATIC 2.0" );
                     put( "accept", "application/json" );
@@ -249,34 +249,34 @@ public class MessagingController extends BaseController {
                             //Error handling using HTTP status codes
                             int _responseCode = _response.getStatusCode();
                             if (_responseCode == 400)
-                                throw new ErrorErrorException("Invalid or missing request parameters", _context);
+                                throw new ErrorErrorErrorException("Invalid or missing request parameters", _context);
 
                             if (_responseCode == 401)
-                                throw new ErrorErrorException("Invalid or no credentials passed in the request", _context);
+                                throw new ErrorErrorErrorException("Invalid or no credentials passed in the request", _context);
 
                             if (_responseCode == 403)
-                                throw new ErrorErrorException("Authorization credentials passed and accepted but account does not have permission", _context);
+                                throw new ErrorErrorErrorException("Authorization credentials passed and accepted but account does not have permission", _context);
 
                             if (_responseCode == 404)
-                                throw new ErrorErrorException("The requested URI does not exist", _context);
+                                throw new ErrorErrorErrorException("The requested URI does not exist", _context);
 
                             if (_responseCode == 405)
-                                throw new ErrorErrorException("The requested resource does not support the supplied verb", _context);
+                                throw new ErrorErrorErrorException("The requested resource does not support the supplied verb", _context);
 
                             if (_responseCode == 415)
-                                throw new ErrorErrorException("API does not support the requested content type", _context);
+                                throw new ErrorErrorErrorException("API does not support the requested content type", _context);
 
                             if (_responseCode == 422)
-                                throw new ErrorErrorException("The request is formed correctly, but due to some condition the request cannot be processed e.g. email is required and it is not provided in the request", _context);
+                                throw new ErrorErrorErrorException("The request is formed correctly, but due to some condition the request cannot be processed e.g. email is required and it is not provided in the request", _context);
 
                             if (_responseCode == 501)
-                                throw new ErrorErrorException("The HTTP method being used has not yet been implemented for the requested resource", _context);
+                                throw new ErrorErrorErrorException("The HTTP method being used has not yet been implemented for the requested resource", _context);
 
                             if (_responseCode == 503)
-                                throw new ErrorErrorException("The service requested is currently unavailable", _context);
+                                throw new ErrorErrorErrorException("The service requested is currently unavailable", _context);
 
                             if ((_responseCode < 200) || (_responseCode > 208))
-                                throw new ErrorErrorException("An internal error occurred when processing the request", _context);
+                                throw new ErrorErrorErrorException("An internal error occurred when processing the request", _context);
 
                             //handle errors defined at the API level
                             validateResponse(_response, _context);
@@ -319,14 +319,14 @@ public class MessagingController extends BaseController {
 
     /**
      * Send Message
-     * @param    payload    Required parameter: A JSON or XML payload containing the recipient's phone number and text message. The recipient number should be in the format '04xxxxxxxx' where x is a digit
+     * @param    payload    Required parameter: A JSON or XML payload containing the recipient's phone number and text message.  The recipient number should be in the format '04xxxxxxxx' where x is a digit
      * @return    Returns the MessageSentResponse response from the API call 
      */
-    public MessageSentResponse createSendMessage(
+    public MessageSentResponse createSendSMS(
                 final SendSMSRequest payload
     ) throws Throwable {
         APICallBackCatcher<MessageSentResponse> callback = new APICallBackCatcher<MessageSentResponse>();
-        createSendMessageAsync(payload, callback);
+        createSendSMSAsync(payload, callback);
         if(!callback.isSuccess())
             throw callback.getError();
         return callback.getResult();
@@ -334,10 +334,10 @@ public class MessagingController extends BaseController {
 
     /**
      * Send Message
-     * @param    payload    Required parameter: A JSON or XML payload containing the recipient's phone number and text message. The recipient number should be in the format '04xxxxxxxx' where x is a digit
+     * @param    payload    Required parameter: A JSON or XML payload containing the recipient's phone number and text message.  The recipient number should be in the format '04xxxxxxxx' where x is a digit
      * @return    Returns the void response from the API call 
      */
-    public void createSendMessageAsync(
+    public void createSendSMSAsync(
                 final SendSMSRequest payload,
                 final APICallBack<MessageSentResponse> callBack
     ) throws JsonProcessingException {
@@ -352,7 +352,7 @@ public class MessagingController extends BaseController {
 
         //load all headers for the outgoing API request
         Map<String, String> _headers = new HashMap<String, String>() {
-            private static final long serialVersionUID = 4612382669805560221L;
+            private static final long serialVersionUID = 5396840174626260001L;
             {
                     put( "user-agent", "APIMATIC 2.0" );
                     put( "accept", "application/json" );
@@ -386,34 +386,34 @@ public class MessagingController extends BaseController {
                             //Error handling using HTTP status codes
                             int _responseCode = _response.getStatusCode();
                             if (_responseCode == 400)
-                                throw new ErrorErrorException("Invalid or missing request parameters", _context);
+                                throw new ErrorErrorErrorException("Invalid or missing request parameters", _context);
 
                             if (_responseCode == 401)
-                                throw new ErrorErrorException("Invalid or no credentials passed in the request", _context);
+                                throw new ErrorErrorErrorException("Invalid or no credentials passed in the request", _context);
 
                             if (_responseCode == 403)
-                                throw new ErrorErrorException("Authorization credentials passed and accepted but account does not have permission", _context);
+                                throw new ErrorErrorErrorException("Authorization credentials passed and accepted but account does not have permission", _context);
 
                             if (_responseCode == 404)
-                                throw new ErrorErrorException("The requested URI does not exist", _context);
+                                throw new ErrorErrorErrorException("The requested URI does not exist", _context);
 
                             if (_responseCode == 405)
-                                throw new ErrorErrorException("The requested resource does not support the supplied verb", _context);
+                                throw new ErrorErrorErrorException("The requested resource does not support the supplied verb", _context);
 
                             if (_responseCode == 415)
-                                throw new ErrorErrorException("API does not support the requested content type", _context);
+                                throw new ErrorErrorErrorException("API does not support the requested content type", _context);
 
                             if (_responseCode == 422)
-                                throw new ErrorErrorException("The request is formed correctly, but due to some condition the request cannot be processed e.g. email is required and it is not provided in the request", _context);
+                                throw new ErrorErrorErrorException("The request is formed correctly, but due to some condition the request cannot be processed e.g. email is required and it is not provided in the request", _context);
 
                             if (_responseCode == 501)
-                                throw new ErrorErrorException("The HTTP method being used has not yet been implemented for the requested resource", _context);
+                                throw new ErrorErrorErrorException("The HTTP method being used has not yet been implemented for the requested resource", _context);
 
                             if (_responseCode == 503)
-                                throw new ErrorErrorException("The service requested is currently unavailable", _context);
+                                throw new ErrorErrorErrorException("The service requested is currently unavailable", _context);
 
                             if ((_responseCode < 200) || (_responseCode > 208))
-                                throw new ErrorErrorException("An internal error occurred when processing the request", _context);
+                                throw new ErrorErrorErrorException("An internal error occurred when processing the request", _context);
 
                             //handle errors defined at the API level
                             validateResponse(_response, _context);
@@ -487,7 +487,7 @@ public class MessagingController extends BaseController {
 
         //process template parameters
         APIHelper.appendUrlWithTemplateParameters(_queryBuilder, new HashMap<String, Object>() {
-            private static final long serialVersionUID = 4809187590596416401L;
+            private static final long serialVersionUID = 4786090742546834740L;
             {
                     put( "messageid", messageid );
             }});
@@ -496,7 +496,7 @@ public class MessagingController extends BaseController {
 
         //load all headers for the outgoing API request
         Map<String, String> _headers = new HashMap<String, String>() {
-            private static final long serialVersionUID = 4875148258838792657L;
+            private static final long serialVersionUID = 4657135207944935397L;
             {
                     put( "user-agent", "APIMATIC 2.0" );
                     put( "Authorization", OAuthManager.getInstance().getAuthorizationHeader());
@@ -529,34 +529,34 @@ public class MessagingController extends BaseController {
                             //Error handling using HTTP status codes
                             int _responseCode = _response.getStatusCode();
                             if (_responseCode == 400)
-                                throw new ErrorErrorException("Invalid or missing request parameters", _context);
+                                throw new ErrorErrorErrorException("Invalid or missing request parameters", _context);
 
                             if (_responseCode == 401)
-                                throw new ErrorErrorException("Invalid or no credentials passed in the request", _context);
+                                throw new ErrorErrorErrorException("Invalid or no credentials passed in the request", _context);
 
                             if (_responseCode == 403)
-                                throw new ErrorErrorException("Authorization credentials passed and accepted but account does not have permission", _context);
+                                throw new ErrorErrorErrorException("Authorization credentials passed and accepted but account does not have permission", _context);
 
                             if (_responseCode == 404)
-                                throw new ErrorErrorException("The requested URI does not exist", _context);
+                                throw new ErrorErrorErrorException("The requested URI does not exist", _context);
 
                             if (_responseCode == 405)
-                                throw new ErrorErrorException("The requested resource does not support the supplied verb", _context);
+                                throw new ErrorErrorErrorException("The requested resource does not support the supplied verb", _context);
 
                             if (_responseCode == 415)
-                                throw new ErrorErrorException("API does not support the requested content type", _context);
+                                throw new ErrorErrorErrorException("API does not support the requested content type", _context);
 
                             if (_responseCode == 422)
-                                throw new ErrorErrorException("The request is formed correctly, but due to some condition the request cannot be processed e.g. email is required and it is not provided in the request", _context);
+                                throw new ErrorErrorErrorException("The request is formed correctly, but due to some condition the request cannot be processed e.g. email is required and it is not provided in the request", _context);
 
                             if (_responseCode == 501)
-                                throw new ErrorErrorException("The HTTP method being used has not yet been implemented for the requested resource", _context);
+                                throw new ErrorErrorErrorException("The HTTP method being used has not yet been implemented for the requested resource", _context);
 
                             if (_responseCode == 503)
-                                throw new ErrorErrorException("The service requested is currently unavailable", _context);
+                                throw new ErrorErrorErrorException("The service requested is currently unavailable", _context);
 
                             if ((_responseCode < 200) || (_responseCode > 208))
-                                throw new ErrorErrorException("An internal error occurred when processing the request", _context);
+                                throw new ErrorErrorErrorException("An internal error occurred when processing the request", _context);
 
                             //handle errors defined at the API level
                             validateResponse(_response, _context);
@@ -626,7 +626,7 @@ public class MessagingController extends BaseController {
 
         //load all headers for the outgoing API request
         Map<String, String> _headers = new HashMap<String, String>() {
-            private static final long serialVersionUID = 5693248250969296501L;
+            private static final long serialVersionUID = 5599548958658755021L;
             {
                     put( "user-agent", "APIMATIC 2.0" );
                     put( "accept", "application/json" );
@@ -663,31 +663,31 @@ public class MessagingController extends BaseController {
                                 throw new APIException("Invalid or missing request parameters", _context);
 
                             if (_responseCode == 401)
-                                throw new ErrorErrorException("Invalid or no credentials passed in the request", _context);
+                                throw new ErrorErrorErrorException("Invalid or no credentials passed in the request", _context);
 
                             if (_responseCode == 403)
-                                throw new ErrorErrorException("Authorization credentials passed and accepted but account does not have permission", _context);
+                                throw new ErrorErrorErrorException("Authorization credentials passed and accepted but account does not have permission", _context);
 
                             if (_responseCode == 404)
-                                throw new ErrorErrorException("The requested URI does not exist", _context);
+                                throw new ErrorErrorErrorException("The requested URI does not exist", _context);
 
                             if (_responseCode == 405)
-                                throw new ErrorErrorException("The requested resource does not support the supplied verb", _context);
+                                throw new ErrorErrorErrorException("The requested resource does not support the supplied verb", _context);
 
                             if (_responseCode == 415)
-                                throw new ErrorErrorException("API does not support the requested content type", _context);
+                                throw new ErrorErrorErrorException("API does not support the requested content type", _context);
 
                             if (_responseCode == 422)
-                                throw new ErrorErrorException("The request is formed correctly, but due to some condition the request cannot be processed e.g. email is required and it is not provided in the request", _context);
+                                throw new ErrorErrorErrorException("The request is formed correctly, but due to some condition the request cannot be processed e.g. email is required and it is not provided in the request", _context);
 
                             if (_responseCode == 501)
-                                throw new ErrorErrorException("The HTTP method being used has not yet been implemented for the requested resource", _context);
+                                throw new ErrorErrorErrorException("The HTTP method being used has not yet been implemented for the requested resource", _context);
 
                             if (_responseCode == 503)
-                                throw new ErrorErrorException("The service requested is currently unavailable", _context);
+                                throw new ErrorErrorErrorException("The service requested is currently unavailable", _context);
 
                             if ((_responseCode < 200) || (_responseCode > 208))
-                                throw new ErrorErrorException("An internal error occurred when processing the request", _context);
+                                throw new ErrorErrorErrorException("An internal error occurred when processing the request", _context);
 
                             //handle errors defined at the API level
                             validateResponse(_response, _context);

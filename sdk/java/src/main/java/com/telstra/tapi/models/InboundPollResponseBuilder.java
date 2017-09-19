@@ -19,7 +19,8 @@ public class InboundPollResponseBuilder {
     }
 
     /**
-     * The phone number (recipient) that the message was sent to(in E.164 format).
+     * The phone number (recipient) that the message was sent to(in
+     * E.164 format).
      */
     public InboundPollResponseBuilder to(String to) {
         inboundPollResponse.setTo(to);
@@ -27,7 +28,8 @@ public class InboundPollResponseBuilder {
     }
 
     /**
-     * The phone number (sender) that the message was sent from (in E.164 format).
+     * The phone number (sender) that the message was sent from (in
+     * E.164 format).
      */
     public InboundPollResponseBuilder from(String from) {
         inboundPollResponse.setFrom(from);
@@ -51,7 +53,9 @@ public class InboundPollResponseBuilder {
     }
 
     /**
-     * Indicates if there are more messages that can be polled from the server. 0=No more messages available. Anything else indicates there are more messages on the server.
+     * Indicates if there are more messages that can be polled from
+     * the server. 0=No more messages available. Anything else indicates there
+     * are more messages on the server.
      */
     public InboundPollResponseBuilder moreMessages(Integer moreMessages) {
         inboundPollResponse.setMoreMessages(moreMessages);
@@ -59,7 +63,8 @@ public class InboundPollResponseBuilder {
     }
 
     /**
-     * Optional message ID of the SMS you sent. Use this ID to view the message status or get responses.
+     * Optional message ID of the SMS you sent. Use this ID to view
+     * the message status or get responses.
      */
     public InboundPollResponseBuilder messageId(String messageId) {
         inboundPollResponse.setMessageId(messageId);

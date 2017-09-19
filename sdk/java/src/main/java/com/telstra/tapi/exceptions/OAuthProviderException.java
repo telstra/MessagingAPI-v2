@@ -14,7 +14,7 @@ import com.telstra.tapi.models.*;
 public class OAuthProviderException 
         extends APIException
         implements java.io.Serializable {
-    private static final long serialVersionUID = 5204645143219398232L;
+    private static final long serialVersionUID = 4870993006720251977L;
     private OAuthProviderErrorEnum error;
     private String errorDescription;
     private String errorUri;

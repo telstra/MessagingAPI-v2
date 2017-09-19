@@ -19,7 +19,8 @@ public class OutboundPollResponseBuilder {
     }
 
     /**
-     * The phone number (recipient) the message was sent to (in E.164 format).
+     * The phone number (recipient) the message was sent to (in E.164
+     * format).
      */
     public OutboundPollResponseBuilder to(String to) {
         outboundPollResponse.setTo(to);

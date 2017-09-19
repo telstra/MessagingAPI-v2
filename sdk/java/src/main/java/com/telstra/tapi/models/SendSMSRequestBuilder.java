@@ -19,7 +19,8 @@ public class SendSMSRequestBuilder {
     }
 
     /**
-     * Phone number (in E.164 format) to send the SMS to. This number can be in international format if preceeded by a ‘+’, or in national format.
+     * Phone number (in E.164 format) to send the SMS to. This number
+     * can be in international format if preceeded by a ‘+’, or in national format.
      */
     public SendSMSRequestBuilder to(String to) {
         sendSMSRequest.setTo(to);
@@ -27,7 +28,8 @@ public class SendSMSRequestBuilder {
     }
 
     /**
-     * The text body of the message. Messages longer than 160 characters will be counted as multiple messages.
+     * The text body of the message. Messages longer than 160 characters
+     * will be counted as multiple messages.
      */
     public SendSMSRequestBuilder body(String body) {
         sendSMSRequest.setBody(body);
@@ -35,7 +37,9 @@ public class SendSMSRequestBuilder {
     }
 
     /**
-     * Phone number (in E.164 format) the SMS was sent from. If not present, the serverice will use the mobile number associated with the application, or it be an Alphanumeric address of up to 11 characters.
+     * Phone number (in E.164 format) the SMS was sent from. If not
+     * present, the serverice will use the mobile number associated with the application,
+     * or it be an Alphanumeric address of up to 11 characters.
      */
     public SendSMSRequestBuilder from(String from) {
         sendSMSRequest.setFrom(from);
@@ -43,7 +47,8 @@ public class SendSMSRequestBuilder {
     }
 
     /**
-     * How long the platform should attempt to deliver the message for. This period is specified in minutes from the message
+     * How long the platform should attempt to deliver the message for.
+     * This period is specified in minutes from the message
      */
     public SendSMSRequestBuilder validity(Integer validity) {
         sendSMSRequest.setValidity(validity);
@@ -51,7 +56,8 @@ public class SendSMSRequestBuilder {
     }
 
     /**
-     * How long the platform should wait before attempting to send the message - specified in minutes.
+     * How long the platform should wait before attempting to send the
+     * message - specified in minutes.
      */
     public SendSMSRequestBuilder scheduledDelivery(Integer scheduledDelivery) {
         sendSMSRequest.setScheduledDelivery(scheduledDelivery);
@@ -59,7 +65,8 @@ public class SendSMSRequestBuilder {
     }
 
     /**
-     * Contains a URL that will be called once your message has been processed. The status may be delivered, expired, deleted, etc.
+     * Contains a URL that will be called once your message has been
+     * processed. The status may be delivered, expired, deleted, etc.
      */
     public SendSMSRequestBuilder notifyURL(String notifyURL) {
         sendSMSRequest.setNotifyURL(notifyURL);
@@ -67,7 +74,9 @@ public class SendSMSRequestBuilder {
     }
 
     /**
-     * If set to true, the reply message functionality will be implemented and the to address will be ignored if present. If false or not present, then normal message handling is implemented.
+     * If set to true, the reply message functionality will be implemented
+     * and the to address will be ignored if present. If false or not present,
+     * then normal message handling is implemented.
      */
     public SendSMSRequestBuilder replyRequest(Boolean replyRequest) {
         sendSMSRequest.setReplyRequest(replyRequest);

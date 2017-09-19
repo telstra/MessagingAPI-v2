@@ -11,13 +11,14 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 
 public class OutboundPollResponse 
         implements java.io.Serializable {
-    private static final long serialVersionUID = 4611748218773107915L;
+    private static final long serialVersionUID = 5559393212332415142L;
     private String to;
     private String receivedTimestamp;
     private String sentTimestamp;
     private StatusEnum status;
     /** GETTER
-     * The phone number (recipient) the message was sent to (in E.164 format).
+     * The phone number (recipient) the message was sent to (in E.164
+     * format).
      */
     @JsonGetter("to")
     public String getTo ( ) { 
@@ -25,7 +26,8 @@ public class OutboundPollResponse
     }
     
     /** SETTER
-     * The phone number (recipient) the message was sent to (in E.164 format).
+     * The phone number (recipient) the message was sent to (in E.164
+     * format).
      */
     @JsonSetter("to")
     public void setTo (String value) { 

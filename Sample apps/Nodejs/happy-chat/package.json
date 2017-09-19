@@ -35,7 +35,7 @@
     "rxjs": "^5.1.0",
     "socket.io": "^2.0.3",
     "socket.io-client": "^2.0.3",
-    "telstra-sms-messaging": "^1.0.0",
+    "telstra-sms-messaging": "^0.1.0",
     "zone.js": "^0.8.4"
   },
   "devDependencies": {

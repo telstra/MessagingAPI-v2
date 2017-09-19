@@ -166,7 +166,7 @@ The fields mean;
 
 | Field | Description |
 | --- | --- |
-| `messages` | An array of responses. |
+| `messages` | An array of responses |
 | `to` | Just a copy of the number the message is sent to |
 | `deliveryStatus` | Gives and indication of if the message has been accepted for delivery. The description field contains information on why a message may have been rejected |
 | `messageId` | For an accepted message, ths will be a refernce that can be used to check the messages status. Please refer to the [Delivery notification](#delivery_notification) section below |

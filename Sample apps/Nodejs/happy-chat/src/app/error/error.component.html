@@ -1,0 +1,17 @@
+<div class="backdrop" [ngStyle]="{'display': display}"></div>
+<div class="modal fade show" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true" [ngStyle]="{'display': display}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="errorModalLabel">{{ error?.title }}</h5>
+        <i class="fa fa-times" (click)="onErrorHandled()" data-dismiss="modal" aria-label="Close" aria-hidden="true"></i>
+      </div>
+      <div class="modal-body">
+        {{ error?.message }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-dismiss="modal" (click)="onErrorHandled()">OK</button>
+      </div>
+    </div>
+  </div>
+</div>

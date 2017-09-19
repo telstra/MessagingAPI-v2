@@ -1,0 +1,37 @@
+$theme-orange: rgb(247, 149, 74);
+$theme-orange-dark: rgb(246, 126, 35);
+$theme-orange-light: rgb(249, 169, 108);
+
+$theme-purple: rgb(174, 76, 129);
+$theme-purple-dark: rgb(124, 54, 92);
+$theme-purple-light: rgb(193, 113, 156);
+
+.card-orange {
+  border-color: $theme-orange;
+  h5 {
+    color: $theme-orange;
+  }
+  .card-footer {
+    background-color: transparent;
+    border-top: none;
+  }
+}
+.card-purple {
+  border-color: $theme-purple;
+  h5 {
+    color: $theme-purple;
+  }
+  .card-footer {
+    background-color: transparent;
+    border-top: none;
+  }
+}
+.fa-times {
+  cursor: pointer;
+}
+.fa-spin-hover:hover {
+  -webkit-animation: fa-spin 2s infinite linear;
+  -moz-animation: fa-spin 2s infinite linear;
+  -o-animation: fa-spin 2s infinite linear;
+  animation: fa-spin 2s infinite linear;
+}

@@ -1,0 +1,177 @@
+<div class="row">
+  <div class="col-12 col-md-8">
+
+    <div class="card mb-3" [ngClass]="cardState.SMS === 1 ? 'card-orange' : cardState.MMS === 1 ? 'card-red' : cardState.HISTORY === 1 ? 'card-purple' : 'card-grey'">
+      <div class="card-header">
+        <ul class="nav nav-tabs card-header-pills nav-justified" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="recipients-tab" data-toggle="tab" role="tab" data-target="#nav-recipients" (click)="setCardState('RECIPIENTS')">Recipients</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="sms-tab" data-toggle="tab" role="tab" data-target="#nav-sms" (click)="setCardState('SMS')">SMS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="mms-tab" data-toggle="tab" role="tab" data-target="#nav-mms" (click)="setCardState('MMS')">MMS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="history-tab" data-toggle="tab" role="tab" data-target="#nav-history" (click)="setCardState('HISTORY')">History</a>
+          </li>
+        </ul>
+      </div>
+      <div class="card-body">
+        <div class="tab-content" id="nav-tabContent">
+          <div class="tab-pane fade show active" id="nav-recipients" role="tabpanel">
+            <h4 class="card-title">Recipients</h4>
+            <p>Enter some numbers to get started! We only like international format, but feel free to enter whatever you like!</p>
+            <a class="btn mb-3" [ngClass]="replyRequest ? 'btn-theme-purple' : 'btn-theme-purple-outline'" (click)="replyRequest = !replyRequest; bindForm()"><i class="fa fa-commenting"></i> Reply Request</a>
+            <form [formGroup]="numbersForm">
+              <div formArrayName="numbers">
+                <ng-container *ngFor="let number of numbersForm.get('numbers')['controls']; let i = index">
+                  <div [formGroupName]="i" class="form-group input-group">
+                    <input type="tel" class="form-control" formControlName="number" placeholder="Recipient {{ i + 1 }}">
+                    <span class="input-group-btn" *ngIf="!replyRequest">
+                          <a 
+                            class="btn btn-success" (click)="addNumber()"><i class="fa fa-plus" style="color: #fff"></i>
+                          </a>
+                        </span>
+                    <span *ngIf="numbersForm.get('numbers')['controls'].length > 1" class="input-group-btn">
+                          <a
+                            class="btn btn-danger" (click)="removeNumber(i)"><i class="fa fa-times" style="color: #fff"></i>
+                          </a>
+                        </span>
+                  </div>
+                </ng-container>
+              </div>
+            </form>
+          </div>
+
+          <div class="tab-pane fade show" id="nav-sms" role="tabpanel">
+            <h4 class="card-title">SMS</h4>
+            <div *ngIf="numbersForm.valid; else invalidMessage">
+              <p class="card-text">Send a SMS message to all recipients. Leave blank to send the Happy Chat 😄 default greeting.</p>
+              <div class="form-group">
+                <label>Scheduled Delivery</label>
+                <input [(ngModel)]="scheduledDelivery" class="form-control" type="number" placeholder="Minutes">
+              </div>
+              <div class="form-group">
+                <label>Message</label>
+                <textarea [(ngModel)]="smsMessage" rows="5" class="form-control" placeholder="SMS message content"></textarea>
+              </div>
+              <a class="btn btn-theme-orange-outline" style="float: right" (click)="sendSMS(smsMessage)">
+                <i *ngIf="messageWaiting && !messageWaiting.closed" class="fa fa-refresh fa-spin fa-fw"></i>
+                {{ messageWaiting && !messageWaiting.closed ? '' : 'Send SMS' }}
+              </a>
+            </div>
+          </div>
+
+          <div class="tab-pane fade show" id="nav-mms" role="tabpanel">
+            <h4 class="card-title">MMS</h4>
+            <ng-container *ngIf="!replyRequest; else replyRequestActive">
+              <div *ngIf="numbersForm.valid; else invalidMessage">
+                <p class="card-text">Send an MMS to all recipients. You can send jpg, png, gif, videos and even music! If your phone can send
+                  it, so can Happy Chat 😄 Feel free to upload as many files as you like!</p>
+                <div class="row">
+                  <div class="col-3">
+                    <div class="fileUpload btn btn-theme-red">
+                      <span><i *ngIf="mmsFileLoading" class="fa fa-refresh fa-spin"></i>{{ !mmsFileLoading ? 'Add a file!' : '' }}</span>
+                      <input type="file" class="upload" (change)="onFileUpload($event)" />
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="mmsContent.length > 0">
+                  <div *ngFor="let mms of mmsContent; let i = index" class="alert alert-success">
+                    <div class="row">
+                      <div class="col-10">
+                        {{ mms.filename }} is ready to send!
+                      </div>
+                      <div class="col-2">
+                        <i class="fa fa-times fa-spin-hover" style="float: right" (click)="removeMmsContent(i)"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="fileErrors.length > 0">
+                  <div *ngFor="let fileError of fileErrors" class="alert alert-danger form-error">
+                    {{ fileError }}
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Subject</label>
+                  <input [(ngModel)]="mmsSubject" class="form-control" placeholder="Subject for the MMS message">
+                </div>
+                <a class="btn btn-theme-red-outline" style="float: right" (click)="sendMMS(mmsSubject)">
+                  <i *ngIf="messageWaiting && !messageWaiting.closed" class="fa fa-refresh fa-spin"></i>
+                  {{ messageWaiting && !messageWaiting.closed ? '' : 'Send MMS' }}
+              </a>
+              </div>
+            </ng-container>
+          </div>
+
+          <div class="tab-pane fade show" id="nav-history" role="tabpanel">
+            <div class="row">
+              <div class="col">
+                <h4>Message History</h4>
+              </div>
+              <div class="col align-self-center">
+                <a class="btn btn-theme-purple-outline mb-3 btn-block" *ngIf="sentMessages && sentMessages.length > 0" (click)="clearStatusList()">Clear All</a>
+              </div>
+            </div>
+            <p *ngIf="!sentMessages || sentMessages && sentMessages.length <= 0">The status of all your sent messages can be seen here. Try sending something then checking this tab to watch
+              the callback events trigger in realtime!</p>
+            <div *ngFor="let message of sentMessages; let i = index">
+              <div class="alert" [ngClass]="successResponses.indexOf(message.deliveryStatus) !== -1 ? 'alert-success' : errorResponses.indexOf(message.deliveryStatus) !== -1 ? 'alert-danger' : 'alert-warning'">
+                <h5 class="alert-heading">{{ message.to }}
+                  <i class="fa fa-times fa-spin-hover" style="float: right" (click)="removeStatus(i)"></i>
+                </h5>
+                <div class="row">
+                  <div class="col-9">
+                    <p><strong>ID: </strong> {{ message.messageId ? message.messageId : '😭😭😭' }} <br/> <strong>Status: </strong>{{
+                      message.deliveryStatus }} <br /><strong *ngIf="message.sentTimestamp">Sent: </strong> {{ message.sentTimestamp
+                      }} <br />
+                      <strong *ngIf="message.receivedTimestamp">Received: </strong> {{ message.receivedTimestamp }}
+                    </p>
+                  </div>
+                  <div class="col-3 align-self-center">
+                    <div *ngIf="successResponses.indexOf(message.deliveryStatus) !== -1">
+                      <div style="float: right">
+                        <app-tick></app-tick>
+                      </div>
+                    </div>
+                    <div *ngIf="errorResponses.indexOf(message.deliveryStatus) !== -1">
+                      <span class="text-danger"><i class="fa fa-exclamation-triangle faa-ring animated fa-4x" style="float: right"></i></span>
+                    </div>
+                    <div *ngIf="message.deliveryStatus === 'MessageWaiting'">
+                      <div style="float: right">
+                        <app-loading [colour]="'rgb(246, 126, 35)'"></app-loading>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <ng-template #invalidMessage>
+            <p class="card-text">Please make sure all your recipient fields have something in them!</p>
+          </ng-template>
+          <ng-template #replyRequestActive>
+            <p class="card-text">MMS does not currently support reply request 😭😭😭😭😭😭</p>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="chat-box">
+      <app-chat-box [messages]="messages" [replyRequestIds]="replyRequestIds" (messageRemoved)="removeMessage($event)"></app-chat-box>
+    </div>
+  </div>
+</div>
+
+<div class="row" style="margin-top: .5em">
+  <div class="col">
+    <p><span [ngClass]="{'spin-forwards': userConnected, 'spin-backwards': userDisconnected }">😄</span> &nbsp;{{ connections
+      }} chatter{{ connections > 1 ? 's' : '' }} chatting
+    </p>
+  </div>
+</div>

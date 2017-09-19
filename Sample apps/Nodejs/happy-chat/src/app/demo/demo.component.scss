@@ -1,0 +1,510 @@
+$theme-grey: rgb(130, 132, 134);
+$theme-grey-dark: rgb(100, 102, 104);
+$theme-grey-light: rgb(151, 153, 155);
+
+$theme-orange: rgb(247, 149, 74);
+$theme-orange-dark: rgb(246, 126, 35);
+$theme-orange-light: rgb(249, 169, 108);
+
+$theme-red: rgb(241, 92, 91);
+$theme-red-dark: rgb(237, 44, 44);
+$theme-red-light: rgb(245, 138, 138);
+
+$theme-purple: rgb(174, 76, 129);
+$theme-purple-dark: rgb(124, 54, 92);
+$theme-purple-light: rgb(193, 113, 156);
+
+$spin-time: .3s;
+
+.input-group .form-control {
+  z-index: 0 !important;
+}
+.card {
+  max-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  .card-header {
+    background-color: transparent;
+    border-bottom: none;
+  }
+}
+.chat-box {
+  max-height: 70vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+/* Button Themes */
+.btn.btn-theme-grey {
+  color: #fff;
+  background-color: $theme-grey;
+  border-color: $theme-grey;
+  &:hover {
+    color: #fff;
+    background-color: $theme-grey-dark;
+  }
+  &:not([href]):not([tabindex]):active {
+    box-shadow: 0 0 0 2px $theme-grey-light;
+  }
+}
+.btn.btn-theme-grey-outline {
+  color: $theme-grey;
+  border-color: $theme-grey;
+  &:hover {
+    color: #fff;
+    background-color: $theme-grey;
+    border-color: $theme-grey;
+  }
+  &:not([href]):not([tabindex]):active {
+    box-shadow: 0 0 0 2px $theme-grey-light;
+  }
+}
+
+.btn.btn-theme-orange {
+  color: #fff;
+  background-color: $theme-orange;
+  border-color: $theme-orange;
+  &:hover {
+    color: #fff;
+    background-color: $theme-orange-dark;
+  }
+  &:not([href]):not([tabindex]):active {
+    box-shadow: 0 0 0 2px $theme-orange-light;
+  }
+}
+.btn.btn-theme-orange-outline {
+  color: $theme-orange;
+  border-color: $theme-orange;
+  &:hover {
+    color: #fff;
+    background-color: $theme-orange;
+    border-color: $theme-orange;
+  }
+  &:not([href]):not([tabindex]):active {
+    box-shadow: 0 0 0 2px $theme-orange-light;
+  }
+}
+
+.btn.btn-theme-red {
+  color: #fff;
+  background-color: $theme-red;
+  border-color: $theme-red;
+  &:hover {
+    color: #fff;
+    background-color: $theme-red-dark;
+  }
+  &:not([href]):not([tabindex]):active {
+    box-shadow: 0 0 0 2px $theme-red-light;
+  }
+}
+.btn.btn-theme-red-outline {
+  color: $theme-red;
+  border-color: $theme-red;
+  &:hover {
+    color: #fff;
+    background-color: $theme-red;
+    border-color: $theme-red;
+  }
+  &:not([href]):not([tabindex]):active {
+    box-shadow: 0 0 0 2px $theme-red-light;
+  }
+}
+
+.btn.btn-theme-purple {
+  color: #fff;
+  background-color: $theme-purple;
+  border-color: $theme-purple;
+  &:hover {
+    color: #fff;
+    background-color: $theme-purple-dark;
+  }
+  &:not([href]):not([tabindex]):active {
+    box-shadow: 0 0 0 2px $theme-purple-light;
+  }
+}
+.btn.btn-theme-purple-outline {
+  color: $theme-purple;
+  border-color: $theme-purple;
+  &:hover {
+    color: #fff;
+    background-color: $theme-purple;
+    border-color: $theme-purple;
+  }
+  &:not([href]):not([tabindex]):active {
+    box-shadow: 0 0 0 2px $theme-purple-light;
+  }
+}
+
+.card-grey {
+  .nav-tabs > li > a {
+    &:before {
+      background-color: $theme-grey;
+    }
+    &:hover {
+      color: $theme-grey;
+      &:before {
+        visibility: visible;
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1);
+      }
+    }
+    &.active {
+      color: $theme-grey;
+      border-bottom: 1px solid $theme-grey;
+    }
+  }
+  h4 {
+    color: $theme-grey;
+  }
+  border-color: $theme-grey;
+}
+.card-orange {
+  .nav-tabs > li > a {
+    &:before {
+      background-color: $theme-orange;
+    }
+    &:hover {
+      color: $theme-orange;
+      &:before {
+        visibility: visible;
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1);
+      }
+    }
+    &.active {
+      color: $theme-orange;
+      border-bottom: 1px solid $theme-orange;
+    }
+  }
+  h4 {
+    color: $theme-orange;
+  }
+  border-color: $theme-orange;
+}
+.card-red {
+  .nav-tabs > li > a {
+    &:before {
+      background-color: $theme-red;
+    }
+    &:hover {
+      color: $theme-red;
+      &:before {
+        visibility: visible;
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1);
+      }
+    }
+    &.active {
+      color: $theme-red;
+      border-bottom: 1px solid $theme-red;
+    }
+  }
+  h4 {
+    color: $theme-red;
+  }
+  border-color: $theme-red;
+}
+.card-purple {
+  .nav-tabs > li > a {
+    &:before {
+      background-color: $theme-purple;
+    }
+    &:hover {
+      color: $theme-purple;
+      &:before {
+        visibility: visible;
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1);
+      }
+    }
+    &.active {
+      color: $theme-purple;
+      border-bottom: 1px solid $theme-purple;
+    }
+  }
+  h4 {
+    color: $theme-purple;
+  }
+  border-color: $theme-purple;
+}
+/* nav tabs */
+.nav-tabs {
+  @media (max-width: 575px) {
+    font-size: .9em;
+  }
+  border: none;
+  cursor: pointer;
+  > li > a {
+    border-width: 0;
+    border: none;
+    position: relative;
+    &:before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      bottom: -1px;
+      left: 0;
+      visibility: hidden;
+      -webkit-transform: scaleX(0);
+      transform: scaleX(0);
+      -webkit-transition: all 0.3s ease-in-out 0s;
+      transition: all 0.3s ease-in-out 0s;
+    }
+    &:hover {
+      &:before {
+        visibility: visible;
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1);
+      }
+    }
+  }
+}
+
+.fileUpload {
+  position: relative;
+  overflow: hidden;
+  margin-top: .5em;
+  margin-bottom: 1em;
+}
+.fileUpload input.upload {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+.mms-image {
+  padding: 0 0 20px 0;
+  img {
+    max-width: 300px;
+    max-height: 300px;
+  }
+}
+.faa-ring.animated {
+  -webkit-animation: ring 2s ease infinite;
+  animation: ring 2s ease infinite;
+  // transform-origin-x: 50%;
+  // transform-origin-y: 0px;
+  // transform-origin-z: initial;
+}
+.fa-times {
+  cursor: pointer;
+}
+.fa-spin-hover:hover {
+  -webkit-animation: fa-spin 2s infinite linear;
+  -moz-animation: fa-spin 2s infinite linear;
+  -o-animation: fa-spin 2s infinite linear;
+  animation: fa-spin 2s infinite linear;
+}
+.spin-forwards{
+   display: inline-block;
+  -webkit-animation: spin-forwards $spin-time linear;
+  -moz-animation: spin-forwards $spin-time linear;
+  -o-animation: spin-forwards $spin-time linear;
+  animation: spin-forwards $spin-time linear;
+}
+.spin-backwards {
+  display: inline-block;
+  -webkit-animation: spin-backwards $spin-time linear;
+  -moz-animation: spin-backwards $spin-time linear;
+  -o-animation: spin-backwards $spin-time linear;
+  animation: spin-backwards $spin-time linear;
+}
+@-webkit-keyframes ring {
+  0% {
+    -webkit-transform: rotate(-15deg);
+    transform: rotate(-15deg);
+  }
+
+  2% {
+    -webkit-transform: rotate(15deg);
+    transform: rotate(15deg);
+  }
+
+  4% {
+    -webkit-transform: rotate(-18deg);
+    transform: rotate(-18deg);
+  }
+
+  6% {
+    -webkit-transform: rotate(18deg);
+    transform: rotate(18deg);
+  }
+
+  8% {
+    -webkit-transform: rotate(-22deg);
+    transform: rotate(-22deg);
+  }
+
+  10% {
+    -webkit-transform: rotate(22deg);
+    transform: rotate(22deg);
+  }
+
+  12% {
+    -webkit-transform: rotate(-18deg);
+    transform: rotate(-18deg);
+  }
+
+  14% {
+    -webkit-transform: rotate(18deg);
+    transform: rotate(18deg);
+  }
+
+  16% {
+    -webkit-transform: rotate(-12deg);
+    transform: rotate(-12deg);
+  }
+
+  18% {
+    -webkit-transform: rotate(12deg);
+    transform: rotate(12deg);
+  }
+
+  20% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes ring {
+  0% {
+    -webkit-transform: rotate(-15deg);
+    -ms-transform: rotate(-15deg);
+    transform: rotate(-15deg);
+  }
+
+  2% {
+    -webkit-transform: rotate(15deg);
+    -ms-transform: rotate(15deg);
+    transform: rotate(15deg);
+  }
+
+  4% {
+    -webkit-transform: rotate(-18deg);
+    -ms-transform: rotate(-18deg);
+    transform: rotate(-18deg);
+  }
+
+  6% {
+    -webkit-transform: rotate(18deg);
+    -ms-transform: rotate(18deg);
+    transform: rotate(18deg);
+  }
+
+  8% {
+    -webkit-transform: rotate(-22deg);
+    -ms-transform: rotate(-22deg);
+    transform: rotate(-22deg);
+  }
+
+  10% {
+    -webkit-transform: rotate(22deg);
+    -ms-transform: rotate(22deg);
+    transform: rotate(22deg);
+  }
+
+  12% {
+    -webkit-transform: rotate(-18deg);
+    -ms-transform: rotate(-18deg);
+    transform: rotate(-18deg);
+  }
+
+  14% {
+    -webkit-transform: rotate(18deg);
+    -ms-transform: rotate(18deg);
+    transform: rotate(18deg);
+  }
+
+  16% {
+    -webkit-transform: rotate(-12deg);
+    -ms-transform: rotate(-12deg);
+    transform: rotate(-12deg);
+  }
+
+  18% {
+    -webkit-transform: rotate(12deg);
+    -ms-transform: rotate(12deg);
+    transform: rotate(12deg);
+  }
+
+  20% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+}
+@-moz-keyframes spin-forwards {
+  0% {
+    -moz-transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin-forwards {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-o-keyframes spin-forwards {
+  0% {
+    -o-transform: rotate(0deg);
+  }
+  100% {
+    -o-transform: rotate(360deg);
+  }
+}
+@keyframes spin-forwards {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@-moz-keyframes spin-backwards {
+  0% {
+    -moz-transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(-360deg);
+  }
+}
+@-webkit-keyframes spin-backwards {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(-360deg);
+  }
+}
+@-o-keyframes spin-backwards {
+  0% {
+    -o-transform: rotate(0deg);
+  }
+  100% {
+    -o-transform: rotate(-360deg);
+  }
+}
+@keyframes spin-backwards {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(-360deg);
+    transform: rotate(-360deg);
+  }
+}

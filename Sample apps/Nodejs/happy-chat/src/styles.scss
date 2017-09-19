@@ -1,0 +1,86 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "~font-awesome/css/font-awesome.css";
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+// custom icons. Made with icomoon: https://icomoon.io
+@font-face {
+  font-family: 'icomoon';
+  src:  url('./assets/fonts/icomoon.eot?ur8kb8');
+  src:  url('./assets/fonts/icomoon.eot?ur8kb8#iefix') format('embedded-opentype'),
+    url('./assets/fonts/icomoon.ttf?ur8kb8') format('truetype'),
+    url('./assets/fonts/icomoon.woff?ur8kb8') format('woff'),
+    url('./assets/fonts/icomoon.svg?ur8kb8#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  font-family: 'Roboto', sans-serif;
+  padding-top: 5rem;
+  height: 100%;
+  color: black;
+  overflow-x: hidden;
+}
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+textarea.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+select.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+.btn {
+  cursor: pointer;
+}
+
+// prefix our custom icon ticon 
+[class^="ticon-"], [class*=" ticon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Messaging API icons
+.ticon-MessagingAPI-icon-2 .path1:before {
+  content: "\e902";
+  color: rgb(241, 92, 91);
+}
+.ticon-MessagingAPI-icon-2 .path2:before {
+  content: "\e903";
+  margin-left: -0.8564453125em;
+  color: rgb(247, 149, 74);
+}
+.ticon-MessagingAPI-icon-2 .path3:before {
+  content: "\e904";
+  margin-left: -0.8564453125em;
+  color: rgb(130, 132, 134);
+}
+.ticon-MessagingAPI-icon-2 .path4:before {
+  content: "\e905";
+  margin-left: -0.8564453125em;
+  color: rgb(130, 132, 134);
+}
+.ticon-Circuit---Circle-01 .path1:before {
+  content: "\e900";
+  color: rgb(241, 92, 91);
+}
+.ticon-Circuit---Circle-01 .path2:before {
+  content: "\e901";
+  margin-left: -1.0126953125em;
+  color: rgb(247, 149, 74);
+}

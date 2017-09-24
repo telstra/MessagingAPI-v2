@@ -1,8 +1,10 @@
 # Messaging v2 Demo
-Demo app for the telstra messaging API
+Demo app for the telstra messaging API.
+
+
+A live demo of Happy Chat that utilizes the callback methods of the messaging API is available [here](http://api-messaging-api-messaging.apps.tdpaas.com.au/).
 
 ## Getting Started
-A live demo of Happy Chat that utilizes the callback methods of the messaging API is available [here](http://api-messaging-api-messaging.apps.tdpaas.com.au/)  
 Alternatively clone this repo and run Happy Chat locally. You need to have [Node.js and NPM installed](https://nodejs.org/en/) to run Happy Chat, also note that the messaging API callbacks will not hit routes running locally.
 
 

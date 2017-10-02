@@ -18,7 +18,7 @@ CONSUMER_KEY="your consumer key"
 CONSUMER_SECRET="your consumer secret"
 curl -X POST -H 'Content-Type: application/x-www-form-urlencoded' \
   -d 'grant_type=client_credentials&client_id=$CONSUMER_KEY&client_secret=CONSUMER_SECRET&scope=NSMS' \
-  'https://tapi.telstra.com/v1/oauth/token'
+  'https://sapi.telstra.com/v1/oauth/token'
 ```
 ### Response
 

@@ -615,9 +615,6 @@ definitions:
         description: ''
         type: integer
         format: int32
-      callbackData:
-        description: ''
-        type: object
       notifyURL:
         description: ''
         type: string
@@ -629,9 +626,6 @@ definitions:
         description: ''
         type: integer
         format: int32
-      callbackData:
-        description: ''
-        type: object
       notifyURL:
         description: ''
         type: string
@@ -640,7 +634,6 @@ definitions:
         type: string
     required:
       - activeDays
-      - callbackData
       - notifyURL
       - destinationAddress
   ErrorError:

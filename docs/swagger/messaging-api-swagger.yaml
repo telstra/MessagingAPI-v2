@@ -1,15 +1,12 @@
 swagger: '2.0'
 info:
-  version: 2.2.2
+  version: 2.2.3
   title: Telstra Messaging API
-  description: >
+  description: |
 
-    The Telstra SMS Messaging API allows your applications to send and receive
-    SMS text messages from Australia's leading network operator.
+    The Telstra SMS Messaging API allows your applications to send and receive SMS text messages from Australia's leading network operator.
 
-
-    It also allows your application to track the delivery status of both sent
-    and received SMS messages.
+    It also allows your application to track the delivery status of both sent and received SMS messages.
   license:
     name: MIT
     url: 'http://github.com/gruntjs/grunt/blob/master/LICENSE-MIT'
@@ -29,95 +26,13 @@ consumes:
 produces:
   - application/json
 paths:
-  '/messages/sms/{messageId}/status':
+  /messages/provisioning/subscriptions:
     get:
-      description: Get Message Status
-      summary: Get SMS Status
+      description: Get Subscription
+      summary: Get Subscription
       tags:
-        - Messaging
-      operationId: Get SMS Status
-      produces:
-        - application/json
-      parameters:
-        - name: messageId
-          in: path
-          required: true
-          type: string
-          description: |-
-            Unique identifier of a message - it is the value returned from
-            a previous POST call to https://api.telstra.com/v2/messages/sms
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/OutboundPollResponse'
-          examples: {}
-        '400':
-          description: Invalid or missing request parameters
-          schema:
-            $ref: '#/definitions/ErrorErrorError'
-        '401':
-          description: Invalid or no credentials passed in the request
-          schema:
-            $ref: '#/definitions/ErrorErrorError'
-        '403':
-          description: |-
-            Authorization credentials passed and accepted but account does
-            not have permission
-          schema:
-            $ref: '#/definitions/ErrorErrorError'
-        '404':
-          description: The requested URI does not exist
-          schema:
-            $ref: '#/definitions/ErrorErrorError'
-        '405':
-          description: The requested resource does not support the supplied verb
-          schema:
-            $ref: '#/definitions/ErrorErrorError'
-        '415':
-          description: API does not support the requested content type
-          schema:
-            $ref: '#/definitions/ErrorErrorError'
-        '422':
-          description: >-
-            The request is formed correctly, but due to some condition
-
-            the request cannot be processed e.g. email is required and it is not
-            provided
-
-            in the request
-          schema:
-            $ref: '#/definitions/ErrorErrorError'
-        '501':
-          description: |-
-            The HTTP method being used has not yet been implemented for
-            the requested resource
-          schema:
-            $ref: '#/definitions/ErrorErrorError'
-        '503':
-          description: The service requested is currently unavailable
-          schema:
-            $ref: '#/definitions/ErrorErrorError'
-        default:
-          description: An internal error occurred when processing the request
-          schema:
-            $ref: '#/definitions/ErrorErrorError'
-      security:
-        - auth:
-            - NSMS
-      x-unitTests: []
-      x-operation-settings:
-        CollectParameters: false
-        AllowDynamicQueryParameters: false
-        AllowDynamicFormParameters: false
-        IsMultiContentStreaming: false
-  /messages/sms:
-    get:
-      description: Retrieve Messages
-      summary: Retrieve SMS Responses
-      tags:
-        - Messaging
-      operationId: Retrieve SMS Responses
+        - Provisioning
+      operationId: Get Subscription
       produces:
         - application/json
       parameters: []
@@ -125,60 +40,28 @@ paths:
         '200':
           description: Success
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/InboundPollResponse'
+            $ref: '#/definitions/ProvisionNumberResponse'
           examples: {}
         '400':
           description: Invalid or missing request parameters
           schema:
-            $ref: '#/definitions/ErrorErrorError'
+            $ref: '#/definitions/ErrorErrorError62'
         '401':
           description: Invalid or no credentials passed in the request
           schema:
-            $ref: '#/definitions/ErrorErrorError'
+            $ref: '#/definitions/ErrorErrorError62'
         '403':
-          description: |-
-            Authorization credentials passed and accepted but account does
-            not have permission
+          description: Authorization credentials passed and accepted but account does not have permission
           schema:
-            $ref: '#/definitions/ErrorErrorError'
+            $ref: '#/definitions/ErrorErrorError62'
         '404':
           description: The requested URI does not exist
           schema:
-            $ref: '#/definitions/ErrorErrorError'
-        '405':
-          description: The requested resource does not support the supplied verb
-          schema:
-            $ref: '#/definitions/ErrorErrorError'
-        '415':
-          description: API does not support the requested content type
-          schema:
-            $ref: '#/definitions/ErrorErrorError'
-        '422':
-          description: >-
-            The request is formed correctly, but due to some condition
-
-            the request cannot be processed e.g. email is required and it is not
-            provided
-
-            in the request
-          schema:
-            $ref: '#/definitions/ErrorErrorError'
-        '501':
-          description: |-
-            The HTTP method being used has not yet been implemented for
-            the requested resource
-          schema:
-            $ref: '#/definitions/ErrorErrorError'
-        '503':
-          description: The service requested is currently unavailable
-          schema:
-            $ref: '#/definitions/ErrorErrorError'
+            $ref: '#/definitions/ErrorErrorError62'
         default:
           description: An internal error occurred when processing the request
           schema:
-            $ref: '#/definitions/ErrorErrorError'
+            $ref: '#/definitions/ErrorErrorError62'
       security:
         - auth:
             - NSMS
@@ -189,82 +72,167 @@ paths:
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
     post:
-      description: Send Message
-      summary: Send SMS
+      description: Create Subscription
+      summary: Create Subscription
       tags:
-        - Messaging
-      operationId: Send SMS
+        - Provisioning
+      operationId: Create Subscription
       produces:
         - application/json
       parameters:
-        - name: payload
+        - name: body
           in: body
           required: true
-          description: >-
-            A JSON or XML payload containing the recipient's phone number and
-            text message.
-
-
-            The recipient number should be in the format '04xxxxxxxx' where x is
-            a digit
+          description: A JSON payload containing the required attributes
           schema:
-            $ref: '#/definitions/SendSMSRequest'
+            $ref: '#/definitions/ProvisionNumberRequest'
       responses:
         '200':
           description: Success
           schema:
-            $ref: '#/definitions/MessageSentResponse'
+            $ref: '#/definitions/ProvisionNumberResponse'
           examples: {}
         '400':
           description: Invalid or missing request parameters
           schema:
-            $ref: '#/definitions/ErrorErrorError'
+            $ref: '#/definitions/ErrorErrorError62'
         '401':
           description: Invalid or no credentials passed in the request
           schema:
-            $ref: '#/definitions/ErrorErrorError'
+            $ref: '#/definitions/ErrorErrorError62'
+        '403':
+          description: Authorization credentials passed and accepted but account does not have permission
+          schema:
+            $ref: '#/definitions/ErrorErrorError62'
+        '404':
+          description: The requested URI does not exist
+          schema:
+            $ref: '#/definitions/ErrorErrorError62'
+        default:
+          description: An internal error occurred when processing the request
+          schema:
+            $ref: '#/definitions/ErrorErrorError62'
+      security:
+        - auth:
+            - NSMS
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    delete:
+      description: Delete Subscription
+      summary: Delete Subscription
+      tags:
+        - Provisioning
+      operationId: Delete Subscription
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Invalid or missing request parameters
+          schema:
+            $ref: '#/definitions/ErrorErrorError62'
+        '401':
+          description: Invalid or no credentials passed in the request
+          schema:
+            $ref: '#/definitions/ErrorErrorError62'
+        '403':
+          description: Authorization credentials passed and accepted but account does not have permission
+          schema:
+            $ref: '#/definitions/ErrorErrorError62'
+        '404':
+          description: The requested URI does not exist
+          schema:
+            $ref: '#/definitions/ErrorErrorError62'
+        default:
+          description: An internal error occurred when processing the request
+          schema:
+            $ref: '#/definitions/ErrorErrorError62'
+      security:
+        - auth:
+            - NSMS
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /messages/mms:
+    post:
+      description: Send MMS
+      summary: Send MMS
+      tags:
+        - Messaging
+      operationId: Send MMS
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          description: |-
+            A JSON or XML payload containing the recipient's phone number
+            and MMS message.The recipient number should be in the format '04xxxxxxxx'
+            where x is a digit
+          schema:
+            $ref: '#/definitions/SendMmsRequest'
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+          examples: {}
+        '400':
+          description: Invalid or missing request parameters
+          schema: {}
+        '401':
+          description: Invalid or no credentials passed in the request
+          schema:
+            $ref: '#/definitions/ErrorErrorErrorError'
         '403':
           description: |-
             Authorization credentials passed and accepted but account does
             not have permission
           schema:
-            $ref: '#/definitions/ErrorErrorError'
+            $ref: '#/definitions/ErrorErrorErrorError'
         '404':
           description: The requested URI does not exist
           schema:
-            $ref: '#/definitions/ErrorErrorError'
+            $ref: '#/definitions/ErrorErrorErrorError'
         '405':
           description: The requested resource does not support the supplied verb
           schema:
-            $ref: '#/definitions/ErrorErrorError'
+            $ref: '#/definitions/ErrorErrorErrorError'
         '415':
           description: API does not support the requested content type
           schema:
-            $ref: '#/definitions/ErrorErrorError'
+            $ref: '#/definitions/ErrorErrorErrorError'
         '422':
-          description: >-
+          description: |-
             The request is formed correctly, but due to some condition
-
-            the request cannot be processed e.g. email is required and it is not
-            provided
-
+            the request cannot be processed e.g. email is required and it is not provided
             in the request
           schema:
-            $ref: '#/definitions/ErrorErrorError'
+            $ref: '#/definitions/ErrorErrorErrorError'
         '501':
           description: |-
             The HTTP method being used has not yet been implemented for
             the requested resource
           schema:
-            $ref: '#/definitions/ErrorErrorError'
+            $ref: '#/definitions/ErrorErrorErrorError'
         '503':
           description: The service requested is currently unavailable
           schema:
-            $ref: '#/definitions/ErrorErrorError'
+            $ref: '#/definitions/ErrorErrorErrorError'
         default:
           description: An internal error occurred when processing the request
           schema:
-            $ref: '#/definitions/ErrorErrorError'
+            $ref: '#/definitions/ErrorErrorErrorError'
       security:
         - auth:
             - NSMS
@@ -295,58 +263,57 @@ paths:
         '200':
           description: ''
           schema:
-            $ref: '#/definitions/OutboundPollResponse'
+            type: array
+            items:
+              $ref: '#/definitions/OutboundPollResponse'
           examples: {}
         '400':
           description: Invalid or missing request parameters
           schema:
-            $ref: '#/definitions/ErrorErrorError'
+            $ref: '#/definitions/ErrorErrorErrorError'
         '401':
           description: Invalid or no credentials passed in the request
           schema:
-            $ref: '#/definitions/ErrorErrorError'
+            $ref: '#/definitions/ErrorErrorErrorError'
         '403':
           description: |-
             Authorization credentials passed and accepted but account does
             not have permission
           schema:
-            $ref: '#/definitions/ErrorErrorError'
+            $ref: '#/definitions/ErrorErrorErrorError'
         '404':
           description: The requested URI does not exist
           schema:
-            $ref: '#/definitions/ErrorErrorError'
+            $ref: '#/definitions/ErrorErrorErrorError'
         '405':
           description: The requested resource does not support the supplied verb
           schema:
-            $ref: '#/definitions/ErrorErrorError'
+            $ref: '#/definitions/ErrorErrorErrorError'
         '415':
           description: API does not support the requested content type
           schema:
-            $ref: '#/definitions/ErrorErrorError'
+            $ref: '#/definitions/ErrorErrorErrorError'
         '422':
-          description: >-
+          description: |-
             The request is formed correctly, but due to some condition
-
-            the request cannot be processed e.g. email is required and it is not
-            provided
-
+            the request cannot be processed e.g. email is required and it is not provided
             in the request
           schema:
-            $ref: '#/definitions/ErrorErrorError'
+            $ref: '#/definitions/ErrorErrorErrorError'
         '501':
           description: |-
             The HTTP method being used has not yet been implemented for
             the requested resource
           schema:
-            $ref: '#/definitions/ErrorErrorError'
+            $ref: '#/definitions/ErrorErrorErrorError'
         '503':
           description: The service requested is currently unavailable
           schema:
-            $ref: '#/definitions/ErrorErrorError'
+            $ref: '#/definitions/ErrorErrorErrorError'
         default:
           description: An internal error occurred when processing the request
           schema:
-            $ref: '#/definitions/ErrorErrorError'
+            $ref: '#/definitions/ErrorErrorErrorError'
       security:
         - auth: []
       x-unitTests: []
@@ -355,83 +322,69 @@ paths:
         AllowDynamicQueryParameters: false
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
-  /messages/mms:
-    post:
-      description: Send MMS
-      summary: Send MMS
+  /messages/sms:
+    get:
+      description: Retrieve SMS Responses
+      summary: Retrieve SMS Responses
       tags:
         - Messaging
-      operationId: Send MMS
+      operationId: Retrieve SMS Responses
       produces:
         - application/json
-      parameters:
-        - name: body
-          in: body
-          required: true
-          description: >-
-            A JSON or XML payload containing the recipient's phone number
-
-            and MMS message.The recipient number should be in the format
-            '04xxxxxxxx'
-
-            where x is a digit
-          schema:
-            $ref: '#/definitions/SendMmsRequest'
+      parameters: []
       responses:
         '200':
-          description: ''
+          description: Success
           schema:
-            type: object
+            $ref: '#/definitions/InboundPollResponse'
           examples: {}
         '400':
           description: Invalid or missing request parameters
-          schema: {}
+          schema:
+            $ref: '#/definitions/ErrorErrorErrorError'
         '401':
           description: Invalid or no credentials passed in the request
           schema:
-            $ref: '#/definitions/ErrorErrorError'
+            $ref: '#/definitions/ErrorErrorErrorError'
         '403':
           description: |-
             Authorization credentials passed and accepted but account does
             not have permission
           schema:
-            $ref: '#/definitions/ErrorErrorError'
+            $ref: '#/definitions/ErrorErrorErrorError'
         '404':
           description: The requested URI does not exist
           schema:
-            $ref: '#/definitions/ErrorErrorError'
+            $ref: '#/definitions/ErrorErrorErrorError'
         '405':
           description: The requested resource does not support the supplied verb
           schema:
-            $ref: '#/definitions/ErrorErrorError'
+            $ref: '#/definitions/ErrorErrorErrorError'
         '415':
           description: API does not support the requested content type
           schema:
-            $ref: '#/definitions/ErrorErrorError'
+            $ref: '#/definitions/ErrorErrorErrorError'
         '422':
-          description: >-
+          description: |-
             The request is formed correctly, but due to some condition
-
-            the request cannot be processed e.g. email is required and it is not
-            provided
-
+            the request cannot be processed e.g. email is required and it is not provided
             in the request
           schema:
-            $ref: '#/definitions/ErrorErrorError'
+            $ref: '#/definitions/ErrorErrorErrorError'
         '501':
           description: |-
             The HTTP method being used has not yet been implemented for
             the requested resource
           schema:
-            $ref: '#/definitions/ErrorErrorError'
+            $ref: '#/definitions/ErrorErrorErrorError'
         '503':
           description: The service requested is currently unavailable
           schema:
-            $ref: '#/definitions/ErrorErrorError'
+            $ref: '#/definitions/ErrorErrorErrorError'
         default:
           description: An internal error occurred when processing the request
           schema:
-            $ref: '#/definitions/ErrorErrorError'
+            $ref: '#/definitions/ErrorErrorErrorError'
       security:
         - auth:
             - NSMS
@@ -441,162 +394,156 @@ paths:
         AllowDynamicQueryParameters: false
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
-  /messages/provisioning/subscriptions:
-    get:
-      description: Get mobile number subscription for an account
-      summary: Get Subscription
+    post:
+      description: Send SMS
+      summary: Send SMS
       tags:
-        - Provisioning
-      operationId: Get Subscription
+        - Messaging
+      operationId: Send SMS
       produces:
         - application/json
       parameters:
-        - name: Authorization
-          in: header
+        - name: payload
+          in: body
+          required: true
+          description: |-
+            A JSON or XML payload containing the recipient's phone number and text message.
+
+            The recipient number should be in the format '04xxxxxxxx' where x is a digit
+          schema:
+            $ref: '#/definitions/SendSMSRequest'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/MessageSentResponse'
+          examples: {}
+        '400':
+          description: Invalid or missing request parameters
+          schema:
+            $ref: '#/definitions/ErrorErrorErrorError'
+        '401':
+          description: Invalid or no credentials passed in the request
+          schema:
+            $ref: '#/definitions/ErrorErrorErrorError'
+        '403':
+          description: |-
+            Authorization credentials passed and accepted but account does
+            not have permission
+          schema:
+            $ref: '#/definitions/ErrorErrorErrorError'
+        '404':
+          description: The requested URI does not exist
+          schema:
+            $ref: '#/definitions/ErrorErrorErrorError'
+        '405':
+          description: The requested resource does not support the supplied verb
+          schema:
+            $ref: '#/definitions/ErrorErrorErrorError'
+        '415':
+          description: API does not support the requested content type
+          schema:
+            $ref: '#/definitions/ErrorErrorErrorError'
+        '422':
+          description: |-
+            The request is formed correctly, but due to some condition
+            the request cannot be processed e.g. email is required and it is not provided
+            in the request
+          schema:
+            $ref: '#/definitions/ErrorErrorErrorError'
+        '501':
+          description: |-
+            The HTTP method being used has not yet been implemented for
+            the requested resource
+          schema:
+            $ref: '#/definitions/ErrorErrorErrorError'
+        '503':
+          description: The service requested is currently unavailable
+          schema:
+            $ref: '#/definitions/ErrorErrorErrorError'
+        default:
+          description: An internal error occurred when processing the request
+          schema:
+            $ref: '#/definitions/ErrorErrorErrorError'
+      security:
+        - auth:
+            - NSMS
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  '/messages/sms/{messageId}/status':
+    get:
+      description: Get SMS Status
+      summary: Get SMS Status
+      tags:
+        - Messaging
+      operationId: Get SMS Status
+      produces:
+        - application/json
+      parameters:
+        - name: messageId
+          in: path
           required: true
           type: string
-          description: >-
-            An OAUTH bearer token that is entitled to use the 'SUBSCRIPTION'
-            scope.
+          description: 'Unique identifier of a message - it is the value returned from a previous POST call to https://api.telstra.com/v2/messages/sms'
       responses:
         '200':
           description: Success
           schema:
             type: array
             items:
-              $ref: '#/definitions/ProvisionNumberResponse'
+              $ref: '#/definitions/OutboundPollResponse'
           examples: {}
         '400':
           description: Invalid or missing request parameters
           schema:
-            $ref: '#/definitions/ErrorError'
+            $ref: '#/definitions/ErrorErrorErrorError'
         '401':
           description: Invalid or no credentials passed in the request
           schema:
-            $ref: '#/definitions/ErrorError'
+            $ref: '#/definitions/ErrorErrorErrorError'
         '403':
-          description: >-
-            Authorization credentials passed and accepted but account does not
-            have permission
+          description: |-
+            Authorization credentials passed and accepted but account does
+            not have permission
           schema:
-            $ref: '#/definitions/ErrorError'
+            $ref: '#/definitions/ErrorErrorErrorError'
         '404':
           description: The requested URI does not exist
           schema:
-            $ref: '#/definitions/ErrorError'
+            $ref: '#/definitions/ErrorErrorErrorError'
+        '405':
+          description: The requested resource does not support the supplied verb
+          schema:
+            $ref: '#/definitions/ErrorErrorErrorError'
+        '415':
+          description: API does not support the requested content type
+          schema:
+            $ref: '#/definitions/ErrorErrorErrorError'
+        '422':
+          description: |-
+            The request is formed correctly, but due to some condition
+            the request cannot be processed e.g. email is required and it is not provided
+            in the request
+          schema:
+            $ref: '#/definitions/ErrorErrorErrorError'
+        '501':
+          description: |-
+            The HTTP method being used has not yet been implemented for
+            the requested resource
+          schema:
+            $ref: '#/definitions/ErrorErrorErrorError'
+        '503':
+          description: The service requested is currently unavailable
+          schema:
+            $ref: '#/definitions/ErrorErrorErrorError'
         default:
           description: An internal error occurred when processing the request
           schema:
-            $ref: '#/definitions/ErrorError'
-      security:
-        - auth:
-            - NSMS
-      x-unitTests: []
-      x-operation-settings:
-        CollectParameters: false
-        AllowDynamicQueryParameters: false
-        AllowDynamicFormParameters: false
-        IsMultiContentStreaming: false
-    post:
-      description: Provision a mobile number
-      summary: Create Subscription
-      tags:
-        - Provisioning
-      operationId: Create Subscription
-      produces:
-        - application/json
-      parameters:
-        - name: Authorization
-          in: header
-          required: true
-          type: string
-          description: >-
-            An OAUTH bearer token that is entitled to use the 'SUBSCRIPTION'
-            scope.
-        - name: body
-          in: body
-          required: true
-          description: A JSON payload containing the required attributes
-          schema:
-            $ref: '#/definitions/ProvisionNumberRequest'
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/ProvisionNumberResponse'
-          examples: {}
-        '400':
-          description: Invalid or missing request parameters
-          schema:
-            $ref: '#/definitions/ErrorError'
-        '401':
-          description: Invalid or no credentials passed in the request
-          schema:
-            $ref: '#/definitions/ErrorError'
-        '403':
-          description: >-
-            Authorization credentials passed and accepted but account does not
-            have permission
-          schema:
-            $ref: '#/definitions/ErrorError'
-        '404':
-          description: The requested URI does not exist
-          schema:
-            $ref: '#/definitions/ErrorError'
-        default:
-          description: An internal error occurred when processing the request
-          schema:
-            $ref: '#/definitions/ErrorError'
-      security:
-        - auth:
-            - NSMS
-      x-unitTests: []
-      x-operation-settings:
-        CollectParameters: false
-        AllowDynamicQueryParameters: false
-        AllowDynamicFormParameters: false
-        IsMultiContentStreaming: false
-    delete:
-      description: Delete a mobile number subscription from an account
-      summary: Delete Subscription
-      tags:
-        - Provisioning
-      operationId: Delete Subscription
-      produces:
-        - application/json
-      parameters:
-        - name: Authorization
-          in: header
-          required: true
-          type: string
-          description: >-
-            An OAUTH bearer token that is entitled to use the 'SUBSCRIPTION'
-            scope.
-      responses:
-        '200':
-          description: Success
-        '400':
-          description: Invalid or missing request parameters
-          schema:
-            $ref: '#/definitions/ErrorError'
-        '401':
-          description: Invalid or no credentials passed in the request
-          schema:
-            $ref: '#/definitions/ErrorError'
-        '403':
-          description: >-
-            Authorization credentials passed and accepted but account does not
-            have permission
-          schema:
-            $ref: '#/definitions/ErrorError'
-        '404':
-          description: The requested URI does not exist
-          schema:
-            $ref: '#/definitions/ErrorError'
-        default:
-          description: An internal error occurred when processing the request
-          schema:
-            $ref: '#/definitions/ErrorError'
+            $ref: '#/definitions/ErrorErrorErrorError'
       security:
         - auth:
             - NSMS
@@ -607,35 +554,124 @@ paths:
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
 definitions:
-  ProvisionNumberRequest:
-    title: ProvisionNumberRequest
+  ErrorErrorError62:
+    title: Error_Error_Error62
     type: object
     properties:
-      activeDays:
-        description: ''
-        type: integer
-        format: int32
-      notifyURL:
-        description: ''
+      status:
+        description: A short error code
         type: string
-  ProvisionNumberResponse:
-    title: ProvisionNumberResponse
-    type: object
-    properties:
-      activeDays:
-        description: ''
-        type: integer
-        format: int32
-      notifyURL:
-        description: ''
-        type: string
-      destinationAddress:
-        description: The mobile phone number that was allocated
+      message:
+        description: Message describing the error.
         type: string
     required:
-      - activeDays
-      - notifyURL
-      - destinationAddress
+      - status
+  ErrorErrorErrorError:
+    title: Error_Error_Error_Error
+    description: Returns error status code and message
+    type: object
+    properties:
+      status:
+        description: The status code.
+        type: integer
+        format: int32
+      message:
+        description: Message describing the error.
+        type: string
+  MessageType:
+    title: MessageType
+    example: SMS
+    type: string
+    enum:
+      - SMS
+      - MMS
+      - RCS
+  MMSContent:
+    title: MMSContent
+    type: object
+    properties:
+      type:
+        description: "The following types are supported audio/amr \taudio/aac \taudio/mp3\n\taudio/mpeg3 \taudio/mpeg \taudio/mpg \taudio/wav \taudio/3gpp \taudio/mp4\n\timage/gif \timage/jpeg \timage/jpg \timage/png \timage/bmp \tvideo/mpeg4\n\tvideo/mp4 \tvideo/mpeg \tvideo/3gpp \tvideo/3gp \tvideo/h263 \ttext/plain\n\ttext/x-vCard \ttext/x-vCalendar"
+        type: string
+      filename:
+        description: |-
+          The file name to be associated with the content. Some devices
+          will display this file name with a placeholder for the content.
+        type: string
+      payload:
+        description: ''
+        type: string
+    required:
+      - type
+      - filename
+      - payload
+  SendMmsRequest:
+    title: Send MMS Request
+    type: object
+    properties:
+      from:
+        description: |-
+          This will be the source address that will be displayed on the
+          receiving device. If it is not present then it will default to the MSISDN
+          assigned to the app. If replyRequest is set to true, then this field will
+          be ignored.
+        type: string
+      to:
+        description: This is the destination address.
+        type: string
+      subject:
+        description: The subject that will be used in an MMS message.
+        type: string
+      replyRequest:
+        description: |-
+          If set to true, the reply message functionality will be implemented
+          and the to address will be ignored if present.
+        type: boolean
+      MMSContent:
+        description: |-
+          An Array of content that will be sent in an MMS message. If this
+          array is present it will cause the “body” element to be ignored, and the
+          message will be sent as an MMS.
+        type: array
+        items:
+          $ref: '#/definitions/MMSContent'
+    required:
+      - from
+      - to
+      - subject
+      - replyRequest
+      - MMSContent
+  Status:
+    title: Status
+    example: PEND
+    type: string
+    enum:
+      - PEND
+      - SENT
+      - DELIVRD
+      - EXPIRED
+      - DELETED
+      - UNDVBL
+      - REJECTED
+      - READ
+  OutboundPollResponse:
+    title: OutboundPollResponse
+    type: object
+    properties:
+      to:
+        description: |-
+          The phone number (recipient) the message was sent to (in E.164
+          format).
+        type: string
+      receivedTimestamp:
+        description: The date and time when the message was recieved by recipient.
+        type: string
+      sentTimestamp:
+        description: The date and time when the message was sent.
+        type: string
+      deliveryStatus:
+        $ref: '#/definitions/Status'
+        example: PEND
   ErrorError:
     title: Error_Error
     type: object
@@ -648,6 +684,54 @@ definitions:
         type: string
     required:
       - status
+  InboundPollResponse:
+    title: InboundPollResponse
+    description: Poll for incoming messages returning the latest. Only works if no url was specified when provisioning a number.
+    type: object
+    properties:
+      destinationAddress:
+        description: |-
+          The phone number (recipient) that the message was sent to(in
+          E.164 format).
+        type: string
+      senderAddress:
+        description: |-
+          The phone number (sender) that the message was sent from (in
+          E.164 format).
+        type: string
+      message:
+        description: Text body of the message that was sent
+        type: string
+      sentTimestamp:
+        description: The date and time when the message was recieved by recipient.
+        type: string
+      messageId:
+        description: Optional message ID of the SMS you sent. Use this ID to viewthe message status or get responses.
+        type: string
+      status:
+        description: Message status from the server
+        type: string
+  Message:
+    title: Message
+    type: object
+    properties:
+      to:
+        description: ''
+        type: string
+      deliveryStatus:
+        description: ''
+        type: string
+      messageId:
+        description: ''
+        type: string
+      messageStatusLink:
+        description: ''
+        type: string
+    required:
+      - to
+      - deliveryStatus
+      - messageId
+      - messageStatusLink
   MessageSentResponse:
     title: MessageSentResponse
     type: object
@@ -673,88 +757,14 @@ definitions:
       - messageType
       - numberSegments
       - numberDestinations
-  OutboundPollResponse:
-    title: OutboundPollResponse
-    type: object
-    properties:
-      to:
-        description: |-
-          The phone number (recipient) the message was sent to (in E.164
-          format).
-        type: string
-      receivedTimestamp:
-        description: The date and time when the message was recieved by recipient.
-        type: string
-      sentTimestamp:
-        description: The date and time when the message was sent.
-        type: string
-      status:
-        $ref: '#/definitions/Status'
-        example: PEND
-  Status:
-    title: Status
-    example: PEND
-    type: string
-    enum:
-      - PEND
-      - SENT
-      - DELIVRD
-      - EXPIRED
-      - DELETED
-      - UNDVBL
-      - REJECTED
-      - READ
-  ErrorErrorError:
-    title: Error_Error_Error
-    description: Returns error status code and message
-    type: object
-    properties:
-      status:
-        description: The status code.
-        type: integer
-        format: int32
-      message:
-        description: Message describing the error.
-        type: string
-  MessageType:
-    title: MessageType
-    example: SMS
-    type: string
-    enum:
-      - SMS
-      - MMS
-      - RCS
-  Message:
-    title: Message
-    type: object
-    properties:
-      to:
-        description: ''
-        type: string
-      deliveryStatus:
-        description: ''
-        type: string
-      messageId:
-        description: ''
-        type: string
-      messageStatusLink:
-        description: ''
-        type: string
-    required:
-      - to
-      - deliveryStatus
-      - messageId
-      - messageStatusLink
   SendSMSRequest:
     title: SendSMSRequest
     type: object
     properties:
       to:
-        description: >-
+        description: |-
           Phone number (in E.164 format) to send the SMS to. This number
-
-          can be in international format if preceeded by a ‘+’, or in national
-          format.
+          can be in international format if preceeded by a ‘+’, or in national format.
         type: string
       body:
         description: |-
@@ -762,12 +772,9 @@ definitions:
           will be counted as multiple messages.
         type: string
       from:
-        description: >-
+        description: |-
           Phone number (in E.164 format) the SMS was sent from. If not
-
-          present, the serverice will use the mobile number associated with the
-          application,
-
+          present, the serverice will use the mobile number associated with the application,
           or it be an Alphanumeric address of up to 11 characters.
         type: string
       validity:
@@ -788,115 +795,40 @@ definitions:
           processed. The status may be delivered, expired, deleted, etc.
         type: string
       replyRequest:
-        description: >-
+        description: |-
           If set to true, the reply message functionality will be implemented
-
-          and the to address will be ignored if present. If false or not
-          present,
-
+          and the to address will be ignored if present. If false or not present,
           then normal message handling is implemented.
         type: boolean
     required:
       - to
       - body
-  SendMmsRequest:
-    title: Send MMS Request
+  ProvisionNumberResponse:
+    title: ProvisionNumberResponse
     type: object
     properties:
-      from:
-        description: >-
-          This will be the source address that will be displayed on the
-
-          receiving device. If it is not present then it will default to the
-          MSISDN
-
-          assigned to the app. If replyRequest is set to true, then this field
-          will
-
-          be ignored.
-        type: string
-      to:
-        description: This is the destination address.
-        type: string
-      subject:
-        description: The subject that will be used in an MMS message.
-        type: string
-      replyRequest:
-        description: |-
-          If set to true, the reply message functionality will be implemented
-          and the to address will be ignored if present.
-        type: boolean
-      MMSContent:
-        description: >-
-          An Array of content that will be sent in an MMS message. If this
-
-          array is present it will cause the “body” element to be ignored, and
-          the
-
-          message will be sent as an MMS.
-        type: array
-        items:
-          $ref: '#/definitions/MMSContent'
-    required:
-      - from
-      - to
-      - subject
-      - replyRequest
-      - MMSContent
-  MMSContent:
-    title: MMSContent
-    type: object
-    properties:
-      type:
-        description: "The following types are supported audio/amr \taudio/aac \taudio/mp3\n\taudio/mpeg3 \taudio/mpeg \taudio/mpg \taudio/wav \taudio/3gpp \taudio/mp4\n\timage/gif \timage/jpeg \timage/jpg \timage/png \timage/bmp \tvideo/mpeg4\n\tvideo/mp4 \tvideo/mpeg \tvideo/3gpp \tvideo/3gp \tvideo/h263 \ttext/plain\n\ttext/x-vCard \ttext/x-vCalendar"
-        type: string
-      filename:
-        description: |-
-          The file name to be associated with the content. Some devices
-          will display this file name with a placeholder for the content.
-        type: string
-      payload:
+      activeDays:
         description: ''
-        type: string
-    required:
-      - type
-      - filename
-      - payload
-  InboundPollResponse:
-    title: InboundPollResponse
-    description: |-
-      Poll for incoming messages returning the latest. Only works if no
-      callback url was specified when provisioning a number.
-    type: object
-    properties:
-      to:
-        description: |-
-          The phone number (recipient) that the message was sent to(in
-          E.164 format).
-        type: string
-      from:
-        description: |-
-          The phone number (sender) that the message was sent from (in
-          E.164 format).
-        type: string
-      body:
-        description: Text body of the message that was sent
-        type: string
-      receivedTimestamp:
-        description: The date and time when the message was recieved by recipient.
-        type: string
-      moreMessages:
-        description: >-
-          Indicates if there are more messages that can be polled from
-
-          the server. 0=No more messages available. Anything else indicates
-          there
-
-          are more messages on the server.
         type: integer
         format: int32
-      messageId:
-        description: |-
-          Optional message ID of the SMS you sent. Use this ID to view
-          the message status or get responses.
+      notifyURL:
+        description: ''
+        type: string
+      destinationAddress:
+        description: The mobile phone number that was allocated
+        type: string
+    required:
+      - activeDays
+      - notifyURL
+      - destinationAddress
+  ProvisionNumberRequest:
+    title: ProvisionNumberRequest
+    type: object
+    properties:
+      activeDays:
+        description: ''
+        type: integer
+        format: int32
+      notifyURL:
+        description: ''
         type: string

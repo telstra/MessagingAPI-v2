@@ -1,6 +1,6 @@
 use LWP::UserAgent;
 use LWP::ConnCache;
-use HTTP::Request 6.07;
+use HTTP::Request;
 use File::Basename;
 use JSON;
 use Storable;
@@ -17,7 +17,7 @@ sub get_token(\%) {
 	my $hash = shift;
 
 	## Check we already have a valid token
-	if ( $hash->{token} and $hash->{token_expires} > gmtime(time()) ) {
+	if ( $hash->{token} and $hash->{token_expires} > time() ) {
 		warn "Oauth token present and valid... Using existing token.\n";
 		return;
 	}
@@ -34,7 +34,7 @@ sub get_token(\%) {
 		warn "Successfully obtained new OAuth token...\n";
 		my $response = JSON->new->decode($res->decoded_content);
 		$hash->{token} = $response->{access_token};
-		$hash->{token_expires} = $response->{expires_in} + gmtime(time()) - 60;
+		$hash->{token_expires} = $response->{expires_in} + time() - 60;
 
 		## Write the file to disk.
 		store $hash, dirname($0) . "/tokenstore.bin";

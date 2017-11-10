@@ -2,6 +2,7 @@
 use strict;
 use warnings;
 use File::Basename;
+use Getopt::Std;
 use Storable;
 use lib dirname($0);
 use functions;
@@ -12,21 +13,29 @@ if ( -f dirname($0) . "/tokenstore.bin" ) {
 	%config = %{ retrieve(dirname($0) . "/tokenstore.bin") };
 }
 
-## Prompt for destination number.
-print "Enter destination number in format +61......: ";
-my $number = <STDIN>;
-chomp($number);
-if ( $number eq "" ) { exit 1; }
+## Check if we have any command line options, if not, prompt for input.
+my %options;
+getopts('n:m:', \%options);
 
-## Prompt for message.
-print "Enter message to send: ";
-my $message = <STDIN>;
-chomp($message);
-if ( $message eq "" ) { exit 1; }
+## If a number isn't provided with -n, prompt for destination number.
+if ( ! $options{n} ) {
+	print "Enter destination number in format +61......: ";
+	$options{n} = <STDIN>;
+	chomp($options{n});
+}
+if ( $options{n} eq "" ) { exit 1; }
+
+## If a message isn't provided with -m, prompt for a message.
+if ( ! $options{m} ) {
+	print "Enter message to send: ";
+	$options{m} = <STDIN>;
+	chomp($options{m});
+}
+if ( $options{m} eq "" ) { exit 1; }
 
 my %body = (
-	'to'	=> $number,
-	'body'	=> $message,
+	'to'	=> $options{n},
+	'body'	=> $options{m},
 );
 
 ## Get an OAuth token if required.

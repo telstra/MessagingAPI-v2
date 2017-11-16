@@ -1,4 +1,5 @@
 ![Messaging API Logo](https://dev.telstra.com/sites/default/files/MessagingAPI-icon%20-%20thumbnail.png)
+<br> </br>
 Send and receive SMS and MMS messages using Telstra’s enterprise grade Messaging API. Get your dedicated Australian number, and start sending and receiving messages to anywhere in the world today.
 
 ## Features

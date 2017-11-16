@@ -237,15 +237,21 @@ The field meanings are;
 
 
 ## Sample Apps
+
 Perl - https://github.com/telstra/MessagingAPI-perl-sample-app
+
 Php - https://github.com/developersteve/telstra-messaging-php
+
 Nodejs - https://github.com/telstra/MessagingAPI-v2/tree/master/Sample%20apps/Nodejs/happy-chat
 
 ## SDKs
+
 PHP - https://github.com/telstra/MessagingAPI-SDK-php
+
 Ruby - https://github.com/telstra/MessagingAPI-SDK-ruby
+
 Python - https://github.com/telstra/MessagingAPI-SDK-python
+
 Node - https://github.com/telstra/MessagingAPI-SDK-node
+
 .Net - https://github.com/telstra/MessagingAPI-SDK-dotnet
-
-

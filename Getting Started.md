@@ -2,7 +2,7 @@
 First step is to create an `App`. After you've created and `App`, follow these steps to 
 
 1. Authenticate
-2. Get a provisioned number for Messaging API
+2. Get a provisioned number for Messaging API __Note: The App will not be able to send a message until you have a provisioned number__
 3. Use the Messaging API
  
 ## Run in Postman
@@ -16,7 +16,7 @@ To get an OAuth 2.0 Authentication token, pass through your Consumer Key and Con
 # Obtain these keys from the Telstra Developer Portal
 CONSUMER_KEY="your consumer key"
 CONSUMER_SECRET="your consumer secret"
-curl -X POST -H 'Content-Type: application/x-www-form-urlencoded' \
+curl -X GET -H 'Content-Type: application/x-www-form-urlencoded' \
   -d 'grant_type=client_credentials&client_id=$CONSUMER_KEY&client_secret=CONSUMER_SECRET&scope=NSMS' \
   'https://sapi.telstra.com/v1/oauth/token'
 ```
@@ -237,7 +237,15 @@ The field meanings are;
 
 
 ## Sample Apps
-1.  Nodejs - https://github.com/telstra/MessagingAPI-v2/tree/master/Sample%20apps/Nodejs/happy-chat
+Perl - https://github.com/telstra/MessagingAPI-perl-sample-app
+Php - https://github.com/developersteve/telstra-messaging-php
+Nodejs - https://github.com/telstra/MessagingAPI-v2/tree/master/Sample%20apps/Nodejs/happy-chat
 
 ## SDKs
-https://github.com/telstra/MessagingAPI-v2
+PHP - https://github.com/telstra/MessagingAPI-SDK-php
+Ruby - https://github.com/telstra/MessagingAPI-SDK-ruby
+Python - https://github.com/telstra/MessagingAPI-SDK-python
+Node - https://github.com/telstra/MessagingAPI-SDK-node
+.Net - https://github.com/telstra/MessagingAPI-SDK-dotnet
+
+

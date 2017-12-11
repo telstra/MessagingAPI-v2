@@ -17,7 +17,7 @@ To get an OAuth 2.0 Authentication token, pass through your Consumer Key and Con
 CONSUMER_KEY="your consumer key"
 CONSUMER_SECRET="your consumer secret"
 curl -X GET -H 'Content-Type: application/x-www-form-urlencoded' \
-  -d 'grant_type=client_credentials&client_id=$CONSUMER_KEY&client_secret=CONSUMER_SECRET&scope=NSMS' \
+  -d "grant_type=client_credentials&client_id=$CONSUMER_KEY&client_secret=$CONSUMER_SECRET&scope=NSMS" \
   'https://sapi.telstra.com/v1/oauth/token'
 ```
 ### Response

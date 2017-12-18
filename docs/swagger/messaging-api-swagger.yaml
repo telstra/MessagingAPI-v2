@@ -16,7 +16,7 @@ securityDefinitions:
   auth:
     type: oauth2
     flow: application
-    tokenUrl: 'https://sapi.telstra.com/v1/oauth/token'
+    tokenUrl: 'https://tapi.telstra.com/v1/oauth/token'
     scopes:
       NSMS: NSMS
 schemes:

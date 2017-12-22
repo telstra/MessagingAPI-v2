@@ -18,7 +18,7 @@ CONSUMER_KEY="your consumer key"
 CONSUMER_SECRET="your consumer secret"
 curl -X GET -H 'Content-Type: application/x-www-form-urlencoded' \
   -d "grant_type=client_credentials&client_id=$CONSUMER_KEY&client_secret=$CONSUMER_SECRET&scope=NSMS" \
-  'https://sapi.telstra.com/v1/oauth/token'
+  'https://tapi.telstra.com/v2/oauth/token'
 ```
 ### Response
 
@@ -238,20 +238,17 @@ The field meanings are;
 
 ## Sample Apps
 
-Perl - https://github.com/telstra/MessagingAPI-perl-sample-app
-
-Php - https://github.com/developersteve/telstra-messaging-php
-
-Nodejs - https://github.com/telstra/MessagingAPI-v2/tree/master/Sample%20apps/Nodejs/happy-chat
+- [Perl Sample App](https://github.com/telstra/MessagingAPI-perl-sample-app)
+- [Happy Chat App](https://github.com/telstra/messaging-sample-code-happy-chat)
+- [PHP Sample App](https://github.com/developersteve/telstra-messaging-php)
 
 ## SDKs
 
-PHP - https://github.com/telstra/MessagingAPI-SDK-php
+## SDK repos
 
-Ruby - https://github.com/telstra/MessagingAPI-SDK-ruby
-
-Python - https://github.com/telstra/MessagingAPI-SDK-python
-
-Node - https://github.com/telstra/MessagingAPI-SDK-node
-
-.Net - https://github.com/telstra/MessagingAPI-SDK-dotnet
+- [Messaging API - PHP SDK](https://github.com/telstra/MessagingAPI-SDK-php)
+- [Messaging API - Python SDK](https://github.com/telstra/MessagingAPI-SDK-python)
+- [Messaging API - Ruby SDK](https://github.com/telstra/MessagingAPI-SDK-ruby)
+- [Messaging API - NodeJS SDK](https://github.com/telstra/MessagingAPI-SDK-node)
+- [Messaging API - .Net2 SDK](https://github.com/telstra/MessagingAPI-SDK-dotnet)
+- [Messaging API - Java SDK](https://github.com/telstra/MessagingAPI-SDK-Java)

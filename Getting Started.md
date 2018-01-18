@@ -74,13 +74,18 @@ The fields mean;
 
 ```sh
 #!/bin/bash
-# Use the Messaging API to send an SMS
+# Use the Messaging API-v2 to send an SMS
 AccessToken="Access Token"
 Dest="Destination number"
-curl -X post -H "Authorization: Bearer $AccessToken" \
-  -H "Content-Type: application/json" \
-  -d '{ "to":"$Dest", "body":"Test Message" }' \
-  https://tapi.telstra.com/v2/messages/sms
+curl -X POST -H "Authorization: Bearer $AccessToken" -H "Content-Type: application/json" -d "{
+  \"to\":\"$Dest\",
+  \"body\":\"Test Message\",
+  \"from\": \"+61472880996\",
+  \"validity\": 5,
+  \scheduledDelivery\": 1,
+  \"notifyURL\": \"\",
+  \"replyRequest\": false
+}" "https://tapi.telstra.com/v2/messages/sms"
 ```
 A number of parameters can be used in this call, these are;
 

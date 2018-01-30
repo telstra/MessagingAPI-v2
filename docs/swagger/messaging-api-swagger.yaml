@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: 2.2.3
+  version: 2.2.4
   title: Telstra Messaging API
   description: |
 
@@ -16,7 +16,7 @@ securityDefinitions:
   auth:
     type: oauth2
     flow: application
-    tokenUrl: 'https://tapi.telstra.com/v2/oauth/token'
+    tokenUrl: 'https://tapi.telstra.com/v2/oauth'
     scopes:
       NSMS: NSMS
 schemes:
@@ -26,6 +26,39 @@ consumes:
 produces:
   - application/json
 paths:
+  /oauth/token:
+    post:
+      description: Generate auth token
+      summary: Auth Token
+      produces:
+        - application/json
+      consumes:
+        - application/x-www-form-urlencoded      
+      parameters:
+        - name: client_id
+          in: formData
+          required: true
+          type: string
+          description: ''
+        - name: client_secret
+          in: formData
+          required: true
+          type: string
+          description: ''
+        - name: grant_type
+          in: formData
+          required: true
+          type: string
+          default: client_credentials
+      tags: 
+        - Auth
+      responses:
+        '200':
+          description: A JSON hash containing the bearer token
+          schema:
+            $ref: '#/definitions/AuthgentokenResponse'
+          examples: {}
+      operationId: oauthtokenpost      
   /messages/provisioning/subscriptions:
     get:
       description: Get Subscription
@@ -586,6 +619,20 @@ definitions:
       - SMS
       - MMS
       - RCS
+  AuthgentokenResponse:
+    title: Auth token Response
+    type: object
+    properties:
+      access_token:
+        description: access token 
+        type: string
+      expires_in:
+        description: time in seconds
+        type: integer
+        format: int32
+      token_type:
+        description: bearer
+        type: string
   MMSContent:
     title: MMSContent
     type: object

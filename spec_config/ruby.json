@@ -1,0 +1,11 @@
+{
+  "gitUserId": "Telstra",
+  "gitRepoId": "Messaging-SDK-Ruby",
+  "gemName": "Telstra_Messaging",
+  "moduleName": "Telstra_Messaging",
+  "gemVersion": "1.0.1",
+  "gemAuthor": "Telstra",
+  "gemHomepage": "https://dev.telstra.com",
+  "gemLicense": "Apache2",
+  "generatorClass": "telstra"
+}

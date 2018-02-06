@@ -6,5 +6,5 @@ The Messaging API sends and receives both SMS and MMS messages to mobile devices
 - [Messaging API - Python SDK](https://github.com/telstra/MessagingAPI-SDK-python)
 - [Messaging API - Ruby SDK](https://github.com/telstra/MessagingAPI-SDK-ruby)
 - [Messaging API - NodeJS SDK](https://github.com/telstra/MessagingAPI-SDK-node)
-- [Messaging API - .Net2 SDK](https://github.com/telstra/MessagingAPI-SDK-dotnet)
+- [Messaging API - .Net SDK](https://github.com/telstra/MessagingAPI-SDK-dotnet)
 - [Messaging API - Java SDK](https://github.com/telstra/MessagingAPI-SDK-Java)

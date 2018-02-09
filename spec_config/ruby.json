@@ -1,6 +1,6 @@
 {
   "gitUserId": "Telstra",
-  "gitRepoId": "Messaging-SDK-Ruby",
+  "gitRepoId": "MessagingAPI-SDK-Ruby",
   "gemName": "Telstra_Messaging",
   "moduleName": "Telstra_Messaging",
   "gemVersion": "1.0.1",

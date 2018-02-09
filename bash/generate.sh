@@ -24,7 +24,9 @@ do
     	fname=${s%.*}
 
 		if [ $fname = "php" ]; then
-			eval mv -f $folder/$fname/SwaggerClient-php/* $folder/$fname/
+			eval rm -rf $folder/$fname/docs
+			eval rm -rf $folder/$fname/lib
+			eval cp -rf $folder/$fname/SwaggerClient-php/* $folder/$fname/
 			eval rm -rf $folder/$fname/SwaggerClient-php
 			# eval ./vendor/bin/phpunit --bootstrap vendor/autoload.php test/
 		elif [ $fname = "python" ]; then
@@ -36,22 +38,21 @@ do
 			echo "Java"
 		fi
 
+		eval rm $folder/$fname/.!*
+
 		fileloc="../../test/"
 		fileloc+=$fname
 		fileloc+="/README.md"
 
 		if [ -f $fileloc ]
 		then
-			sed -i '' "/$Swagger Codegen/d" $folder/$fname/README.md 
-			sed -i '' "/$Build package/d" $folder/$fname/README.md
-			sed -i '' "/$swagger-codegen/d" $folder/$fname/README.md
-			sed -i '' "/$swagger/d" $folder/$fname/README.md
-			sed -i '' "/$Swagger/d" $folder/$fname/README.md
-			sed -i '' "/$SwaggerClient-php/d" $folder/$fname/README.md
-			sed -i '' "/$Author/d" $folder/$fname/README.md
+			sed -i '' "/$Swagger\ Codegen/d;/$Build\ package/d;s/\*\@dev/\*\@master/g;s/\/SwaggerClient-php//g;s/\#\ SwaggerClient\-php/\#\ \Messaging\ SDK/g;/$Build package/d;/$swagger-codegen/d;/$swagger-codegen/d;/$swagger/d;/$SwaggerClient/d;/$\#\# Author/d;s/\Authorization/\Authorisation/g" $folder/$fname/README.md 
 		fi
 
 		rm ../../test/$fname/git_push.sh
+		rm ../../test/$fname/.swagger-codegen-ignore
+		rm -rf ../../test/$fname/.swagger-codegen
+		rm ../../test/$fname/.DS_Store
 
 		# Runtests
 		# if[$file="python"]

@@ -93,7 +93,9 @@ paths:
         '200':
           description: Success
           schema:
-            $ref: '#/definitions/OutboundPollResponse'
+            type: array
+            items: 
+              $ref: '#/definitions/OutboundPollResponse'
           examples: {}
         '400':
           description: |-
@@ -160,9 +162,7 @@ paths:
         '200':
           description: Success
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/InboundPollResponse'
+            $ref: '#/definitions/InboundPollResponse'
           examples: {}
         '400':
           description: |-
@@ -230,8 +230,8 @@ paths:
           schema:
             $ref: '#/definitions/SendSMSRequest'
       responses:
-        '200':
-          description: Success
+        '201':
+          description: Created
           schema:
             $ref: '#/definitions/MessageSentResponse'
           examples: {}
@@ -311,7 +311,9 @@ paths:
         '200':
           description: ''
           schema:
-            $ref: '#/definitions/OutboundPollResponse'
+            type: array
+            items: 
+              $ref: '#/definitions/OutboundPollResponse'
           examples: {}
         '400':
           description: |-
@@ -383,10 +385,10 @@ paths:
           schema:
             $ref: '#/definitions/SendMmsRequest'
       responses:
-        '200':
-          description: 'Success'
+        '201':
+          description: 'Created'
           schema:
-            type: object
+            $ref: '#/definitions/MessageSentResponse'
           examples: {}
         '400':
           description: |-
@@ -454,22 +456,12 @@ paths:
       operationId: Get Subscription
       produces:
         - application/json
-      parameters:
-        - name: Authorization
-          in: header
-          required: true
-          type: string
-          description: >-
-            An OAUTH bearer token that is entitled to use the 'SUBSCRIPTION'
-            scope.
+      parameters: []
       responses:
         '200':
           description: Success
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/ProvisionNumberResponse'
-          examples: {}
+            $ref: '#/definitions/GetSubscriptionResponse'
         '400':
           description: Invalid or missing request parameters
         '401':
@@ -508,13 +500,6 @@ paths:
       produces:
         - application/json
       parameters:
-        - name: Authorization
-          in: header
-          required: true
-          type: string
-          description: >-
-            An OAUTH bearer token that is entitled to use the 'SUBSCRIPTION'
-            scope.
         - name: body
           in: body
           required: true
@@ -522,8 +507,8 @@ paths:
           schema:
             $ref: '#/definitions/ProvisionNumberRequest'
       responses:
-        '200':
-          description: Success
+        '201':
+          description: Created
           schema:
             $ref: '#/definitions/ProvisionNumberResponse'
           examples: {}
@@ -562,19 +547,20 @@ paths:
       tags:
         - Provisioning
       operationId: Delete Subscription
+      consumes:
+        - application/json
       produces:
         - application/json
       parameters:
-        - name: Authorization
-          in: header
+        - name: body
+          in: body
           required: true
-          type: string
-          description: >-
-            An OAUTH bearer token that is entitled to use the 'SUBSCRIPTION'
-            scope.
+          description: EmptyArr
+          schema:
+            $ref: '#/definitions/DeleteNumberRequest'
       responses:
-        '200':
-          description: Success
+        '204':
+          description: No Content
         '400':
           description: Invalid or missing request parameters
         '401':
@@ -604,35 +590,47 @@ paths:
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
 definitions:
+  DeleteNumberRequest:
+    title: DeleteNumberRequest
+    type: object
+    properties:
+      emptyArr:
+        description: 'Empty Arr'
+        type: integer
+        format: int32
+        default: 0      
   ProvisionNumberRequest:
     title: ProvisionNumberRequest
     type: object
     properties:
       activeDays:
-        description: ''
+        description: 'Number of active days'
         type: integer
         format: int32
+        example: 20
       notifyURL:
-        description: ''
+        description: 'Notify url'
+        type: string
+  GetSubscriptionResponse:
+    title: ProvisionNumberResponse
+    type: object
+    properties:
+      activeDays:
+        description: 'Number of active days'
+        type: string
+      notifyURL:
+        description: 'Notify url configured'
+        type: string
+      destinationAddress:
+        description: The mobile phone number that was allocated
         type: string
   ProvisionNumberResponse:
     title: ProvisionNumberResponse
     type: object
     properties:
-      activeDays:
-        description: ''
-        type: integer
-        format: int32
-      notifyURL:
-        description: ''
-        type: string
       destinationAddress:
         description: The mobile phone number that was allocated
         type: string
-    required:
-      - activeDays
-      - notifyURL
-      - destinationAddress
   ErrorError:
     title: Error_Error
     type: object
@@ -744,7 +742,7 @@ definitions:
       - to
       - deliveryStatus
       - messageId
-      - messageStatusURL
+      - messageStatusUrl
   OAuthRequest:
     title: OAuthRequest
     type: object
@@ -810,12 +808,14 @@ definitions:
           This period is specified in minutes from the message
         type: integer
         format: int32
+        example: 20
       scheduledDelivery:
         description: |-
           How long the platform should wait before attempting to send the
           message - specified in minutes.
         type: integer
         format: int32
+        example: 20
       notifyURL:
         description: |-
           Contains a URL that will be called once your message has been
@@ -903,34 +903,25 @@ definitions:
       callback url was specified when provisioning a number.
     type: object
     properties:
-      to:
+      status: 
+        description: message status
+        type: string
+      destinationAddress:
         description: |-
           The phone number (recipient) that the message was sent to(in
           E.164 format).
         type: string
-      from:
+      senderAddress:
         description: |-
           The phone number (sender) that the message was sent from (in
           E.164 format).
         type: string
-      body:
-        description: Text body of the message that was sent
+      message:
+        description: Text of the message that was sent
         type: string
-      receivedTimestamp:
-        description: The date and time when the message was recieved by recipient.
-        type: string
-      moreMessages:
-        description: >-
-          Indicates if there are more messages that can be polled from
-
-          the server. 0=No more messages available. Anything else indicates
-          there
-
-          are more messages on the server.
-        type: integer
-        format: int32
       messageId:
-        description: |-
-          Optional message ID of the SMS you sent. Use this ID to view
-          the message status or get responses.
+        description: Message Id
+        type: string
+      sentTimestamp:
+        description: The date and time when the message was sent by recipient.
         type: string

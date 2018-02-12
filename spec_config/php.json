@@ -1,0 +1,7 @@
+{
+  "gitUserId": "Telstra",
+  "gitRepoId": "MessagingAPI-SDK-php",
+  "invokerPackage": "Telstra_Messaging",
+  "artifactVersion": "1.0.2",
+  "composerProjectName": "MessagingAPI-SDK-php"
+}

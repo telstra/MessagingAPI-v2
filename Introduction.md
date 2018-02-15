@@ -1,6 +1,6 @@
 ![Messaging API Logo](https://dev.telstra.com/sites/default/files/MessagingAPI-icon%20-%20thumbnail.png)
 <br> </br>
-Send and receive SMS and MMS messages using Telstra’s enterprise grade Messaging API. Get your dedicated Australian number, and start sending and receiving messages to anywhere in the world today.
+Send and receive SMS and MMS messages using Telstra’s enterprise grade Messaging API. Get your dedicated Australian number, and start sending and receiving messages today.
 
 ## Features
 Messaging API provides these features
@@ -27,11 +27,6 @@ Follow these steps to get access to the API
 2. Use the `API Key` to provision a number for your application. A provisioned number is **required** before you can use Messaging API
 3. Use `API Key` to get an authentication token and start using the API. Auth tokens needs to be refreshed regularly so keep an eye on `expires`
 
-Now head over to **Getting Started** to get down to the details. Here are some sample apps and SDKs to get your started.
+Now head over to **Getting Started** to get down to the details, where you can also find links to sample apps and SDKs to get you started.
 Happy Messaging!
 
-## Sample Apps
-1.  Nodejs - https://github.com/telstra/MessagingAPI-v2/tree/master/Sample%20apps/Nodejs/happy-chat
-
-## SDKs
-https://github.com/telstra/MessagingAPI-v2

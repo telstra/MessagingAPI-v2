@@ -1,5 +1,5 @@
 
-First step is to create an `App`. After you've created and `App`, follow these steps to 
+First step is to create an `App`. After you've created an `App`, follow these steps to 
 
 1. Authenticate
 2. Get a provisioned number for Messaging API __Note: The App will not be able to send a message until you have a provisioned number__

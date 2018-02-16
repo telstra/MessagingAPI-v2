@@ -75,6 +75,8 @@ The fields mean;
 ```sh
 #!/bin/bash
 # Use the Messaging API-v2 to send an SMS
+# Note: only to: and body: are required 
+
 AccessToken="Access Token"
 Dest="Destination number"
 curl -X POST -H "Authorization: Bearer $AccessToken" -H "Content-Type: application/json" -d "{
@@ -87,6 +89,7 @@ curl -X POST -H "Authorization: Bearer $AccessToken" -H "Content-Type: applicati
   \"replyRequest\": false
 }" "https://tapi.telstra.com/v2/messages/sms"
 ```
+
 A number of parameters can be used in this call, these are;
 
 | Parameter | Description |

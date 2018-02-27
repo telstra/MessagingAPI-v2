@@ -16,7 +16,7 @@ To get an OAuth 2.0 Authentication token, pass through your Consumer Key and Con
 # Obtain these keys from the Telstra Developer Portal
 CONSUMER_KEY="your consumer key"
 CONSUMER_SECRET="your consumer secret"
-curl -X GET -H 'Content-Type: application/x-www-form-urlencoded' \
+curl -X POST -H 'Content-Type: application/x-www-form-urlencoded' \
   -d "grant_type=client_credentials&client_id=$CONSUMER_KEY&client_secret=$CONSUMER_SECRET&scope=NSMS" \
   'https://tapi.telstra.com/v2/oauth/token'
 ```

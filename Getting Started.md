@@ -82,7 +82,7 @@ Dest="Destination number"
 curl -X POST -H "Authorization: Bearer $AccessToken" -H "Content-Type: application/json" -d "{
   \"to\":\"$Dest\",
   \"body\":\"Test Message\",
-  \"from\": \"+61472880996\",
+  \"from\": \"+61412345678\",
   \"validity\": 5,
   \scheduledDelivery\": 1,
   \"notifyURL\": \"\",
@@ -110,21 +110,31 @@ A typical response will look like;
 {
     "messages": [
         {
-            "to": "0431588242",
+            "to": "0412345678",
             "deliveryStatus": "MessageWaiting",
-            "messageId": "cc70158e000249b2000000000c53ef94021b0201-1261431588242"
+            "messageId": "cc70158e000249b2000000000c53ef94021b0201-1261412345678"
+            "messageStatusURL": "https://tapi.telstra.com/v2/messages/sms/cc70158e000249b2000000000c53ef94021b0201-1261412345678/status"
         }
-    ]
+    ],
+    "NumberInternationalDestinations": 0,
+    "NumberNationalDestinations": 1,
+    "messageType": "SMS",
+    "numberSegments": 1
 }
 ```
 The fields mean:
 
 | Field | Description |
 | --- | --- |
-| `messages` | An array of messages. |
-| `to` | Just a copy of the number the message is sent to. |
+| `messages` | An array of messages |
+| `to` | Just a copy of the number the message is sent to |
 | `deliveryStatus` | Gives an indication if the message has been accepted for delivery. The description field contains information on why a message may have been rejected |
-| `messageId` | For an accepted message, ths will be a reference that can be used to check the messages status. Please refer to the [Delivery notification](#delivery_notification) section below |
+| `messageId` | For an accepted message, ths will be a unique reference that can be used to check the messages status. Please refer to the [Delivery notification](#delivery_notification) section below |
+| `messageStatusURL` | For an accepted message, ths will be the URL that can be used to check the messages status. Please refer to the [Delivery notification](#delivery_notification) section below |
+| `NumberInternationalDestinations` | This returns the number of international messages sent |
+| `NumberNationalDestinations` | This returns the number of domestic Australian messages sent |
+| `messageType` | This returns whether the message sent was a SMS or MMS |
+| `numberSegments` | For SMS messages only, the value indicates the number of 160 character message segments sent |
 
 ### Send Message to multiple numbers
 
@@ -161,13 +171,19 @@ A typical response will look like. Note that `messageId` will be differnt for ea
             "to": "+61412345678",
             "deliveryStatus": "MessageWaiting",
             "messageId": "cc70158e000249b2000000000c53ef94021b0201-1261412345678"
+            "messageStatusURL": "https://tapi.telstra.com/v2/messages/sms/cc70158e000249b2000000000c53ef94021b0201-1261412345678/status"
         },
         {
             "to": "+61418765432",
             "deliveryStatus": "MessageWaiting",
             "messageId": "cc70158e000249b2000000000c53ef94021b0201-1261418765432"
+            "messageStatusURL": "https://tapi.telstra.com/v2/messages/sms/cc70158e000249b2000000000c53ef94021b0201-1261418765432/status"
         },
     ]
+    "NumberInternationalDestinations": 0,
+    "NumberNationalDestinations": 2,
+    "messageType": "SMS",
+    "numberSegments": 1
 }
 ```
 The fields mean;
@@ -177,7 +193,12 @@ The fields mean;
 | `messages` | An array of responses |
 | `to` | Just a copy of the number the message is sent to |
 | `deliveryStatus` | Gives and indication of if the message has been accepted for delivery. The description field contains information on why a message may have been rejected |
-| `messageId` | For an accepted message, ths will be a refernce that can be used to check the messages status. Please refer to the [Delivery notification](#delivery_notification) section below |
+| `messageId` | For an accepted message, ths will be a unique reference that can be used to check the messages status. Please refer to the [Delivery notification](#delivery_notification) section below |
+| `messageStatusURL` | For an accepted message, ths will be the URL that can be used to check the messages status. Please refer to the [Delivery notification](#delivery_notification) section below |
+| `NumberInternationalDestinations` | This returns the number of international messages sent |
+| `NumberNationalDestinations` | This returns the number of domestic Australian messages sent |
+| `messageType` | This returns whether the message sent was a SMS or MMS |
+| `numberSegments` | For SMS messages only, the value indicates the number of 160 character message segments sent |
 
 ## Delivery Notification
 The API provides several methods for notifying when a message has been delivered to the destination.

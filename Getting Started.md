@@ -110,10 +110,10 @@ A typical response will look like;
 {
     "messages": [
         {
-            "to": "0412345678",
+            "to": "+61412345678",
             "deliveryStatus": "MessageWaiting",
-            "messageId": "cc70158e000249b2000000000c53ef94021b0201-1261412345678"
-            "messageStatusURL": "https://tapi.telstra.com/v2/messages/sms/cc70158e000249b2000000000c53ef94021b0201-1261412345678/status"
+            "messageId": "d997474900097a1f0000000008d7e18102cc0901-1261412345678",
+            "messageStatusURL": "https://tapi.telstra.com/v2/messages/sms/d997474900097a1f0000000008d7e18102cc0901-1261412345678/status"
         }
     ],
     "NumberInternationalDestinations": 0,
@@ -170,16 +170,16 @@ A typical response will look like. Note that `messageId` will be differnt for ea
         {
             "to": "+61412345678",
             "deliveryStatus": "MessageWaiting",
-            "messageId": "cc70158e000249b2000000000c53ef94021b0201-1261412345678"
-            "messageStatusURL": "https://tapi.telstra.com/v2/messages/sms/cc70158e000249b2000000000c53ef94021b0201-1261412345678/status"
+            "messageId": "d99745ea00096bb70000000008af106202cc0901-1261412345678",
+            "messageStatusURL": "https://tapi.telstra.com/v2/messages/sms/d99745ea00096bb70000000008af106202cc0901-1261412345678/status"
         },
         {
-            "to": "+61418765432",
+            "to": "+61487654321",
             "deliveryStatus": "MessageWaiting",
-            "messageId": "cc70158e000249b2000000000c53ef94021b0201-1261418765432"
-            "messageStatusURL": "https://tapi.telstra.com/v2/messages/sms/cc70158e000249b2000000000c53ef94021b0201-1261418765432/status"
-        },
-    ]
+            "messageId": "eb9745ea000534b7000000000ec885a302ca0501-1261487654321",
+            "messageStatusURL": "https://tapi.telstra.com/v2/messages/sms/eb9745ea000534b7000000000ec885a302ca0501-1261487654321/status"
+        }
+    ],
     "NumberInternationalDestinations": 0,
     "NumberNationalDestinations": 2,
     "messageType": "SMS",

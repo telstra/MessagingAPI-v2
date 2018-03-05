@@ -24,7 +24,7 @@ curl -X POST -H 'Content-Type: application/x-www-form-urlencoded' \
 
 ```json
 {
-  "expires_in" : "35999",
+  "expires_in" : "3599",
   "access_token" : "1234567890123456788901234567"
 }
 ```

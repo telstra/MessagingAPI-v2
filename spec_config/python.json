@@ -1,7 +1,7 @@
 {
   "gitUserId": "Telstra",
   "gitRepoId": "MessagingAPI-SDK-python",
-  "packageVersion": "1.0.2",
+  "packageVersion": "1.0.3",
   "packageUrl": "https://github.com/telstra/Messaging-SDK-python",
   "projectName": "Telstra_Messaging",
   "packageName": "Telstra_Messaging"

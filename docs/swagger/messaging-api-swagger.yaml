@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: 2.2.4
+  version: 2.2.5
   title: Telstra Messaging API
   description: >
 
@@ -216,6 +216,8 @@ paths:
       tags:
         - Messaging
       operationId: Send SMS
+      consumes:
+        - application/json
       produces:
         - application/json
       parameters:
@@ -369,6 +371,8 @@ paths:
       tags:
         - Messaging
       operationId: Send MMS
+      consumes:
+        - application/json
       produces:
         - application/json
       parameters:
@@ -860,6 +864,9 @@ definitions:
           If set to true, the reply message functionality will be implemented
           and the to address will be ignored if present.
         type: boolean
+      notifyURL:
+        description: 'Notify url'
+        type: string
       MMSContent:
         description: >-
           An Array of content that will be sent in an MMS message. If this

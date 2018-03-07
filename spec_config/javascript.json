@@ -1,7 +1,7 @@
 {
   "gitUserId": "Telstra",
   "gitRepoId": "MessagingAPI-SDK-node",
-  "artifactVersion": "1.0.2", 
+  "artifactVersion": "1.0.3", 
   "projectName": "Telstra_Messaging",
-  "projectVersion": "1.0.1"
+  "projectVersion": "1.0.3"
 }

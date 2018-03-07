@@ -1,6 +1,6 @@
 {
   "gitUserId": "Telstra",
   "gitRepoId": "MessagingAPI-SDK-dotnet2",
-  "packageVersion": "1.0.2", 
+  "packageVersion": "1.0.3", 
   "packageName": "com.telstra.messaging"
 }

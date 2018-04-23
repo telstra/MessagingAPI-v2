@@ -46,7 +46,7 @@ do
 
 		if [ -f $fileloc ]
 		then
-			sed -i '' "/$Swagger\ Codegen/d;/$Build\ package/d;s/\*\@dev/\*\@master/g;s/\/SwaggerClient-php//g;s/\#\ SwaggerClient\-php/\#\ \Messaging\ SDK/g;/$Build package/d;/$swagger-codegen/d;/$swagger-codegen/d;/$swagger/d;/$SwaggerClient/d;/$\#\# Author/d;s/\Authorization/\Authorisation/g" $folder/$fname/README.md 
+			sed -i '' "/$Swagger\ Codegen/d;/$Introduction\ \ Send\ and\ receive\ SMS\ and\ MMS\ messages\ globally/d;/$Build\ package/d;s/\*\@dev/\*\@master/g;s/\/SwaggerClient-php//g;s/\#\ SwaggerClient\-php/\#\ \Messaging\ SDK/g;/$Build package/d;/$swagger-codegen/d;/$swagger-codegen/d;/$swagger/d;/$SwaggerClient/d;/$\#\# Author/d;s/\Authorization/\Authorisation/g" $folder/$fname/README.md 
 		fi
 
 		rm ../../test/$fname/git_push.sh

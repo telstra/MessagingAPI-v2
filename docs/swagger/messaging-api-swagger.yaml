@@ -1,15 +1,320 @@
 swagger: '2.0'
 info:
-  version: 2.2.5
   title: Telstra Messaging API
-  description: >
+  version: 2.2.6
+  description: |-
 
-    The Telstra SMS Messaging API allows your applications to send and receive
-    SMS text messages from Australia's leading network operator.
+    # Introduction
+
+    Send and receive SMS and MMS messages globally using Telstraâ€™s enterprise grade Messaging API.
+    It also allows your application to track the delivery status of both sent and received messages.
+    Get your dedicated Australian number, and start sending and receiving messages today.
+    
+    # Features
+
+    <p>The Telstra Messaging API provides the features below.
+    <table>
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>Dedicated Number</code></td>
+          <td>Provision a mobile number for your account to be used as from address in the API</td>
+        </tr>
+        <tr>
+          <td><code>Send Messages</code></td>
+          <td>Sending SMS or MMS messages</td>
+        </tr>
+        <tr>
+          <td><code>Receive Messages</code></td>
+          <td>Telstra will deliver messages sent to a dedicated number or to the <code>notifyURL</code> defined by you</td>
+        </tr>
+        <tr>
+          <td><code>Broadcast Messages</code></td>
+          <td>Invoke a single API to send a message to a list of number provided in <code>to</code></td>
+        </tr>
+        <tr>
+          <td><code>Delivery Status</code></td>
+          <td>Query the delivery status of your messages</td>
+        </tr>
+        <tr>
+          <td><code>Callbacks</code></td>
+          <td>Provide a notification URL and Telstra will notify your app when messages status changes</td>
+        </tr>
+        <tr>
+          <td><code>Alphanumeric Identifier</code></td>
+          <td>Differentiate yourself by providing an alphanumeric string in <code>from</code>. This feature is only available on paid plans</td>
+        </tr>
+        <tr>
+          <td><code>Concatenation</code></td>
+          <td>Send messages up to 1900 characters long and Telstra will automaticaly segment and reassemble them</td>
+        </tr>
+        <tr>
+          <td><code>Reply Request</code></td>
+          <td>Create a chat session by associating <code>messageId</code> and <code>to</code> number to track responses received from a mobile number. We will store this association for 8 days</td>
+        </tr>
+        <tr>
+          <td><code>Character set</code></td>
+          <td>Accepts all Unicode characters as part of UTF-8</td>
+        </tr>
+        <tr>
+          <td><code>Bounce-back response</code></td>
+          <td>See if your SMS hits an unreachable or unallocated number (Australia Only)</td>
+        </tr>
+        <tr>
+          <td><code>Queuing</code></td>
+          <td>Messaging API will automatically queue and deliver each message at a compliant rate.</td>
+        </tr>
+        <tr>
+          <td><code>Emoji Encoding</code></td>
+          <td>The API supports the encoding of the full range of emojis. Emojis in the reply messages will be in their UTF-8 format.</td>
+        </tr>
+      </tbody>
+    </table>
 
 
-    It also allows your application to track the delivery status of both sent
-    and received SMS messages.
+    # Getting Access to the API
+
+    <ol>
+      <li>Register at <a href="https://dev.telstra.com">https://dev.telstra.com</a>.
+      <li>After registration, login to <a href="https://dev.telstra.com">https://dev.telstra.com</a> 
+          and navigate to the &quot;My apps&quot; page. 
+      <li>Create your application by clicking the &quot;Add new app&quot; button 
+      <li>Select &quot;API Free Trial&quot; Product when configuring your application. This Product includes the Telstra Messaging API as well as other APIs. Your application will be approved automatically.
+      <li>There is a maximum of 1000 free messages per developer. Additional messages and features can be purchased from <a href="https://dev.telstra.com">https://dev.telstra.com</a>.
+      <li>Note your <code>Client key</code> and <code>Client secret</code> as these will be needed to provision a number for your application and for authentication.
+    </ol>
+
+    <p>Now head over to <b>Getting Started</b> where you can find a postman
+    collection as well as some links to sample apps and SDKs to get you started.
+    <p>Happy Messaging!
+
+
+    # Getting Started
+
+    <p>Below are the steps to get started with the Telstra Messaging API.</p>
+
+      <ol>
+        <li>Generate OAuth2 Token using your <code>Client key</code> and <code>Client secret</code>.</li>
+        <li>Create Subscription in order to receive a provisioned number.</li>
+        <li>Send Message to a specific mobile number.</li>
+      </ol>
+
+      <h2>Run in Postman</h2>
+
+      <p><a
+      href="https://app.getpostman.com/run-collection/ded00578f69a9deba256#?env%5BMessaging%20API%20Environments%5D=W3siZW5hYmxlZCI6dHJ1ZSwia2V5IjoiY2xpZW50X2lkIiwidmFsdWUiOiIiLCJ0eXBlIjoidGV4dCJ9LHsiZW5hYmxlZCI6dHJ1ZSwia2V5IjoiY2xpZW50X3NlY3JldCIsInZhbHVlIjoiIiwidHlwZSI6InRleHQifSx7ImVuYWJsZWQiOnRydWUsImtleSI6ImFjY2Vzc190b2tlbiIsInZhbHVlIjoiIiwidHlwZSI6InRleHQifSx7ImVuYWJsZWQiOnRydWUsImtleSI6Imhvc3QiLCJ2YWx1ZSI6InRhcGkudGVsc3RyYS5jb20iLCJ0eXBlIjoidGV4dCJ9LHsiZW5hYmxlZCI6dHJ1ZSwia2V5IjoiQXV0aG9yaXphdGlvbiIsInZhbHVlIjoiIiwidHlwZSI6InRleHQifSx7ImVuYWJsZWQiOnRydWUsImtleSI6Im9hdXRoX2hvc3QiLCJ2YWx1ZSI6InNhcGkudGVsc3RyYS5jb20iLCJ0eXBlIjoidGV4dCJ9LHsiZW5hYmxlZCI6dHJ1ZSwia2V5IjoibWVzc2FnZV9pZCIsInZhbHVlIjoiIiwidHlwZSI6InRleHQifV0=">
+      <img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+      
+    <h2>Sample Apps</h2>
+      - <a href="https://github.com/telstra/MessagingAPI-perl-sample-app">Perl Sample App</a>
+      - <a href="https://github.com/telstra/messaging-sample-code-happy-chat">Happy Chat App</a>
+      - <a href="https://github.com/developersteve/telstra-messaging-php">PHP Sample App</a>
+      
+    <h2>SDK repos</h2>
+      - <a href="https://github.com/telstra/MessagingAPI-SDK-php">Messaging API - PHP SDK</a>
+      - <a href="https://github.com/telstra/MessagingAPI-SDK-python">Messaging API - Python SDK</a>
+      - <a href="https://github.com/telstra/MessagingAPI-SDK-ruby">Messaging API - Ruby SDK</a>
+      - <a href="https://github.com/telstra/MessagingAPI-SDK-node">Messaging API - NodeJS SDK</a>
+      - <a href="https://github.com/telstra/MessagingAPI-SDK-dotnet">Messaging API - .Net2 SDK</a>
+      - <a href="https://github.com/telstra/MessagingAPI-SDK-Java">Messaging API - Java SDK</a>
+
+    # Delivery Notification
+    
+    The API provides several methods for notifying when a message has been delivered to the destination.
+    
+    <ol>
+      <li>When you provision a number there is an opportunity to specify a <code>notifyURL</code>, when the message has been delivered the API will make a call to this URL to advise of the message status. If this is not provided then you can make use the Get Replies API to poll for messages.</li>
+      <li>If you do not specify a URL you can always call the <code>GET /sms</code> API get the latest replies to the message.</li>
+    </ol>
+    
+    <I>Please note that the notification URLs and the polling call are exclusive. If a notification URL has been set then the polling call will not provide any useful information.</I>
+    
+    <h2>Notification URL Format</h2>
+    
+    When a message has reached its final state, the API will send a POST to the URL that has been previously specified. 
+    
+    <h3>Notification URL Format for SMS</h3>
+    <pre><code class="language-sh">{
+        to: '+61418123456'
+        sentTimestamp: '2017-03-17T10:05:22+10:00'
+        receivedTimestamp: '2017-03-17T10:05:23+10:00'
+        messageId: /cccb284200035236000000000ee9d074019e0301/1261418123456
+        deliveryStatus: DELIVRD
+      }
+    </code></pre>
+    \
+    The fields are: 
+    <table>
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>to</code></td>
+          <td>The number the message was sent to.</td>
+        </tr>
+        <tr>
+          <td><code>receivedTimestamp</code></td>
+          <td>Time the message was sent to the API.</td>
+        </tr>
+        <tr>
+          <td><code>sentTimestamp</code></td>
+          <td>Time handling of the message ended.</td>
+        </tr>
+        <tr>
+          <td><code>deliveryStatus</code></td>
+          <td>The final state of the message.</td>
+        </tr>
+        <tr>
+          <td><code>messageId</code></td>
+          <td>The same reference that was returned when the original message was sent.</td>
+        </tr>
+        <tr>
+          <td><code>receivedTimestamp</code></td>
+          <td>Time the message was sent to the API.</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    Upon receiving this call it is expected that your servers will give a 204 (No Content) response. Anything else will cause the API to reattempt the call 5 minutes later.
+    
+    
+    <h3>Notification URL Format for SMS Replies</h3>
+    <pre><code class="language-sh">{
+        "status": "RECEIVED"
+        "destinationAddress": "+61418123456"
+        "senderAddress": "+61421987654"
+        "message": "Foo"        
+        "sentTimestamp": "2018-03-23T12:10:06+10:00"
+      }                             
+    </code></pre>
+    
+    \
+    The fields are: 
+    <table>
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>status</code></td>
+          <td>The final state of the message.</td>
+        </tr>
+        <tr>
+          <td><code>destinationAddress</code></td>
+          <td>The number the message was sent to.</td>
+        </tr>
+        <tr>
+          <td><code>senderAddress</code></td>
+          <td>The number the message was sent from.</td>
+        </tr>
+        <tr>
+          <td><code>message</code></td>
+          <td>The sontent of the SMS reply.</td>
+        </tr>
+        <tr>
+          <td><code>sentTimestamp</code></td>
+          <td>Time handling of the message ended.</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <h3>Notification URL Format for MMS Replies</h3>
+    <pre><code class="language-sh">{
+        "status": "RECEIVED",
+        "destinationAddress": "+61418123456",
+        "senderAddress": "+61421987654",
+        "subject": "Foo",
+        "sentTimestamp": "2018-03-23T12:15:45+10:00",
+        "envelope": "string",
+        "MMSContent": 
+        [
+          {
+            "type": "application/smil",
+            "filename": "smil.xml",
+            "payload": "string"
+          }, 
+          {
+            "type": "image/jpeg",
+            "filename": "sample.jpeg",
+            "payload": "string" 
+          } 
+        ] 
+      }
+    </code></pre>
+    
+    \
+    The fields are: 
+    <table>
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>status</code></td>
+          <td>The final state of the message.</td>
+        </tr>
+        <tr>
+          <td><code>destinationAddress</code></td>
+          <td>The number the message was sent to.</td>
+        </tr>
+        <tr>
+          <td><code>senderAddress</code></td>
+          <td>The number the message was sent from.</td>
+        </tr>
+        <tr>
+          <td><code>subject</code></td>
+          <td>The subject assigned to the message.</td>
+        </tr>
+        <tr>
+          <td><code>sentTimestamp</code></td>
+          <td>Time handling of the message ended.</td>
+        </tr>
+        <tr>
+          <td><code>envelope</code></td>
+          <td>Information about about terminal type and originating operator.</td>
+        </tr>
+        <tr>
+          <td><code>MMSContent</code></td>
+          <td>An array of the actual content of the reply message.</td>
+        </tr>
+        <tr>
+          <td><code>type</code></td>
+          <td>The content type of the message.</td>
+        </tr>
+        <tr>
+          <td><code>filename</code></td>
+          <td>The filename for the message content.</td>
+        </tr>
+        <tr>
+          <td><code>payload</code></td>
+          <td>The content of the message.</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    # Frequently Asked Questions
+    **Q: Can I send a broadcast message using the Telstra Messging API?**
+    A. Yes. Recipient numbers can be in teh form of an array of strings if a broadcast message needs to be sent.
+
+    <h2>Notes</h2>
+    <a href="http://petstore.swagger.io/?url=https://raw.githubusercontent.com/telstra/MessagingAPI-v2/master/docs/swagger/messaging-api-swagger.yaml" target="_blank">View messaging in Swagger UI</a>
+  
+  termsOfService: 'https://dev.telstra.com/legal'
   license:
     name: MIT
     url: 'http://github.com/gruntjs/grunt/blob/master/LICENSE-MIT'
@@ -29,12 +334,30 @@ consumes:
 produces:
   - application/json
 paths:
-  '/oauth/token':
+  /oauth/token:
     post:
-      description: Generate authentication token
-      summary: Generate authentication token
+      description: >
+        To generate an OAuth2 Authentication token, pass through your `Client
+        key` and `Client secret` that you received when you registered for the
+        &quot;API Free Trial&quot; Product. 
+
+        The grant_type should be left as `client_credentials` and the scope as
+        `NSMS`. 
+
+        The token will expire in one hour.
+
+        <pre><code class="language-sh">
+          #!/bin/bash
+          # Obtain these keys from the Telstra Developer Portal
+          CLIENT_KEY="your client key"
+          CLIENT_SECRET="your client secret"
+          curl -X POST -H 'Content-Type: application/x-www-form-urlencoded' \
+          -d 'grant_type=client_credentials&amp;client_id=$CLIENT_KEY&amp;client_secret=CLIENT_SECRET&amp;scope=NSMS' \
+          'https://tapi.telstra.com/v2/oauth/token'
+        </code></pre>
+      summary: Generate OAuth2 token
       tags:
-        - authentication
+        - Authentication
       operationId: auth token
       produces:
         - application/json
@@ -72,400 +395,46 @@ paths:
           description: The service requested is currently unavailable
         default:
           description: An internal error occurred when processing the request
-  '/messages/sms/{messageId}/status':
-    get:
-      description: Get Message Status
-      summary: Get SMS Status
-      tags:
-        - Messaging
-      operationId: Get SMS Status
-      produces:
-        - application/json
-      parameters:
-        - name: messageId
-          in: path
-          required: true
-          type: string
-          description: 
-            Unique identifier of a message - it is the value returned from
-            a previous POST call to https://api.telstra.com/v2/messages/sms
-      responses:
-        '200':
-          description: Success
-          schema:
-            type: array
-            items: 
-              $ref: '#/definitions/OutboundPollResponse'
-          examples: {}
-        '400':
-          description: |-
-            Invalid or missing request parameters
-             NOT-PROVISIONED 
-             Request flagged as containing suspicious content
-        '401':
-          description: Invalid access token. Please try with a valid token
-        '403':
-          description: |-
-            Authorization credentials passed and accepted but account does
-            not have permission 
-             SpikeArrest-The API call rate limit has been exceeded
-        '404':
-          description: |-
-            The requested URI does not exist 
-             OLD-NONEXISTANT-MESSAGE-ID 
-             RESOURCE-NOT-FOUND
-        '405':
-          description: The requested resource does not support the supplied verb
-        '415':
-          description: API does not support the requested content type
-        '422':
-          description: >-
-            The request is formed correctly, but due to some condition
-
-            the request cannot be processed e.g. email is required and it is not
-            provided
-
-            in the request
-        '500':
-          description: >-
-            Technical error : Unable to route the message to a Target Endpoint :
-            An error has occurred while processing your request, please refer to
-            API Docs for summary on the issue
-        '501':
-          description: |-
-            The HTTP method being used has not yet been implemented for
-            the requested resource
-        '503':
-          description: The service requested is currently unavailable
-        default:
-          description: An internal error occurred when processing the request
-      security:
-        - auth:
-            - NSMS
-      x-unitTests: []
-      x-operation-settings:
-        CollectParameters: false
-        AllowDynamicQueryParameters: false
-        AllowDynamicFormParameters: false
-        IsMultiContentStreaming: false
-  '/messages/sms':
-    get:
-      description: Retrieve Messages
-      summary: Retrieve SMS Responses
-      tags:
-        - Messaging
-      operationId: Retrieve SMS Responses
-      produces:
-        - application/json
-      parameters: []
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/InboundPollResponse'
-          examples: {}
-        '400':
-          description: |-
-            Invalid or missing request parameters 
-             NOT-PROVISIONED 
-             Request flagged as containing suspicious content
-        '401':
-          description: Invalid access token. Please try with a valid token
-        '403':
-          description: |-
-            Authorization credentials passed and accepted but account does
-            not have permission 
-             SpikeArrest-The API call rate limit has been exceeded
-        '404':
-          description: |-
-            The requested URI does not exist 
-             RESOURCE-NOT-FOUND
-        '405':
-          description: The requested resource does not support the supplied verb
-        '415':
-          description: API does not support the requested content type
-        '422':
-          description: >-
-            The request is formed correctly, but due to some condition
-            the request cannot be processed e.g. email is required and it is not provided in the request
-        '500':
-          description: >-
-            Technical error : Unable to route the message to a Target Endpoint :
-            An error has occurred while processing your request, please refer to
-            API Docs for summary on the issue
-        '501':
-          description: |-
-            The HTTP method being used has not yet been implemented for
-            the requested resource
-        '503':
-          description: The service requested is currently unavailable
-        default:
-          description: An internal error occurred when processing the request
-      security:
-        - auth:
-            - NSMS
-      x-unitTests: []
-      x-operation-settings:
-        CollectParameters: false
-        AllowDynamicQueryParameters: false
-        AllowDynamicFormParameters: false
-        IsMultiContentStreaming: false
+  /messages/provisioning/subscriptions:
     post:
-      description: Send Message
-      summary: Send SMS
+      description: |-
+        Invoke the provisioning API to get a dedicated mobile number for an account or application.
+
+        <pre><code class="language-sh">
+          #!/bin/bash
+          curl -X POST \
+          https://tapi.telstra.com/v2/messages/provisioning/subscriptions \
+          -H 'authorization: Bearer $ACCESS_TOKEN' \
+          -H 'cache-control: no-cache' \
+          -H 'content-type: application/json' \
+          -d '{
+          "activeDays":30,
+          "notifyURL":"http://example.com/callback",
+          "callbackData":
+            {
+              "anything":"some data"
+            }
+          }'
+        </code></pre>
+      summary: Create Subscription
       tags:
-        - Messaging
-      operationId: Send SMS
-      consumes:
-        - application/json
-      produces:
-        - application/json
-      parameters:
-        - name: payload
-          in: body
-          required: true
-          description: >-
-            A JSON or XML payload containing the recipient's phone number and
-            text message.
-            The recipient number should be in the format '04xxxxxxxx' where x is
-            a digit
-          schema:
-            $ref: '#/definitions/SendSMSRequest'
-      responses:
-        '201':
-          description: Created
-          schema:
-            $ref: '#/definitions/MessageSentResponse'
-          examples: {}
-        '400':
-          description: |-
-            Invalid or missing request parameters 
-             TO-MSISDN-NOT-VALID 
-             SENDER-MISSING 
-             DELIVERY-IMPOSSIBLE 
-             FROM-MSISDN-TOO-LONG 
-             BODY-TOO-LONG 
-             BODY-MISSING 
-             TO-MSISDN-TOO-LONG 
-             TECH-ERR 
-             BODY-NOT-VALID 
-             NOT-PROVISIONED 
-             Request flagged as containing suspicious content
-        '401':
-          description: Invalid access token. Please try with a valid token
-        '403':
-          description: |-
-            Authorization credentials passed and accepted but account does
-            not have permission 
-             SpikeArrest-The API call rate limit has been exceeded
-        '404':
-          description: |-
-            The requested URI does not exist 
-             RESOURCE-NOT-FOUND
-        '405':
-          description: The requested resource does not support the supplied verb
-        '415':
-          description: API does not support the requested content type
-        '422':
-          description: >-
-            The request is formed correctly, but due to some condition
-            the request cannot be processed e.g. email is required and it is not provided in the request
-        '500':
-          description: >-
-            Technical error : Unable to route the message to a Target Endpoint :
-            An error has occurred while processing your request, please refer to
-            API Docs for summary on the issue
-        '501':
-          description: |-
-            The HTTP method being used has not yet been implemented for
-            the requested resource
-        '503':
-          description: The service requested is currently unavailable
-        default:
-          description: An internal error occurred when processing the request
-      security:
-        - auth:
-            - NSMS
-      x-unitTests: []
-      x-operation-settings:
-        CollectParameters: false
-        AllowDynamicQueryParameters: false
-        AllowDynamicFormParameters: false
-        IsMultiContentStreaming: false
-  '/messages/mms/{messageid}/status':
-    get:
-      description: Get MMS Status
-      summary: Get MMS Status
-      tags:
-        - Messaging
-      operationId: Get MMS Status
-      produces:
-        - application/json
-      parameters:
-        - name: messageid
-          in: path
-          required: true
-          type: string
-          description: |-
-            Unique identifier of a message - it is the value returned from
-            a previous POST call to https://api.telstra.com/v2/messages/mms
-      responses:
-        '200':
-          description: ''
-          schema:
-            type: array
-            items: 
-              $ref: '#/definitions/OutboundPollResponse'
-          examples: {}
-        '400':
-          description: |-
-            Invalid or missing request parameters 
-             NOT-PROVISIONED 
-             Request flagged as containing suspicious content
-        '401':
-          description: Invalid access token. Please try with a valid token
-        '403':
-          description: |-
-            Authorization credentials passed and accepted but account does
-            not have permission 
-             SpikeArrest-The API call rate limit has been exceeded
-        '404':
-          description: |-
-            The requested URI does not exist 
-             OLD-NONEXISTANT-MESSAGE-ID 
-             RESOURCE-NOT-FOUND
-        '405':
-          description: The requested resource does not support the supplied verb
-        '415':
-          description: API does not support the requested content type
-        '422':
-          description: >-
-            The request is formed correctly, but due to some condition
-            the request cannot be processed e.g. email is required and it is not provided in the request
-        '500':
-          description: >-
-            Technical error : Unable to route the message to a Target Endpoint :
-            An error has occurred while processing your request, please refer to
-            API Docs for summary on the issue
-        '501':
-          description: |-
-            The HTTP method being used has not yet been implemented for
-            the requested resource
-        '503':
-          description: The service requested is currently unavailable
-        default:
-          description: An internal error occurred when processing the request
-      security:
-        - auth: 
-            - NSMS          
-      x-unitTests: []
-      x-operation-settings:
-        CollectParameters: false
-        AllowDynamicQueryParameters: false
-        AllowDynamicFormParameters: false
-        IsMultiContentStreaming: false
-  '/messages/mms':
-    post:
-      description: Send MMS
-      summary: Send MMS
-      tags:
-        - Messaging
-      operationId: Send MMS
-      consumes:
-        - application/json
+        - Provisioning
+      operationId: Create Subscription
       produces:
         - application/json
       parameters:
         - name: body
           in: body
           required: true
-          description: >-
-            A JSON or XML payload containing the recipient's phone number
-
-            and MMS message.The recipient number should be in the format
-            '04xxxxxxxx'
-
-            where x is a digit
+          description: A JSON payload containing the required attributes
           schema:
-            $ref: '#/definitions/SendMmsRequest'
+            $ref: '#/definitions/ProvisionNumberRequest'
       responses:
         '201':
-          description: 'Created'
+          description: Created
           schema:
-            $ref: '#/definitions/MessageSentResponse'
+            $ref: '#/definitions/ProvisionNumberResponse'
           examples: {}
-        '400':
-          description: |-
-            Invalid or missing request parameters 
-                MMS-TYPE-MISSING 
-             MMS-PAYLOAD-MISSING 
-              MMS-FILENAME-MISSING 
-             DELIVERY-IMPOSSIBLE 
-              TO-MSISDN-NOT-VALID 
-              SENDER-MISSING 
-             DELIVERY-IMPOSSIBLE 
-             SUBJECT-TOO-LONG 
-             FROM-MSISDN-TOO-LONG 
-             TO-MSISDN-TOO-LONG 
-             NOT-PROVISIONED 
-             Request flagged as containing suspicious content
-          schema: {}
-        '401':
-          description: Invalid access token. Please try with a valid token
-        '403':
-          description: |-
-            Authorization credentials passed and accepted but account does
-            not have permission 
-             SpikeArrest-The API call rate limit has been exceeded
-        '404':
-          description: |-
-            The requested URI does not exist 
-             RESOURCE-NOT-FOUND
-        '405':
-          description: The requested resource does not support the supplied verb
-        '415':
-          description: API does not support the requested content type
-        '422':
-          description: >-
-            The request is formed correctly, but due to some condition
-            the request cannot be processed e.g. email is required and it is not provided in the request
-        '500':
-          description: >-
-            Technical error : Unable to route the message to a Target Endpoint :
-            An error has occurred while processing your request, please refer to
-            API Docs for summary on the issue
-        '501':
-          description: |-
-            The HTTP method being used has not yet been implemented for
-            the requested resource
-        '503':
-          description: The service requested is currently unavailable
-        default:
-          description: An internal error occurred when processing the request
-      security:
-        - auth:
-            - NSMS
-      x-unitTests: []
-      x-operation-settings:
-        CollectParameters: false
-        AllowDynamicQueryParameters: false
-        AllowDynamicFormParameters: false
-        IsMultiContentStreaming: false
-  '/messages/provisioning/subscriptions':
-    get:
-      description: Get mobile number subscription for an account
-      summary: Get Subscription
-      tags:
-        - Provisioning
-      operationId: Get Subscription
-      produces:
-        - application/json
-      parameters: []
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/GetSubscriptionResponse'
         '400':
           description: Invalid or missing request parameters
         '401':
@@ -495,27 +464,21 @@ paths:
         AllowDynamicQueryParameters: false
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
-    post:
-      description: Provision a mobile number
-      summary: Create Subscription
+    get:
+      description: |-
+        Get mobile number subscription for an account
+      summary: Get Subscription
       tags:
         - Provisioning
-      operationId: Create Subscription
+      operationId: Get Subscription
       produces:
         - application/json
-      parameters:
-        - name: body
-          in: body
-          required: true
-          description: A JSON payload containing the required attributes
-          schema:
-            $ref: '#/definitions/ProvisionNumberRequest'
+      parameters: []
       responses:
-        '201':
-          description: Created
+        '200':
+          description: Success
           schema:
-            $ref: '#/definitions/ProvisionNumberResponse'
-          examples: {}
+            $ref: '#/definitions/GetSubscriptionResponse'
         '400':
           description: Invalid or missing request parameters
         '401':
@@ -571,7 +534,8 @@ paths:
           description: Invalid access token. Please try with a valid token
         '403':
           description: >-
-            Authorization credentials passed and accepted but account does not have permission 
+            Authorization credentials passed and accepted but account does not
+            have permission 
              SpikeArrest-The API call rate limit has been exceeded
         '404':
           description: |-
@@ -593,37 +557,479 @@ paths:
         AllowDynamicQueryParameters: false
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
+  /messages/sms:
+    post:
+      description: |- 
+        Send an SMS Message to a single or multiple mobile number/s.
+        
+        <h3>Send message to a single number: </h3>
+        <pre><code class="language-sh">  #!/bin/bash
+          # Use the Messaging API-v2 to send an SMS
+          # Note: only to: and body: are required
+          AccessToken="Access Token"
+          Dest="Destination number"
+          curl -X POST -H "Authorization: Bearer $AccessToken" -H "Content-Type: application/json" -d "{
+            \"to\":\"$Dest\",
+            \"body\":\"Test Message\",
+            \"from\": \"+61412345678\",
+            \"validity\": 5,
+            \"scheduledDelivery\": 1,
+            \"notifyURL\": \"\",
+            \"replyRequest\": false
+            \"priority\": true
+          }" "https://tapi.telstra.com/v2/messages/sms"
+        </code></pre>
+        
+        \
+        <h3>Send message to multiple numbers: </h3>
+        <pre><code class="language-sh">
+        #!/bin/bash
+          # Use the Messaging API to send an SMS
+          AccessToken="Access Token"
+          Dest="Destination number"
+          curl -X post -H "Authorization: Bearer $AccessToken" \
+            -H "Content-Type: application/json" \
+            -d '{ "to":"$dest1, $dest2, $dest3", "body":"Test Message" }' \
+            https://tapi.telstra.com/v2/messages/sms
+          <pre><code class="language-sh">
+        
+      summary: Send SMS
+      tags:
+        - Messaging
+      operationId: Send SMS
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: payload
+          in: body
+          required: true
+          description: |-
+            A JSON or XML payload containing the recipient's phone number and text message. 
+            This number can be in international format if preceeded by a â€˜+â€™ or in national format ('04xxxxxxxx') where x is a digit.
+          schema:
+            $ref: '#/definitions/SendSMSRequest'
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/MessageSentResponse'
+          examples: {}
+        '400':
+          description: |-
+            Invalid or missing request parameters 
+             TO-MSISDN-NOT-VALID 
+             SENDER-MISSING 
+             DELIVERY-IMPOSSIBLE 
+             FROM-MSISDN-TOO-LONG 
+             BODY-TOO-LONG 
+             BODY-MISSING 
+             TO-MSISDN-TOO-LONG 
+             TECH-ERR 
+             BODY-NOT-VALID 
+             NOT-PROVISIONED 
+             Request flagged as containing suspicious content
+        '401':
+          description: Invalid access token. Please try with a valid token
+        '403':
+          description: |-
+            Authorization credentials passed and accepted but account does
+            not have permission 
+             SpikeArrest-The API call rate limit has been exceeded
+        '404':
+          description: |-
+            The requested URI does not exist 
+             RESOURCE-NOT-FOUND
+        '405':
+          description: The requested resource does not support the supplied verb
+        '415':
+          description: API does not support the requested content type
+        '422':
+          description: >-
+            The request is formed correctly, but due to some condition the
+            request cannot be processed e.g. email is required and it is not
+            provided in the request
+        '500':
+          description: >-
+            Technical error : Unable to route the message to a Target Endpoint :
+            An error has occurred while processing your request, please refer to
+            API Docs for summary on the issue
+        '501':
+          description: |-
+            The HTTP method being used has not yet been implemented for
+            the requested resource
+        '503':
+          description: The service requested is currently unavailable
+        default:
+          description: An internal error occurred when processing the request
+      security:
+        - auth:
+            - NSMS
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    get:
+      description: |-
+        Messages are retrieved one at a time, starting with the earliest response.
+        The API supports the encoding of the full range of emojis in the reply message. The emojis will be in their UTF-8 format.
+        If the subscription has a `notifyURL`, response messages will be logged there instead.
+      summary: Retrieve SMS Responses
+      tags:
+        - Messaging
+      operationId: Retrieve SMS Responses
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/InboundPollResponse'
+          examples: {}
+        '400':
+          description: |-
+            Invalid or missing request parameters 
+             NOT-PROVISIONED 
+             Request flagged as containing suspicious content
+        '401':
+          description: Invalid access token. Please try with a valid token
+        '403':
+          description: |-
+            Authorization credentials passed and accepted but account does
+            not have permission 
+             SpikeArrest-The API call rate limit has been exceeded
+        '404':
+          description: |-
+            The requested URI does not exist 
+             RESOURCE-NOT-FOUND
+        '405':
+          description: The requested resource does not support the supplied verb
+        '415':
+          description: API does not support the requested content type
+        '422':
+          description: >-
+            The request is formed correctly, but due to some condition the
+            request cannot be processed e.g. email is required and it is not
+            provided in the request
+        '500':
+          description: >-
+            Technical error : Unable to route the message to a Target Endpoint :
+            An error has occurred while processing your request, please refer to
+            API Docs for summary on the issue
+        '501':
+          description: |-
+            The HTTP method being used has not yet been implemented for
+            the requested resource
+        '503':
+          description: The service requested is currently unavailable
+        default:
+          description: An internal error occurred when processing the request
+      security:
+        - auth:
+            - NSMS
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  '/messages/sms/{messageId}/status':
+    get:
+      description: |-
+        If no notification URL has been specified, it is possible to poll for the message status.
+        <pre><code class="language-sh">  #!/bin/bash
+          #!/bin/bash
+          # Example of how to poll for a message status
+          AccessToken="Consumer Access Token"
+          MessageId="Previous supplied Message Id, URL encoded"
+          curl -X get -H "Authorization: Bearer $AccessToken" \
+            -H "Content-Type: application/json" \
+            "https://tapi.telstra.com/v2/messages/sms/$MessageId"
+        </code></pre>
+        
+        Note that the `MessageId` that appears in the URL must be URL encoded, just copying the `MessageId` as it was supplied when submitting the message may not work.
+      summary: Get SMS Status
+      tags:
+        - Messaging
+      operationId: Get SMS Status
+      produces:
+        - application/json
+      parameters:
+        - name: messageId
+          in: path
+          required: true
+          type: string
+          description: |-
+            Unique identifier of a message - it is the value returned from a previous POST call to https://api.telstra.com/v2/messages/sms.
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/OutboundPollResponse'
+          examples: {}
+        '400':
+          description: |-
+            Invalid or missing request parameters
+             NOT-PROVISIONED 
+             Request flagged as containing suspicious content
+        '401':
+          description: Invalid access token. Please try with a valid token
+        '403':
+          description: |-
+            Authorization credentials passed and accepted but account does
+            not have permission 
+             SpikeArrest-The API call rate limit has been exceeded
+        '404':
+          description: |-
+            The requested URI does not exist 
+             OLD-NONEXISTANT-MESSAGE-ID 
+             RESOURCE-NOT-FOUND
+        '405':
+          description: The requested resource does not support the supplied verb
+        '415':
+          description: API does not support the requested content type
+        '422':
+          description: >-
+            The request is formed correctly, but due to some condition
+
+            the request cannot be processed e.g. email is required and it is not
+            provided
+
+            in the request
+        '500':
+          description: >-
+            Technical error : Unable to route the message to a Target Endpoint :
+            An error has occurred while processing your request, please refer to
+            API Docs for summary on the issue
+        '501':
+          description: |-
+            The HTTP method being used has not yet been implemented for
+            the requested resource
+        '503':
+          description: The service requested is currently unavailable
+        default:
+          description: An internal error occurred when processing the request
+      security:
+        - auth:
+            - NSMS
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /messages/mms:
+    post:
+      description: Send MMS
+      summary: Send MMS
+      tags:
+        - Messaging
+      operationId: Send MMS
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          description: >-
+            A JSON or XML payload containing the recipient's phone number
+
+            and MMS message.The recipient number should be in the format
+            '04xxxxxxxx'
+
+            where x is a digit
+          schema:
+            $ref: '#/definitions/SendMmsRequest'
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/MessageSentResponse'
+          examples: {}
+        '400':
+          description: |-
+            Invalid or missing request parameters 
+                MMS-TYPE-MISSING 
+             MMS-PAYLOAD-MISSING 
+              MMS-FILENAME-MISSING 
+             DELIVERY-IMPOSSIBLE 
+              TO-MSISDN-NOT-VALID 
+              SENDER-MISSING 
+             DELIVERY-IMPOSSIBLE 
+             SUBJECT-TOO-LONG 
+             FROM-MSISDN-TOO-LONG 
+             TO-MSISDN-TOO-LONG 
+             NOT-PROVISIONED 
+             Request flagged as containing suspicious content
+          schema: {}
+        '401':
+          description: Invalid access token. Please try with a valid token
+        '403':
+          description: |-
+            Authorization credentials passed and accepted but account does
+            not have permission 
+             SpikeArrest-The API call rate limit has been exceeded
+        '404':
+          description: |-
+            The requested URI does not exist 
+             RESOURCE-NOT-FOUND
+        '405':
+          description: The requested resource does not support the supplied verb
+        '415':
+          description: API does not support the requested content type
+        '422':
+          description: >-
+            The request is formed correctly, but due to some condition the
+            request cannot be processed e.g. email is required and it is not
+            provided in the request
+        '500':
+          description: >-
+            Technical error : Unable to route the message to a Target Endpoint :
+            An error has occurred while processing your request, please refer to
+            API Docs for summary on the issue
+        '501':
+          description: |-
+            The HTTP method being used has not yet been implemented for
+            the requested resource
+        '503':
+          description: The service requested is currently unavailable
+        default:
+          description: An internal error occurred when processing the request
+      security:
+        - auth:
+            - NSMS
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  '/messages/mms/{messageid}/status':
+    get:
+      description: Get MMS Status
+      summary: Get MMS Status
+      tags:
+        - Messaging
+      operationId: Get MMS Status
+      produces:
+        - application/json
+      parameters:
+        - name: messageid
+          in: path
+          required: true
+          type: string
+          description: |-
+            Unique identifier of a message - it is the value returned from
+            a previous POST call to https://api.telstra.com/v2/messages/mms
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/OutboundPollResponse'
+          examples: {}
+        '400':
+          description: |-
+            Invalid or missing request parameters 
+             NOT-PROVISIONED 
+             Request flagged as containing suspicious content
+        '401':
+          description: Invalid access token. Please try with a valid token
+        '403':
+          description: |-
+            Authorization credentials passed and accepted but account does
+            not have permission 
+             SpikeArrest-The API call rate limit has been exceeded
+        '404':
+          description: |-
+            The requested URI does not exist 
+             OLD-NONEXISTANT-MESSAGE-ID 
+             RESOURCE-NOT-FOUND
+        '405':
+          description: The requested resource does not support the supplied verb
+        '415':
+          description: API does not support the requested content type
+        '422':
+          description: >-
+            The request is formed correctly, but due to some condition the
+            request cannot be processed e.g. email is required and it is not
+            provided in the request
+        '500':
+          description: >-
+            Technical error : Unable to route the message to a Target Endpoint :
+            An error has occurred while processing your request, please refer to
+            API Docs for summary on the issue
+        '501':
+          description: |-
+            The HTTP method being used has not yet been implemented for
+            the requested resource
+        '503':
+          description: The service requested is currently unavailable
+        default:
+          description: An internal error occurred when processing the request
+      security:
+        - auth:
+            - NSMS
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
 definitions:
-  DeleteNumberRequest:
-    title: DeleteNumberRequest
-    type: object
-    properties:
-      emptyArr:
-        description: 'Empty Arr'
-        type: integer
-        format: int32
-        default: 0      
   ProvisionNumberRequest:
     title: ProvisionNumberRequest
     type: object
     properties:
       activeDays:
-        description: 'Number of active days'
+        description: >-
+          The number of days before for which this number is provisioned.
+          Usually this will be same as the plan you buy.
         type: integer
         format: int32
+        default: 30 days
         example: 20
       notifyURL:
-        description: 'Notify url'
+        description: >-
+          A callback URL that will be POSTed to whenever a new message arrives
+          at this destination address. If this is not provided then you can make
+          use the Get Replies API to poll for messages.
         type: string
+        example: 'http://example.com/callback'
+      callbackData:
+        description: >-
+          A JSON that will be sent as the body in the POST to the notifyURL.
+          This can be any meaningful data relevant to your application.
+        type: string
+        example:
+          anything: some data
+  DeleteNumberRequest:
+    title: DeleteNumberRequest
+    type: object
+    properties:
+      emptyArr:
+        description: Empty Arr
+        type: integer
+        format: int32
+        default: 0
   GetSubscriptionResponse:
     title: ProvisionNumberResponse
     type: object
     properties:
       activeDays:
-        description: 'Number of active days'
+        description: Number of active days
         type: string
       notifyURL:
-        description: 'Notify url configured'
+        description: Notify url configured
         type: string
       destinationAddress:
         description: The mobile phone number that was allocated
@@ -635,67 +1041,154 @@ definitions:
       destinationAddress:
         description: The mobile phone number that was allocated
         type: string
-  ErrorError:
-    title: Error_Error
+  SendSMSRequest:
+    title: SendSMSRequest
     type: object
     properties:
-      status:
-        description: A short error code
+      to:
+        description: |-
+            Phone number (in E.164 format) to send the SMS to. 
+            This number can be in international format `"to": "+61412345678"` or in national
+            format.
+            Can be an array of strings if sending to multiple numbers: `"to": "+61412345678, +61418765432"`
         type: string
-      message:
-        description: Message describing the error.
+        example: "$Dest"
+      body:
+        description: |-
+          The text body of the message. Messages longer than 160 characters
+          will be counted as multiple messages.
+          This field contains the message text, this can be up to 1900 (for a single recipient) or 500 (for multiple recipients) UTF-8 characters. As mobile devices rarely support the full range of UTF-8 characters, it is possible that some characters may not be translated correctly by the mobile device
         type: string
+        example: "Test Message"
+      from:
+        description: |-
+          The Alphanumeric sender ID of up to 11 characters or phone number the SMS was sent from. If not present, the service will use the mobile number associated with the application (in E.164 format).
+          This feature is only available on paid plans.
+        type: string
+        example: "+61412345678"
+      validity:
+        description: |-
+          How long the platform should attempt to deliver the message for.
+          This period is specified in minutes from the message.
+          Normally if the message cannot be delivered immediately, it will be stored and delivery will be periodically reattempted. The network will attempt to send the message for up to seven days. It is possible to define a period smaller than 7 days by including this parameter and specifying the number of minutes that delivery should be attempted. eg: including `"validity": 60` will specify that if a message can't be delivered within the first 60 minutes them the network should stop.
+        type: integer
+        format: int32
+        example: 5
+      scheduledDelivery:
+        description: |-
+          How long the platform should wait before attempting to send the message - specified in minutes.
+          e.g.: If `"scheduledDelivery": 120` is included, then the network will not attempt to start message delivery for two hours after the message has been submitted
+        type: integer
+        format: int32
+        example: 1
+      notifyURL:
+        description: |-
+          Contains a URL that will be called once your message has been processed. The status may be delivered, expired, deleted, etc.
+          It is possible for the network to make a call to a URL when the message has been delivered (or has expired), different URLs can be set per message. Please refer to the Delivery Notification section.
+        type: string
+      replyRequest:
+        description: |-
+          If set to true, the reply message functionality will be implemented and the to address will be ignored if present. If false or not present, then normal message handling is implemented.
+          When set to true, network will use a temporary number to deliver this message. All messages sent by mobile to this temporary number will be stored against the same `messageId`. If a `notifyURL` is provided then user response will be delivered to the URL where `messageId` will be same as `messageId` in reponse to original API request.
+          This field contains the message text, this can be up to 500 UTF-8 characters. As mobile devices rarely support the full range of UTF-8 characters, it is possible that some characters may not be translated correctly by the mobile device.
+        type: boolean
+        example: false
+      priority:
+        description: |-
+          When messages are queued up for a number, then it is possible to set where a new message will be placed in the queue. If the priority is set to true then the new message will be placed ahead of all messages with a normal priority. If there are no messages queued for the number, then this parameter has no effect.
+        type: boolean
+        example: true
     required:
-      - status
+      - to
+      - body
   MessageSentResponse:
     title: MessageSentResponse
     type: object
     properties:
       messages:
-        description: ''
+        description: |-
+          An array of messages.
         type: array
         items:
           $ref: '#/definitions/Message'
       messageType:
-        description: ''
+        description: |-
+          This returns whether the message sent was a SMS or MMS.
         type: string
+        example: "SMS"
       numberSegments:
-        description: ''
+        description: |-
+          For SMS messages only, the value indicates the number of 160 character message segments sent.
         type: integer
         format: int32
+        example: 1
       NumberNationalDestinations:
-        description: ''
+        description: |-
+          This returns the number of domestic Australian messages sent.
         type: integer
         format: int32
+        example: 1
       NumberInternationalDestinations:
-        description: ''
+        description: |-
+          This returns the number of international messages sent
         type: integer
         format: int32
+        example: 0
     required:
       - messages
       - messageType
       - numberSegments
+  Message:
+    title: Message
+    type: object
+    properties:
+      to:
+        description: |-
+          Just a copy of the number the message is sent to.
+        type: string
+        example: "+61412345678"
+      deliveryStatus:
+        description: |-
+          Gives an indication if the message has been accepted for delivery. The description field contains information on why a message may have been rejected.
+        type: string
+        example: "MessageWaiting"
+      messageId:
+        description: |-
+          For an accepted message, ths will be a unique reference that can be used to check the messages status. Please refer to the Delivery Notification section.
+          Note that `messageId` will be different for each number that the message was sent to.
+        type: string
+        example: "d997474900097a1f0000000008d7e18102cc0901-1261412345678"
+      messageStatusURL:
+        description: |-
+          For an accepted message, ths will be the URL that can be used to check the messages status. Please refer to the Delivery Notification section.
+        type: string
+        example: "https://tapi.telstra.com/v2/messages/sms/d997474900097a1f0000000008d7e18102cc0901-1261412345678/status"
+    required:
+      - to
+      - deliveryStatus
+      - messageId
+      - messageStatusUrl
   OutboundPollResponse:
     title: OutboundPollResponse
     type: object
     properties:
       to:
         description: |-
-          The phone number (recipient) the message was sent to (in E.164
-          format).
+          The phone number (recipient) the message was sent to (in E.164 format).
         type: string
-      receivedTimestamp:
-        description: The date and time when the message was recieved by recipient.
-        type: string
+        example: "+61418123456"
       sentTimestamp:
         description: The date and time when the message was sent.
         type: string
+        example: "2017-03-17T09:16:49+10:00"
+      receivedTimestamp:
+        description: The date and time when the message was recieved by recipient.
+        type: string
+        example: "2017-03-17T09:16:50+10:00"
       deliveryStatus:
         $ref: '#/definitions/Status'
-        example: PEND
   Status:
     title: Status
-    example: PEND
     type: string
     enum:
       - PEND
@@ -706,68 +1199,7 @@ definitions:
       - UNDVBL
       - REJECTED
       - READ
-  ErrorErrorError:
-    title: Error_Error_Error
-    description: Returns error status code and message
-    type: object
-    properties:
-      status:
-        description: The status code.
-        type: integer
-        format: int32
-      message:
-        description: Message describing the error.
-        type: string
-  MessageType:
-    title: MessageType
-    example: SMS
-    type: string
-    enum:
-      - SMS
-      - MMS
-      - RCS
-  Message:
-    title: Message
-    type: object
-    properties:
-      to:
-        description: ''
-        type: string
-      deliveryStatus:
-        description: ''
-        type: string
-      messageId:
-        description: ''
-        type: string
-      messageStatusURL:
-        description: ''
-        type: string
-    required:
-      - to
-      - deliveryStatus
-      - messageId
-      - messageStatusUrl
-  OAuthRequest:
-    title: OAuthRequest
-    type: object
-    properties:
-      client_id:
-        description: Client id
-        type: string
-      client_secret:
-        description: Client secret
-        type: string
-      grant_type:
-        description: OAuth grant type
-        type: string
-      scopes:
-        description: OAuth scope
-        type: string
-    required:
-      - client_id
-      - client_secret
-      - grant_type
-      - scopes
+    example: "DELIVRD"
   OAuthResponse:
     title: OAuthResponse
     type: object
@@ -781,77 +1213,13 @@ definitions:
       expires_in:
         description: OAuth expity time
         type: string
-  SendSMSRequest:
-    title: SendSMSRequest
-    type: object
-    properties:
-      to:
-        description: >-
-          Phone number (in E.164 format) to send the SMS to. This number
-
-          can be in international format if preceeded by a ‘+’, or in national
-          format.
-        type: string
-      body:
-        description: |-
-          The text body of the message. Messages longer than 160 characters
-          will be counted as multiple messages.
-        type: string
-      from:
-        description: >-
-          Phone number (in E.164 format) the SMS was sent from. If not
-
-          present, the serverice will use the mobile number associated with the
-          application,
-
-          or it be an Alphanumeric address of up to 11 characters.
-        type: string
-      validity:
-        description: |-
-          How long the platform should attempt to deliver the message for.
-          This period is specified in minutes from the message
-        type: integer
-        format: int32
-        example: 20
-      scheduledDelivery:
-        description: |-
-          How long the platform should wait before attempting to send the
-          message - specified in minutes.
-        type: integer
-        format: int32
-        example: 20
-      notifyURL:
-        description: |-
-          Contains a URL that will be called once your message has been
-          processed. The status may be delivered, expired, deleted, etc.
-        type: string
-      replyRequest:
-        description: >-
-          If set to true, the reply message functionality will be implemented
-
-          and the to address will be ignored if present. If false or not
-          present,
-
-          then normal message handling is implemented.
-        type: boolean
-    required:
-      - to
-      - body
   SendMmsRequest:
     title: Send MMS Request
     type: object
     properties:
       from:
-        description: >-
-          This will be the source address that will be displayed on the
-
-          receiving device. If it is not present then it will default to the
-          MSISDN
-
-          assigned to the app. If replyRequest is set to true, then this field
-          will
-
-          be ignored.
+        description: |-
+          This will be the source address that will be displayed on the receiving device. If it is not present then it will default to the MSISDN assigned to the app. If replyRequest is set to true, then this field will be ignored.
         type: string
       to:
         description: This is the destination address.
@@ -865,13 +1233,13 @@ definitions:
           and the to address will be ignored if present.
         type: boolean
       notifyURL:
-        description: 'Notify url'
+        description: Notify url
         type: string
       MMSContent:
         description: >-
           An Array of content that will be sent in an MMS message. If this
 
-          array is present it will cause the “body” element to be ignored, and
+          array is present it will cause the body element to be ignored, and
           the
 
           message will be sent as an MMS.
@@ -910,7 +1278,7 @@ definitions:
       callback url was specified when provisioning a number.
     type: object
     properties:
-      status: 
+      status:
         description: message status
         type: string
       destinationAddress:
@@ -932,3 +1300,4 @@ definitions:
       sentTimestamp:
         description: The date and time when the message was sent by recipient.
         type: string
+        

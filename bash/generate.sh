@@ -12,7 +12,7 @@ do
 
     	mkdir -p ../../test/$fname
 
-		eval swagger-codegen generate -i ../docs/swagger/messaging-api-swagger.yaml -l $fname -c $file -o $folder/$fname 
+		eval openapi-generator generate -i ../docs/swagger/messaging-api-swagger.yaml -l $fname -c $file -o $folder/$fname 
     fi
 done
 
@@ -26,8 +26,8 @@ do
 		if [ $fname = "php" ]; then
 			eval rm -rf $folder/$fname/docs
 			eval rm -rf $folder/$fname/lib
-			eval cp -rf $folder/$fname/SwaggerClient-php/* $folder/$fname/
-			eval rm -rf $folder/$fname/SwaggerClient-php
+			eval cp -rf $folder/$fname/OpenAPIClient-php/* $folder/$fname/
+			eval rm -rf $folder/$fname/OpenAPIClient-php
 			# eval ./vendor/bin/phpunit --bootstrap vendor/autoload.php test/
 		elif [ $fname = "python" ]; then
 			# pip install -r test-requirements
@@ -46,12 +46,12 @@ do
 
 		if [ -f $fileloc ]
 		then
-			sed -i '' "/$Swagger\ Codegen/d;/$Introduction\ \ Send\ and\ receive\ SMS\ and\ MMS\ messages\ globally/d;/$Build\ package/d;s/\*\@dev/\*\@master/g;s/\/SwaggerClient-php//g;s/\#\ SwaggerClient\-php/\#\ \Messaging\ SDK/g;/$Build package/d;/$swagger-codegen/d;/$swagger-codegen/d;/$swagger/d;/$SwaggerClient/d;/$\#\# Author/d;s/\Authorization/\Authorisation/g" $folder/$fname/README.md 
+			sed -i '' "/$Swagger\ Codegen/d;/$Introduction\ \ Send\ and\ receive\ SMS\ and\ MMS\ messages\ globally/d;/$Build\ package/d;s/\*\@dev/\*\@master/g;s/\/OpenAPIClient-php//g;s/\#\ OpenAPIClient\-php/\#\ \Messaging\ SDK/g;/$Build package/d;/$swagger-codegen/d;/$swagger-codegen/d;/$swagger/d;/$OpenAPIClient/d;/$\#\# Author/d;s/\Authorization/\Authorisation/g" $folder/$fname/README.md 
 		fi
 
 		rm ../../test/$fname/git_push.sh
-		rm ../../test/$fname/.swagger-codegen-ignore
-		rm -rf ../../test/$fname/.swagger-codegen
+		rm ../../test/$fname/.openapi-generator-ignore
+		rm -rf ../../test/$fname/.openapi-generator
 		rm ../../test/$fname/.DS_Store
 
 		# Runtests

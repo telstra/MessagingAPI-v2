@@ -1,12 +1,11 @@
-{"options":
-	{
-	  "gitUserId": "Telstra",
-	  "gitRepoId": "MessagingAPI-SDK-Java",
-	  "packageVersion": "1.0.4.1",
-	  "groupId": "Telstra", 
-	  "artifactId": "TelstraMessaging",
-	  "apiPackage": "com.telstra.messaging",
-	  "modelPackage": "com.telstra.messaging"
-	}
-	,"swaggerUrl": "https://raw.githubusercontent.com/telstra/MessagingAPI-v2/master/docs/swagger/messaging-api-swagger.yaml"}
+{
+  "gitUserId": "Telstra",
+  "gitRepoId": "MessagingAPI-SDK-Java",
+  "artifactVersion": "1.0.5",
+  "groupId": "Telstra", 
+  "license": "Apache-2.0",
+  "artifactId": "TelstraMessaging",
+  "apiPackage": "com.telstra.messaging",
+  "modelPackage": "com.telstra.messaging",
+  "hideGenerationTimestamp": true
 }

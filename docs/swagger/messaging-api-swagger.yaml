@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   title: Telstra Messaging API
-  version: 2.2.6
+  version: 2.2.7
   description: |
 
     # Introduction
@@ -65,6 +65,9 @@ info:
     
     Use Provisioning to create a dedicated number subscription, or renew your dedicated number if it has expired.
     
+    **Q: How long does my dedicated number stay active for?**
+    A. When you provision a dedicated number, by default it will be active for 30-days. You can use the `activeDays` parameter during the provisioning call to increment or decrement the number of days your dedicated number will remain active.
+    
     **Q: Can I send a broadcast message using the Telstra Messaging API?**
     A. Yes. Recipient numbers can be in the form of an array of strings if a broadcast message needs to be sent, allowing you to send to multiple mobile numbers in one API call.
       A sample request body for this will be: `{"to":["+61412345678","+61487654321"],"body":"Test Message"}`
@@ -72,11 +75,16 @@ info:
     **Q: Can I use `Alphanumeric Identifier` from my paid plan via credit card?**
     A. `Alphanumeric Identifier` is only available on Telstra Account paid plans, not through credit card paid plans.
 
-    **Q: How long does my dedicated number stay active for?**
-    A. When you provision a dedicated number, by default it will be active for 30-days. You can use the `activeDays` parameter during the provisioning call to increment or decrement the number of days your dedicated number will remain active.
-
     **Q: What is the maximum sized MMS that I can send?**
     A. This will depend on the carrier that will receive the MMS. For Telstra it's up to 2MB,  Optus up to 1.5MB and Vodafone only allows up to 500kB. You will need to check with international carriers for thier MMS size limits.
+    
+    **Q: How is the size of an MMS calculated?**
+    A. Images are scaled up to approximately 4/3 when base64 encoded.
+    Additionally, there is approximately 200 bytes of overhead on each MMS.
+    Assuming the maximum MMS that can be sent on Telstraâ€™s network is 2MB, then the maximum image size that can be sent will be approximately 1.378MB (1.378 x 1.34 + 200, without SOAP encapsulation).
+    
+    **Q: How is an MMS classified as Small or Large?**
+    A. MMSes with size below 600kB are classed as Small whereas those that are bigger than 600kB are classed as Large. They will be charged accordingly.
     
     **Q: Are SMILs supported by the Messaging API?**
     A. While there will be no error if you send an MMS with a SMIL presentation, the actual layout or sequence defined in the SMIL may not display as expected because most of the new smartphone devices ignore the SMIL presentation layer. SMIL was used in feature phones which had limited capability and SMIL allowed a *powerpoint type* presentation to be provided. Smartphones now have the capability to display video which is the better option for presentations. It is recommended that MMS messages should just drop the SMIL.
@@ -191,21 +199,14 @@ paths:
           description: An internal error occurred when processing the request
       x-code-samples:
         - lang: curl
-          source: >
+          source: |
             #!/bin/bash
-
             # Obtain these keys from the Telstra Developer Portal
-
             CLIENT_KEY="your client key"
-
             CLIENT_SECRET="your client secret"
 
             curl -X POST -H 'Content-Type: application/x-www-form-urlencoded' \
-
-            -d
-            'grant_type=client_credentials&amp;client_id=$CLIENT_KEY&amp;client_secret=CLIENT_SECRET&amp;scope=NSMS'
-            \
-
+            -d 'grant_type=client_credentials&amp;client_id=$CLIENT_KEY&amp;client_secret=CLIENT_SECRET&amp;scope=NSMS' \
             'https://tapi.telstra.com/v2/oauth/token'
   /messages/provisioning/subscriptions:
     post:
@@ -240,14 +241,12 @@ paths:
             have permission
              SpikeArrest-The API call rate limit has been exceeded
         '404':
-          description: |-
+          description: |
             The requested URI does not exist
              RESOURCE-NOT-FOUND
         '500':
-          description: >-
-            Technical error : Unable to route the message to a Target Endpoint :
-            An error has occurred while processing your request, please refer to
-            API Docs for summary on the issue
+          description: |
+            Technical error : Unable to route the message to a Target Endpoint : An error has occurred while processing your request, please refer to API Docs for summary on the issue
         default:
           description: An internal error occurred when processing the request
       security:
@@ -264,11 +263,7 @@ paths:
             -H 'content-type: application/json' \
             -d '{
             "activeDays":30,
-            "notifyURL":"http://example.com/callback",
-            "callbackData":
-              {
-                "anything":"some data"
-              }
+            "notifyURL":"http://example.com/callback"
             }'
     get:
       description: |
@@ -369,8 +364,7 @@ paths:
           in: body
           required: true
           description: |
-            A JSON or XML payload containing the recipient's phone number and text message.
-            This number can be in international format if preceeded by a â€˜+â€™ or in national format ('04xxxxxxxx') where x is a digit.
+            A JSON or XML payload containing the recipient's phone number and text message. This number can be in international format if preceeded by a '+' or in national format ('04xxxxxxxx') where x is a digit.
           schema:
             $ref: '#/definitions/SendSMSRequest'
       responses:
@@ -702,8 +696,7 @@ paths:
           in: body
           required: true
           description: |
-            A JSON or XML payload containing the recipient's phone number and MMS message.
-            The recipient number should be in the format '04xxxxxxxx' where x is a digit.
+            A JSON or XML payload containing the recipient's phone number and MMS message. The recipient number should be in the format '04xxxxxxxx' where x is a digit.
           schema:
             $ref: '#/definitions/SendMmsRequest'
       responses:
@@ -955,13 +948,6 @@ definitions:
           *Please note that the notification URLs and the Get /sms or /mms call are exclusive. If a notification URL has been set then the GET call will not provide any useful information.*
         type: string
         example: 'http://example.com/callback'
-      callbackData:
-        description: |
-          A JSON that will be sent as the body in the POST to the notifyURL.
-          This can be any meaningful data relevant to your application.
-        type: string
-        example:
-          anything: some data
   DeleteNumberRequest:
     title: DeleteNumberRequest
     type: object
@@ -997,8 +983,7 @@ definitions:
     properties:
       to:
         description: |
-          Phone number (in E.164 format) to send the SMS to.
-          This number can be in international format `"to": "+61412345678"` or in national format.
+          Phone number (in E.164 format) to send the SMS to. This number can be in international format `"to": "+61412345678"` or in national format.
           Can be an array of strings if sending to multiple numbers: `"to":["+61412345678", "+61418765432"]`
         type: string
         example: ["+61412345678"]
@@ -1092,27 +1077,20 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Message'
+      Country:
+        description: An array of the countries to which the destination MSISDNs belong.
+        type: string
+        example: [{"AUS": 1}]
       messageType:
         description: This returns whether the message sent was a SMS or MMS.
         type: string
         example: SMS
       numberSegments:
-        description: >-
-          For SMS messages only, the value indicates the number of 160 character
-          message segments sent.
+        description: |
+          For SMS messages only, the value indicates the number of 160 character message segments sent.
         type: integer
         format: int32
         example: 1
-      NumberNationalDestinations:
-        description: This returns the number of domestic Australian messages sent.
-        type: integer
-        format: int32
-        example: 1
-      NumberInternationalDestinations:
-        description: This returns the number of international messages sent
-        type: integer
-        format: int32
-        example: 0
     required:
       - messages
       - messageType

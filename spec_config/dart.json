@@ -1,7 +1,8 @@
 {
   "gitUserId": "Telstra",
   "gitRepoId": "MessagingAPI-SDK-dart",
-  "pubVersion": "1.0.4.1", 
+  "pubVersion": "1.0.6", 
   "pubName": "Telstra_Messaging",
-  "pubDescription": "The Telstra SMS Messaging API allows your applications to send and receive SMS text messages from Australia's leading network operator."
+  "pubDescription": "The Telstra SMS Messaging API allows your applications to send and receive SMS text messages from Australia's leading network operator.",
+  "license": "Apache-2.0"
 }

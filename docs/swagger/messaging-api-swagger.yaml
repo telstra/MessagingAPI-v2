@@ -1,14 +1,12 @@
 swagger: '2.0'
 info:
   title: Telstra Messaging API
-  version: 2.2.7
+  version: 2.2.9
   description: |
 
     # Introduction
-
-    Send and receive SMS and MMS messages globally using Telstraâ€™s enterprise grade Messaging API.
-    It also allows your application to track the delivery status of both sent and received messages.
-    Get your dedicated Australian number, and start sending and receiving messages today.
+    
+    <table><tbody><tr><td class = 'into_api' style='border:none;padding:0 0 0 0'><p>Send and receive SMS and MMS messages globally using Telstra's enterprise grade Messaging API. It also allows your application to track the delivery status of both sent and received messages. Get your dedicated Australian number, and start sending and receiving messages today.</p></td><td class = 'into_api_logo' style='width: 20%;border:none'><img class = 'api_logo' style='margin: -26px 0 0 0' src = 'https://test-telstra-retail-tdev.devportal.apigee.io/sites/default/files/messagingapi-icon.png'></td></tr></tbody></table>
 
     # Features
 
@@ -46,14 +44,17 @@ info:
     6. Note your `Client key` and `Client secret` as these will be needed to provision a number for your application and for authentication.
 
     Now head over to **Getting Started** where you can find a postman collection as well as some links to sample apps and SDKs to get you started.
+    
     Happy Messaging!
-
+    
     # Frequently Asked Questions
 
     **Q: Is creating a subscription via the Provisioning call a required step?**
+    
     A. Yes. You will only be able to start sending messages if you have a provisioned dedicated number. Use Provisioning to create a dedicated number subscription, or renew your dedicated number if it has expired.
     
     **Q: When trying to send an SMS I receive a `400 Bad Request` response. How can I fix this?**
+    
     A. You need to make sure you have a provisioned dedicated number before you can send an SMS. 
     If you do not have a provisioned dedicated number and you try to send a message via the API, you will get the error below in the response:
     
@@ -66,33 +67,49 @@ info:
     Use Provisioning to create a dedicated number subscription, or renew your dedicated number if it has expired.
     
     **Q: How long does my dedicated number stay active for?**
-    A. When you provision a dedicated number, by default it will be active for 30-days. You can use the `activeDays` parameter during the provisioning call to increment or decrement the number of days your dedicated number will remain active.
+    
+    A. When you provision a dedicated number, by default it will be active for 30 days. 
+    You can use the `activeDays` parameter during the provisioning call to increment or decrement the number of days your dedicated number will remain active.
+    
+    Note that Free Trial apps will have 30 days as the maximum `activeDays` they can add to their provisioned number. If the Provisioning call is made several times within that 30-Day period, it will return the `expiryDate` in the Unix format and will not add any activeDays until after that `expiryDate`.
     
     **Q: Can I send a broadcast message using the Telstra Messaging API?**
+    
     A. Yes. Recipient numbers can be in the form of an array of strings if a broadcast message needs to be sent, allowing you to send to multiple mobile numbers in one API call.
       A sample request body for this will be: `{"to":["+61412345678","+61487654321"],"body":"Test Message"}`
+      
+    **Q: Can I send SMS and MMS to all countries?**
+    
+    A. You can send SMS and MMS to all countries EXCEPT to countries which are subject to global sanctions namely: Burma, Côte d'Ivoire, Cuba, Iran, North Korea, Syria.
 
     **Q: Can I use `Alphanumeric Identifier` from my paid plan via credit card?**
+    
     A. `Alphanumeric Identifier` is only available on Telstra Account paid plans, not through credit card paid plans.
 
     **Q: What is the maximum sized MMS that I can send?**
+    
     A. This will depend on the carrier that will receive the MMS. For Telstra it's up to 2MB,  Optus up to 1.5MB and Vodafone only allows up to 500kB. You will need to check with international carriers for thier MMS size limits.
     
     **Q: How is the size of an MMS calculated?**
+    
     A. Images are scaled up to approximately 4/3 when base64 encoded.
     Additionally, there is approximately 200 bytes of overhead on each MMS.
-    Assuming the maximum MMS that can be sent on Telstraâ€™s network is 2MB, then the maximum image size that can be sent will be approximately 1.378MB (1.378 x 1.34 + 200, without SOAP encapsulation).
+    Assuming the maximum MMS that can be sent on Telstra’s network is 2MB, then the maximum image size that can be sent will be approximately 1.378MB (1.378 x 1.34 + 200, without SOAP encapsulation).
     
     **Q: How is an MMS classified as Small or Large?**
+    
     A. MMSes with size below 600kB are classed as Small whereas those that are bigger than 600kB are classed as Large. They will be charged accordingly.
     
     **Q: Are SMILs supported by the Messaging API?**
+    
     A. While there will be no error if you send an MMS with a SMIL presentation, the actual layout or sequence defined in the SMIL may not display as expected because most of the new smartphone devices ignore the SMIL presentation layer. SMIL was used in feature phones which had limited capability and SMIL allowed a *powerpoint type* presentation to be provided. Smartphones now have the capability to display video which is the better option for presentations. It is recommended that MMS messages should just drop the SMIL.
     
     **Q: How do I assign a delivery notification or callback URL?**
+    
     A. You can assign a delivery notification or callback URL by adding the `notifyURL` parameter in the body of the request when you send a message. Once the message has been delivered, a notification will then be posted to this callback URL.
     
     **Q: What is the difference between the `notifyURL` parameter in the Provisoning call versus the `notifyURL` parameter in the Send Message call?**
+    
     A. The `notifyURL` in the Provisoning call will be the URL where replies to the provisioned number will be posted.
     On the other hand, the `notifyURL` in the Send Message call will be the URL where the delivery notification will be posted, e.g. when an SMS has already been delivered to the recipient.
 
@@ -212,6 +229,9 @@ paths:
     post:
       description: |
         Invoke the provisioning API to get a dedicated mobile number for an account or application.
+        Note that Free Trial apps will have a 30-Day Limit for their provisioned number. If the Provisioning call is made several times within that 30-Day period, it will return the `expiryDate` in the Unix format and will not add any activeDays until after that `expiryDate`.
+        
+        For paid apps, a provisioned number can be allotted for a maximum of 5 years. If a Provisioning call is made which will result to activeDays > 1830, the response body will indicate that the provisioned number is already valid for more than 5 years.
       summary: Create Subscription
       tags:
         - Provisioning
@@ -364,7 +384,8 @@ paths:
           in: body
           required: true
           description: |
-            A JSON or XML payload containing the recipient's phone number and text message. This number can be in international format if preceeded by a '+' or in national format ('04xxxxxxxx') where x is a digit.
+            A JSON or XML payload containing the recipient's phone number and text message.
+            This number can be in international format if preceeded by a '+' or in national format ('04xxxxxxxx') where x is a digit.
           schema:
             $ref: '#/definitions/SendSMSRequest'
       responses:
@@ -696,7 +717,8 @@ paths:
           in: body
           required: true
           description: |
-            A JSON or XML payload containing the recipient's phone number and MMS message. The recipient number should be in the format '04xxxxxxxx' where x is a digit.
+            A JSON or XML payload containing the recipient's phone number and MMS message.
+            The recipient number should be in the format '04xxxxxxxx' where x is a digit.
           schema:
             $ref: '#/definitions/SendMmsRequest'
       responses:
@@ -936,7 +958,6 @@ definitions:
       activeDays:
         description: |
           The number of days before for which this number is provisioned.
-          Usually this will be same as the plan you buy.
         type: integer
         format: int32
         default: 30 days
@@ -957,6 +978,22 @@ definitions:
         type: integer
         format: int32
         default: 0
+  ProvisionNumberResponse:
+    title: ProvisionNumberResponse
+    type: object
+    properties:
+      destinationAddress:
+        description: The mobile phone number that was allocated
+        type: string
+        example: "+61412345678"
+      description: 
+        description: Metadata for provisioned numbers which are valid for more than 5 years
+        type: string
+        example: "Your provisioned number is already valid for more than 5 years"
+      expiryDate:
+        description: Free Trial apps will have a 30-Day Limit for their provisioned number. This is in Unix time format.
+        type: number
+        example: 1534463077362
   GetSubscriptionResponse:
     title: ProvisionNumberResponse
     type: object
@@ -970,20 +1007,14 @@ definitions:
       destinationAddress:
         description: The mobile phone number that was allocated
         type: string
-  ProvisionNumberResponse:
-    title: ProvisionNumberResponse
-    type: object
-    properties:
-      destinationAddress:
-        description: The mobile phone number that was allocated
-        type: string
   SendSMSRequest:
     title: SendSMSRequest
     type: object
     properties:
       to:
         description: |
-          Phone number (in E.164 format) to send the SMS to. This number can be in international format `"to": "+61412345678"` or in national format.
+          Phone number (in E.164 format) to send the SMS to.
+          This number can be in international format `"to": "+61412345678"` or in national format.
           Can be an array of strings if sending to multiple numbers: `"to":["+61412345678", "+61418765432"]`
         type: string
         example: ["+61412345678"]
@@ -1079,8 +1110,10 @@ definitions:
           $ref: '#/definitions/Message'
       Country:
         description: An array of the countries to which the destination MSISDNs belong.
-        type: string
-        example: [{"AUS": 1}]
+        type: array
+        items: 
+          type: string
+        example: "[{'AUS': 1}]"
       messageType:
         description: This returns whether the message sent was a SMS or MMS.
         type: string

@@ -3,7 +3,7 @@
   "gitRepoId": "MessagingAPI-SDK-Ruby",
   "gemName": "Telstra_Messaging",
   "moduleName": "Telstra_Messaging",
-  "gemVersion": "1.0.5",
+  "gemVersion": "1.0.6",
   "gemAuthor": "Telstra",
   "gemHomepage": "https://dev.telstra.com",
   "gemLicense": "Apache-2.0",

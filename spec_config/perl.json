@@ -2,7 +2,7 @@
   "gitUserId": "Telstra",
   "gitRepoId": "MessagingAPI-SDK-haskell",
   "invokerPackage": "Telstra_Messaging",
-  "moduleVersion": "1.0.5",
+  "moduleVersion": "1.0.6",
   "moduleName": "MessagingAPI",
   "license": "Apache-2.0"
 }

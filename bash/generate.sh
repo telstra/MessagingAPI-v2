@@ -23,13 +23,13 @@ do
     	s=${file##*/}
     	fname=${s%.*}
 
-		if [ $fname = "php" ]; then
-			eval rm -rf $folder/$fname/docs
-			eval rm -rf $folder/$fname/lib
-			eval cp -rf $folder/$fname/OpenAPIClient-php/* $folder/$fname/
-			eval rm -rf $folder/$fname/OpenAPIClient-php
+		# if [ $fname = "php" ]; then
+			# eval rm -rf $folder/$fname/docs
+			# eval rm -rf $folder/$fname/lib
+			# eval cp -rf $folder/$fname/OpenAPIClient-php/* $folder/$fname/
+			# eval rm -rf $folder/$fname/OpenAPIClient-php
 			# eval ./vendor/bin/phpunit --bootstrap vendor/autoload.php test/
-		elif [ $fname = "python" ]; then
+		if [ $fname = "python" ]; then
 			# pip install -r test-requirements
 			# nosetests ./test/
 			echo "python"
@@ -45,8 +45,8 @@ do
 		fileloc+="/README.md"
 
 		if [ -f $fileloc ]
-		then
-			sed -i '' "/$OpenAPI\ Generator/d;/$Introduction\ \ Send\ and\ receive\ SMS\ and\ MMS\ messages\ globally/d;/$Build\ package/d;s/\*\@dev/\*\@master/g;s/\/OpenAPIClient-php//g;s/\#\ OpenAPIClient\-php/\#\ \Messaging\ SDK/g;/$Build package/d;/$swagger-codegen/d;/$swagger-codegen/d;/$swagger/d;/$OpenAPIClient/d;/$\#\# Author/d;s/\Authorization/\Authorisation/g" $folder/$fname/README.md 
+		then # Introduction  <table><tbody><tr>
+			sed -i '' "/$OpenAPI\ Generator/d;/$\#\ Introduction\ \ Send\ and\ receive\ SMS\ and\ MMS\ messages\ globally/d;/$Build\ package/d;s/\*\@dev/\*\@master/g;s/\/OpenAPIClient-php//g;s/\#\ OpenAPIClient\-php/\#\ \Messaging\ SDK/g;/$Build package/d;/$swagger-codegen/d;/$swagger-codegen/d;/$swagger/d;/$OpenAPIClient/d;/$\#\# Author/d;s/\Authorization/\Authorisation/g" $folder/$fname/README.md 
 		fi
 
 		rm ../../test/$fname/git_push.sh

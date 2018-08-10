@@ -1,7 +1,7 @@
 {
   "gitUserId": "Telstra",
   "gitRepoId": "MessagingAPI-SDK-Java",
-  "artifactVersion": "1.0.5",
+  "artifactVersion": "1.0.6",
   "groupId": "Telstra", 
   "license": "Apache-2.0",
   "artifactId": "TelstraMessaging",

@@ -46,7 +46,7 @@ do
 
 		if [ -f $fileloc ]
 		then # Introduction  <table><tbody><tr>
-			sed -i '' "/$OpenAPI\ Generator/d;/$\#\ Introduction\ \ Send\ and\ receive\ SMS\ and\ MMS\ messages\ globally/d;/$Build\ package/d;s/\*\@dev/\*\@master/g;s/\/OpenAPIClient-php//g;s/\#\ OpenAPIClient\-php/\#\ \Messaging\ SDK/g;/$Build package/d;/$swagger-codegen/d;/$swagger-codegen/d;/$swagger/d;/$OpenAPIClient/d;/$\#\# Author/d;s/\Authorization/\Authorisation/g" $folder/$fname/README.md 
+			sed -i '' "/$OpenAPI\ Generator/d;/$Send\ and\ receive\ SMS\ and\ MMS\ messages\ globally/d;/$Build\ package/d;s/\*\@dev/\*\@master/g;s/\/OpenAPIClient-php//g;s/\#\ OpenAPIClient\-php/\#\ \Messaging\ SDK/g;/$Build package/d;/$swagger-codegen/d;/$swagger-codegen/d;/$swagger/d;/$OpenAPIClient/d;/$\#\# Author/d;s/\Authorization/\Authorisation/g" $folder/$fname/README.md 
 		fi
 
 		rm ../../test/$fname/git_push.sh

@@ -1112,7 +1112,7 @@ definitions:
         description: An array of the countries to which the destination MSISDNs belong.
         type: array
         items: 
-          type: string
+          type: object
         example: "[{'AUS': 1}]"
       messageType:
         description: This returns whether the message sent was a SMS or MMS.

@@ -960,7 +960,7 @@ definitions:
           The number of days before for which this number is provisioned.
         type: integer
         format: int32
-        default: 30 days
+        default: 30
         example: 20
       notifyURL:
         description: |
@@ -1017,7 +1017,7 @@ definitions:
           This number can be in international format `"to": "+61412345678"` or in national format.
           Can be an array of strings if sending to multiple numbers: `"to":["+61412345678", "+61418765432"]`
         type: string
-        example: ["+61412345678"]
+        example: "+61412345678"
       body:
         description: |
           The text body of the message. Messages longer than 160 characters will be counted as multiple messages.
@@ -1225,7 +1225,7 @@ definitions:
           This is the destination address.
           Can be an array of strings if sending to multiple numbers: "to":["+61412345678", "+61418765432"]
         type: string
-        example: ["+61412345678"]
+        example: "+61412345678"
       subject:
         description: The subject that will be used in an MMS message.
         type: string
